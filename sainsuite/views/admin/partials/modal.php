@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i aria-hidden="true" class="ki ki-close"></i>
+                    <i aria-hidden="true" class="sit sit-close"></i>
                 </button>
             </div>
             <div class="modal-body">
@@ -21,7 +21,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i aria-hidden="true" class="ki ki-close"></i>
+                    <i aria-hidden="true" class="sit sit-close"></i>
                 </button>
             </div>
             <div class="modal-body">
@@ -38,7 +38,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i aria-hidden="true" class="ki ki-close"></i>
+                    <i aria-hidden="true" class="sit sit-close"></i>
                 </button>
             </div>
             <div class="modal-body" data-scroll="true" data-height="300">
@@ -57,7 +57,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="text-center">
-                    <i class="ki ki-outline-info icon-5x text-info"></i>
+                    <i class="sit sit-outline-info icon-5x text-info"></i>
                     <h4 class="mt-2"><?php _e("heads up"); ?>!</h4>
                     <p class="mt-3"><?php _e("are you sure"); ?>?</p>
                     <button type="button" class="btn btn-light font-weight-bold" data-dismiss="modal"><?php _e("cancel"); ?></button>
@@ -80,7 +80,7 @@
                     <h5 class="font-weight-bold m-0 modal-title">....</h5>
                     <div class="d-flex ml-2">
                         <span class="btn btn-clean btn-sm btn-icon" data-dismiss="modal">
-                            <i class="ki ki-close icon-1x"></i>
+                            <i class="sit sit-close icon-1x"></i>
                         </span>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
     function showAjaxModal(url, header)
     {
         // SHOWING AJAX PRELOADER IMAGE
-        $('#scrollable-modal .modal-body').html('<i class="ki ki-plus"></i>');
+        $('#scrollable-modal .modal-body').html('<i class="sit sit-plus"></i>');
         $('#scrollable-modal .modal-title').html('...');
         // LOADING THE AJAX MODAL
         $('#scrollable-modal').modal('show');
@@ -151,7 +151,7 @@
     function showLargeModal(url, header)
     {
         // SHOWING AJAX PRELOADER IMAGE
-        $('#large-modal .modal-body').html('<i class="ki ki-plus"></i>');
+        $('#large-modal .modal-body').html('<i class="sit sit-plus"></i>');
         $('#large-modal .modal-title').html('...');
         // LOADING THE AJAX MODAL
         $('#large-modal').modal('show', {backdrop: 'true'});
@@ -170,7 +170,7 @@
     function showModal(url, header)
     {
         // SHOWING AJAX PRELOADER IMAGE
-        $('#showModal-modal .modal-body').html('<i class="ki ki-plus"></i>');
+        $('#showModal-modal .modal-body').html('<i class="sit sit-plus"></i>');
         $('#showModal-modal .modal-title').html('...');
         // LOADING THE AJAX MODAL
         $('#showModal-modal').modal('show', {backdrop: 'true'});

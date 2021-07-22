@@ -17,7 +17,7 @@ $this->events->add_filter( 'fill_toolbar_nav', function( $final ) {
     $final[] = array(
         'id' => 1,
         'name'   => __('Back to the list'),
-        'icon'    => 'ki ki-long-arrow-back',
+        'icon'    => 'sit sit-long-arrow-back',
         'attr_anchor'  => 'class="btn btn-light btn-sm font-weight-bolder"',
         'slug'    => site_url([ 'admin', 'users' ]),
         'permission' => 'create.users'

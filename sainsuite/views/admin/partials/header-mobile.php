@@ -25,7 +25,7 @@
 		<!--end::User-->
 
 		<button class="btn btn-icon btn-clean ml-2" id="sit_aside_mobile_toggle">
-			<i class="icon-lg ki ki-bold-more-ver"></i>
+			<i class="icon-lg sit sit-bold-more-ver"></i>
 		</button>
 	</div>
 

@@ -19,11 +19,11 @@
 		</label>
 
 		<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="<?php _e('Cancel avatar');?>">
-			<i class="ki ki-bold-close icon-xs text-muted"></i>
+			<i class="sit sit-bold-close icon-xs text-muted"></i>
 		</span>
 
 		<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="<?php _e('Remove avatar');?>">
-			<i class="ki ki-bold-close icon-xs text-muted"></i>
+			<i class="sit sit-bold-close icon-xs text-muted"></i>
 		</span>
 	</div>
 	<span class="form-text text-muted"><?php echo riake('description', $_item);?></span>
