@@ -24,7 +24,7 @@ class Polatan
     public $cols;
 
     private static $page_name;
-    private static $page_title = 'Untitled Page';
+    private static $page_title;
     private static $page_description;
     
 	/**
@@ -170,6 +170,6 @@ class Polatan
     **/
     public function output($data = null)
     {
-        $this->CI->load->backend_view('layouts', $data);
+        $this->CI->load->admin_view('layouts', $data);
     }
 }

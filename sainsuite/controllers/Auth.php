@@ -28,19 +28,14 @@ class Auth extends MY_Controller
      */
 	public function index()
 	{
-        if (User::is_loggedin()) : redirect($this->config->item('admin_route'));
+        if (User::in_group('user') && riake('enable_site', options(APPNAME))) : redirect(site_url());
+        elseif (User::is_loggedin()) : redirect($this->config->item('admin_route'));
         endif;
 
         $this->form_validation->set_rules('username_or_email', __('Email or User Name' ), 'required|min_length[5]');
         $this->form_validation->set_rules('password', __('Password' ), 'required|min_length[6]');
         
-        if ($this->session->userdata('captcha')) :
-        $this->form_validation->set_rules('captcha', __('Security Code'),  array('matches[captcha]', function($captcha){ 
-            if (strtolower($captcha) == $this->session->userdata('captcha')) {
-                return true;
-            } } )
-        );
-        endif;
+        $this->events->do_action('do_login_rules');
 		
         // Log User After Applying Filters
         if ($this->form_validation->run()) 
@@ -59,14 +54,17 @@ class Auth extends MY_Controller
 
             $this->notice->push_notice_array($this->aauth->get_errors_array());
         }
-
-        Polatan::set_title(sprintf(__('Sign In &mdash; %s'), get('app_name')));
-
         // Do events
         $this->events->do_action('do_oauth_client');
-        
-		$data['pages'] = 'login';
-        $this->load->backend_view('layouts_aside', $this->events->apply_filters('fill_data_login', $data) );
+
+        $this->events->add_action( 'do_auth_footer', function() {
+            $this->load->admin_view( 'auth/script' );
+        });
+
+        Polatan::set_title(sprintf(__('Sign In &mdash; %s'), get('app_name')));
+        $data = $this->events->apply_filters('fill_data_login', []);
+		$data['pages'] = $this->load->admin_view('auth/login', $data, true);
+        $this->load->admin_view('layouts_aside', $data );
 	}
     
     /**
@@ -78,33 +76,36 @@ class Auth extends MY_Controller
             redirect(array( 'login' ));
         endif;
 
-        if (User::is_loggedin()) : redirect($this->config->item('admin_route'));
+        if (User::is_loggedin()) : redirect($this->config->item('login_route'));
         endif;
         
-        $this->events->do_action('do_registration_rules');
+        // set rules
+        $this->form_validation->set_rules( $this->events->apply_filters('fill_registration_rules', []) );
 
         if ($this->form_validation->run()) 
         {
             $Options = options(APPNAME);
+            $validation = ( @$Options[ 'require_validation' ] == 1 ? 1 : 0 );
             $exec = $this->user_model->create(
                 $this->input->post('email'),
                 $this->input->post('password'),
                 $this->input->post('username'),
                 'user',
-                ( @$Options[ 'require_validation' ] == 1 ? 1 : 0 )
+                $validation
             );
     
-            if ($exec == 'created') {
-                $url = $this->events->apply_filters( 'fill_register_redirection', site_url( array( 'login?notice=create-email-send' ) ) );
+            if ($exec) {
+                $url = $this->events->apply_filters( 'fill_register_redirection', site_url( array( 'login?notice='.$exec ) ) );
                 redirect( $url );
             }
             
             $this->notice->push_notice_array($this->aauth->get_errors_array());
         }
-		
+
 		Polatan::set_title(sprintf(__('Sign Up &mdash; %s'), get('app_name')));
-		$data['pages'] = 'register';
-        $this->load->backend_view('layouts_aside', $this->events->apply_filters('fill_data_register', $data) );
+        $data = $this->events->apply_filters('fill_data_register', []);
+		$data['pages'] = $this->events->apply_filters('fill_form_register', $data);
+        $this->load->admin_view('layouts_aside', $data );
     }
     
     /**
@@ -128,11 +129,7 @@ class Auth extends MY_Controller
      *	Allow user to get reset email for his account
     **/
     public function recovery()
-    {
-        if (intval(riake('site_registration', options(APPNAME))) == false) : 
-            redirect(array( 'login' ));
-        endif;
-        
+    {        
         $this->form_validation->set_rules('user_email', __('User Email'), 'required|valid_email');
         if ($this->form_validation->run()) 
         {
@@ -145,9 +142,13 @@ class Auth extends MY_Controller
             endif;
         }
 
+        $this->events->add_action( 'do_auth_footer', function() {
+            $this->load->admin_view( 'auth/script' );
+        });
+        
         Polatan::set_title(sprintf(__('Recover Password &mdash; %s'), get('app_name')));
-        $data['pages'] = 'recovery';
-        $this->load->backend_view('layouts_aside', $data );
+		$data['pages'] = $this->load->admin_view('auth/recovery', [], true);
+        $this->load->admin_view('layouts_aside', $data );
     }
     
     /**
@@ -178,16 +179,5 @@ class Auth extends MY_Controller
         endif;
 
         redirect(array( 'login?notice=account-activated' ));
-    }
-    
-    //check username using ajax
-    public function check_username($value)
-    {   
-        $result = $this->aauth->user_exist_by_username($value);
-        if (!empty($result)) {
-            echo json_encode(array('st' => 2));
-        } else {
-            echo json_encode(array('st' => 1));
-        }
     }
 }

@@ -12,7 +12,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */
-class usersApiController extends MY_Addon
+class usersApiController extends MY_Api
 {
 	public function __construct()
 	{
@@ -22,7 +22,12 @@ class usersApiController extends MY_Addon
 	public function index($group_par = false)
 	{
 		// Get all users / by group
-		$users = ($u = $this->aauth->list_users($group_par)) ? $u : [];
+		$users = ($u = $this->aauth->list_users($group_par, ['banneds'=>true])) ? $u : [];
+
+		foreach ($users as $row => $value) :
+		$users[$row]['picture'] = User::get_user_image_url($value['id']);
+		endforeach;
+
 		return response()->json($users, JSON_PRETTY_PRINT);
 	}
 
@@ -35,9 +40,8 @@ class usersApiController extends MY_Addon
 		else {
 			$result = (array) User::get($id);
 		}
+		$array['group'] = User::get_user_group($result['id']);
 		$array['picture'] = User::get_user_image_url($result['id']);
-		$key = User::get_user_group($result['id']);
-		$array['group'] = $key->name;
 
 		$response = array_merge($array, $result);
 		return response()->json($response, JSON_PRETTY_PRINT);

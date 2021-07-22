@@ -69,40 +69,33 @@ class Menus_Model extends CI_Model
     public function aside_footer_nav()
     {
         $aside_footer_nav[] = array(
-            'id'     => 3,
-            'parent' => null,
+            'id'         => 3, 'parent' => null, 'order' => 1,
             'name'   => __('Appearance'),
             'icon'   => 'icon-lg fas fa-palette',
-            'slug'   => 'admin/appearance',
-            'permission' => 'read.themes',
-            'order'  => 3,
+            'slug'   => site_url('admin/appearance'),
+            'permission' => 'read.themes'
         );
         $aside_footer_nav[] = array(
-            'id'     => 4,
-            'parent' => null,
+            'id'         => 4, 'parent' => null, 'order' => 1,
             'name'   => __('Addons'),
             'icon'   => 'icon-lg flaticon2-layers-1',
-            'slug'   => 'admin/addons',
-            'permission' => 'read.addons',
-            'order'  => 4,
+            'slug'   => site_url('admin/addons'),
+            'permission' => 'read.addons'
         );
         $aside_footer_nav[] = array(
-            'id'     => 5,
-            'parent' => null,
+            'id'         => 5, 'parent' => null, 'order' => 1,
             'name'   => __('Setting'),
             'icon'   => 'icon-lg flaticon2-settings',
-            'slug'   => 'admin/settings',
-            'permission' => 'read.options',
-            'order'  => 5,
+            'slug'   => site_url('admin/settings'),
+            'permission' => 'read.options'
         );
         $aside_footer_nav[] = array(
-            'id'         => 6,
-            'parent'     => null,
-            'name'       => __('Reset', 'aauth'),
+            'id'         => 6, 'parent' => null, 'order' => 1,
+            'name'       => __('Reset'),
             'icon'       => 'icon-lg flaticon2-refresh-button',
-            'slug'       => 'admin/reset',
-            'permission' => 'manage.core',
-            'order'      => 6
+            'slug'       => '#',
+            'attr_anchor' => 'class="btn btn-icon btn-clean btn-lg mb-2" id="button_reset"',
+            'permission' => 'manage.core'
         );
         get_instance()->multimenu->set_items(
             $this->events->apply_filters('fill_aside_footer_nav', $aside_footer_nav)
@@ -126,63 +119,38 @@ class Menus_Model extends CI_Model
     public function infocenter_nav()
     {
         $infocenter_nav[] = array(
-            'id'     => 11,
-            'parent' => null,
-            'name'   => __('Docs'),
-            'slug'   => 'admin/doc',
-            'order'  => 1
-        );
-        $infocenter_nav[] = array(
-            'id'          => 12,
-            'parent'      => null,
-            'name'        => __('Github'),
-            'slug'        => 'https://github.com/saintekno/sainsuite',
-            'attr_anchor' => 'class="navi-link py-1" target="_blank"',
-            'target'      => true,
-            'order'       => 2
-        );
-        $infocenter_nav[] = array(
-            'id'     => 3,
-            'parent' => null,
+            'id'     => 4, 'parent' => null, 'order'  => 1,
             'name'   => __('API'),
-            'slug'   => 'admin/api',
-            'order'  => 3
+            'slug'   => site_url('admin/api')
         );
         $infocenter_nav[] = array(
-            'id'     => 5,
-            'parent' => null,
+            'id'     => 5, 'parent' => null, 'order'  => 1,
             'name'   => __('Terms'),
-            'slug'   => 'admin/term',
-            'order'  => 5
+            'slug'   => site_url('admin/term')
         );
         $infocenter_nav[] = array(
-            'id'     => 6,
-            'parent' => null,
+            'id'     => 6, 'parent' => null, 'order'  => 1,
             'name'   => __('Privacy'),
-            'slug'   => 'admin/privacy',
-            'order'  => 6
+            'slug'   => site_url('admin/privacy')
         );
         $infocenter_nav[] = array(
-            'id'     => 7,
-            'parent' => null,
-            'name'   => __('About'),
-            'slug'   => 'admin/about',
-            'order'  => 7
+            'id'     => 7, 'parent' => null, 'order'  => 1,
+            'name'   => sprintf( __( 'Copyright © %s %s' ), date('Y'), riake('site_name', options(APPNAME)) ),
+            'slug'   => site_url('admin/about')
         );
         get_instance()->multimenu->set_items(
             $this->events->apply_filters('fill_infocenter_nav', $infocenter_nav)
         );
 
-        $config["nav_tag_open"]   = '<ul class="navi py-4">';
-        $config["nav_tag_close"]  = '</ul>';
-        $config["item_tag_open"]  = '<li class="navi-item">';
+        $config["nav_tag_open"]   = '<div class="nav justify-content-center">';
+        $config["nav_tag_close"]  = '</div>';
+        $config["item_tag_open"]  = '<li class="nav-item" data-toggle="tooltip" title="%s">';
         $config["item_tag_close"] = '</li>';
-        $config["item_anchor"]    = '<a class="navi-link py-1" href="%s">%s</a>';
+        $config["item_anchor"]    = '<a class="navi-link px-2" href="%s">%s</a>';
         $config["item_label"]     = '<span class="navi-text">%s</span>';
-        $config["item_divider"]   = '<li class="navi-separator my-4"></li>';
 
         // call render in view
-        return get_instance()->multimenu->render($config, ['admin/about', 'admin/term']);
+        return get_instance()->multimenu->render($config, []);
     }
 
     /**
@@ -232,7 +200,7 @@ class Menus_Model extends CI_Model
         endif;
 
         // call render in view
-        if (User::control( $this->events->apply_filters('fill_create_nav', [])[0]['permission'] )) :
+        if (User::is_allowed( $this->events->apply_filters('fill_create_nav', [])[0]['permission'] )) :
         return get_instance()->multimenu->render();
         endif;
     }
@@ -294,17 +262,17 @@ class Menus_Model extends CI_Model
             $this->events->apply_filters('fill_menu_nav', [])
         );
 
-        $config["nav_tag_open"]       = '<ul class="menu-nav">';
-        $config["nav_tag_close"]      = '';
-        $config["parent_tag_open"]    = '<li class="menu-item menu-item-submenu">';
-        $config["parent_anchor"]      = '<a class="menu-link menu-toggle" href="%s">%s</a>';
+        $config["nav_tag_open"]       = '<ul class="menu-nav list list-hover">';
+        $config["nav_tag_close"]      = '</ul>';
+        $config["parent_tag_open"]    = '<li class="menu-item menu-item-submenu mb-1">';
+        $config["parent_anchor"]      = '<a class="menu-link d-flex align-items-center mb-1 border menu-toggle" href="%s">%s</a>';
         $config["children_tag_open"]  = '<div class="menu-submenu"><ul class="menu-subnav">';
         $config["children_tag_close"] = '</ul></div>';
-        $config["item_tag_open"]      = '<li class="menu-item">';
+        $config["item_tag_open"]      = '<li class="menu-item list-item hoverable mb-1 %s">';
         $config["item_tag_close"]     = '</li>';
-        $config["item_anchor"]        = '<a class="menu-link" href="%s">%s</a>';
-        $config["item_icon"]          = '<i class="menu-icon %s"><span></span></i>';
-        $config["item_label"]         = '<span class="menu-text">%s</span>';
+        $config["item_anchor"]        = '<a class="menu-link d-flex align-items-center border" href="%s">%s</a>';
+        $config["item_icon"]          = '<div class="symbol symbol-25 symbol-white ml-1 mr-4 border"><span class="symbol-label font-size-h5">%s</span></div>';
+        $config["item_label"]         = '<div class="d-flex flex-column flex-grow-1 mr-2"><span class="text-dark-75 font-size-h6 mb-0">%s</span></div>';
         $config["item_arrow"]         = '<i class="menu-arrow"></i>';
         $config["item_divider"]       = '<li class="menu-section"><h4 class="menu-text">%s</h4></li>';
 

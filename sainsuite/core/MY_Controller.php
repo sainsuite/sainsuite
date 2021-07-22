@@ -17,12 +17,15 @@ class MY_Controller extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
+        // Include Library Class
+        include_once( APPPATH . 'core/MY_Api.php' );
+        include_once( APPPATH . 'core/MY_Addon.php' );
         
         // Load Global Lang lines
         $this->lang->load_lines(APPPATH . '/language/*.php');
         
         // Load Addons
-        include_once( APPPATH . 'core/MY_Addon.php' );
         MY_Addon::load( ADDONSPATH );
 
         // if is installed, setup is always loaded
@@ -31,11 +34,11 @@ class MY_Controller extends CI_Controller
             // Load Model
             $this->load->model('options_model');
 
-            // language is set on dashboard
-            $this->options_model->defineLanguage();
-
             //init active addons
             MY_Addon::init('actives'); 
+
+            // language is set on dashboard
+            $this->options_model->defineLanguage();
 
             // add events
             $this->events->do_action('do_app_init');

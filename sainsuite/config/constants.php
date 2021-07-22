@@ -91,7 +91,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | This determine how sainsuite works with all it components.
 */
 define('ADDONSPATH', APPPATH . 'addons' . '/'); // Addons Paths
-define('FRONTENDPATH', VIEWPATH . 'frontend' . '/'); // Frontend Paths
-define('BACKENDPATH', VIEWPATH . 'backend' . '/'); // Backend Paths
+define('SITEPATH', VIEWPATH . 'site' . '/'); // Site Paths
+define('ADMINPATH', VIEWPATH . 'admin' . '/'); // Admin Paths
 define('GUI_EXPIRE', 60*60*6); // expiration time
 define('ENABLE_DEBUG', true );

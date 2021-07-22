@@ -19,8 +19,6 @@ class UsersProfileController extends MY_Addon
     public function __construct()
     {
         parent::__construct();
-
-        $this->events->add_filter( 'aside_menu', array( new Users_Menu, '_aside_menu' ));
     }
 
     private function breadcrumb($array)
@@ -35,19 +33,17 @@ class UsersProfileController extends MY_Addon
     
     public function index($param1 = '')
     {		
-        if ( ! User::control('edit.profile') ) {
-            $this->session->set_flashdata('error_message', __( 'Youre not allowed to see this page.' ));
-            redirect(site_url('admin/page404'));
-        }
+        User::control('edit.profile');
 
         $this->load->library('form_validation');
+        
         if ($param1 == 'change_password') 
         {
             if ( $this->events->apply_filters('fill_old_password', User::id()) ) {
-                $this->form_validation->set_rules('old_pass', __('Old Pass', 'aauth'), 'required|min_length[6]');
+                $this->form_validation->set_rules('old_pass', __('Old Pass' ), 'required|min_length[6]');
             }
-            $this->form_validation->set_rules('password', __('Password', 'aauth'), 'required|min_length[6]');
-            $this->form_validation->set_rules('confirm', __('Confirm', 'aauth'), 'required|matches[password]');
+            $this->form_validation->set_rules('password', __('Password' ), 'required|min_length[6]');
+            $this->form_validation->set_rules('confirm', __('Confirm' ), 'required|matches[password]');
     
             if ($this->form_validation->run()) 
             {
@@ -70,7 +66,7 @@ class UsersProfileController extends MY_Addon
         }
         else {
             // load custom rules
-            $this->form_validation->set_rules('user_email', __('User Email', 'aauth'), 'valid_email');
+            $this->form_validation->set_rules('user_email', __('User Email' ), 'valid_email');
 
             if ($this->form_validation->run()) {
                 $exec = $this->user_model->edit(

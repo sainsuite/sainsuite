@@ -12,7 +12,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */
-class groupsApiController extends MY_Addon
+class groupsApiController extends MY_Api
 {
 	public function __construct()
 	{

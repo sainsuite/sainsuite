@@ -47,11 +47,8 @@ class UsersHomeController extends MY_Addon
      */
     public function index( $index = 1 )
     {
-        if ( ! User::control('read.users') ) {
-            $this->session->set_flashdata('info_message', __( 'Youre not allowed to see this page.' ));
-            redirect(site_url('admin/page404'));
-		}
-        
+        User::control('read.users');
+
         // Title
 		Polatan::set_title(sprintf(__('Users &mdash; %s'), get('signature')));
         
@@ -69,17 +66,14 @@ class UsersHomeController extends MY_Addon
      */
     public function add()
     {
-        if (! User::control('create.users')) {
-            $this->session->set_flashdata('info_message', __( 'Youre not allowed to see this page.' ));
-            redirect(site_url('admin/page404'));
-        }
+        User::control('create.users');
         
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', __('User Name', 'aauth'), 'required|min_length[5]');
-        $this->form_validation->set_rules('user_email', __('User Email', 'aauth'), 'required|valid_email');
-        $this->form_validation->set_rules('password', __('Password', 'aauth'), 'required|min_length[6]');
-        $this->form_validation->set_rules('confirm', __('Confirm', 'aauth'), 'required|matches[password]');
-        $this->form_validation->set_rules('group', __('Group', 'aauth'), 'required');
+        $this->form_validation->set_rules('username', __('User Name'), 'required|min_length[5]');
+        $this->form_validation->set_rules('user_email', __('User Email'), 'required|valid_email');
+        $this->form_validation->set_rules('password', __('Password'), 'required|min_length[6]');
+        $this->form_validation->set_rules('confirm', __('Confirm' ), 'required|matches[password]');
+        $this->form_validation->set_rules('group', __('Group' ), 'required');
 
         // load custom rules
         $this->events->do_action('do_user_rules');
@@ -130,10 +124,7 @@ class UsersHomeController extends MY_Addon
             redirect(array( 'admin', 'profile' ));
         }
 
-        if (! User::control('edit.users')) {
-            $this->session->set_flashdata('info_message', __( 'Youre not allowed to see this page.' ));
-            redirect(site_url('admin/page404'));
-        }
+        User::control('edit.users');
         
         // User Goup
         $user = User::get($index);
@@ -144,13 +135,14 @@ class UsersHomeController extends MY_Addon
 
         // validation rules
         $this->load->library('form_validation');
+        
         if ($param1 == 'change_password') 
         {
             if ( $this->events->apply_filters('fill_old_password', User::get($index)->id) ) {
-                $this->form_validation->set_rules('old_pass', __('Old Pass', 'aauth'), 'required|min_length[6]');
+                $this->form_validation->set_rules('old_pass', __('Old Pass' ), 'required|min_length[6]');
             }
-            $this->form_validation->set_rules('password', __('Password', 'aauth'), 'required|min_length[6]');
-            $this->form_validation->set_rules('confirm', __('Confirm', 'aauth'), 'required|matches[password]');
+            $this->form_validation->set_rules('password', __('Password' ), 'required|min_length[6]');
+            $this->form_validation->set_rules('confirm', __('Confirm' ), 'required|matches[password]');
     
             if ($this->form_validation->run()) 
             {
@@ -173,7 +165,7 @@ class UsersHomeController extends MY_Addon
         }
         else {
             // load custom rules
-            $this->form_validation->set_rules('user_email', __('User Email', 'aauth'), 'valid_email');
+            $this->form_validation->set_rules('user_email', __('User Email' ), 'valid_email');
 
             if ($this->form_validation->run()) {
                 $exec =  $this->user_model->edit(
@@ -213,10 +205,7 @@ class UsersHomeController extends MY_Addon
 
     public function delete( $index = null, $redirect = 'users' )
     {
-        if (! User::control('delete.users')) {
-            $this->session->set_flashdata('info_message', __( 'Youre not allowed to see this page.' ));
-            redirect(site_url('admin/page404'));
-        }
+        User::control('delete.users');
 
         if ( $index == null ) 
         {
@@ -236,7 +225,7 @@ class UsersHomeController extends MY_Addon
                 redirect( array( 'admin', 'users?notice=cant-delete-yourself' ) );
             endif;
     
-            $exec = $this->aauth->delete_user($index);
+            $exec = $this->aauth->ban_user($index);
 
             if ($exec) {
                 $this->session->set_flashdata('flash_message', __('deleted'));

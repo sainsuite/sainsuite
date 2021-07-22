@@ -38,22 +38,22 @@ $config[ 'supported_languages' ] = array(
 |--------------------------------------------------------------------------
 */
 $config[ 'app_name' ] = 'sainsuite';
-$config[ 'version' ] = '3.18.2';
-$config[ 'signature' ] = $config[ 'app_name' ] . ' ' . $config[ 'version' ];
+$config[ 'version' ] = '3.19.0';
+$config[ 'signature' ] = $config[ 'app_name' ] . ' v' . $config[ 'version' ];
 
 /*
 |--------------------------------------------------------------------------
 | Custom Asset Paths
 |--------------------------------------------------------------------------
 */
-$config['asset_path']    = 'assets/';
-$config['addon_path']    = 'addons/';
-$config['upload_path']   = 'uploads/';
-$config['backend_path']  = 'backend/';
-$config['frontend_path'] = 'frontend/';
-$config['js_path']       = 'js/';
-$config['css_path']      = 'css/';
-$config['img_path']      = 'img/';
+$config['asset_path']  = 'assets/';
+$config['addon_path']  = 'addons/';
+$config['upload_path'] = 'uploads/';
+$config['admin_path']  = 'admin/';
+$config['site_path']   = 'site/';
+$config['js_path']     = 'js/';
+$config['css_path']    = 'css/';
+$config['img_path']    = 'img/';
 
 /*
 |--------------------------------------------------------------------------

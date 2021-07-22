@@ -25,30 +25,70 @@ class User
         return get_instance()->aauth->is_loggedin();
     }
 
-    public static function id()
+	/**
+	 * Get user id
+	 * Get user id from email address, if par. not given, return current user's id
+	 * @param string|bool $email Email address for user
+	 * @return int User id
+	 */
+    public static function id($user_par = false)
     {
-        $user = get_instance()->aauth->get_user_id();
+        $user = get_instance()->aauth->get_user_id($user_par);
         return $user ? $user : 0;
     }
 
+	/**
+	 * Get user
+	 * Get user information
+	 * @param int|bool $user_id User id to get or FALSE for current user
+	 * @return object User information
+	 */
     public static function get($user_par = false)
     {
         return get_instance()->aauth->get_user($user_par);
     }
 
+	/**
+	 * Get user groups
+	 * Get groups a user is in
+	 * @param int|bool $user_id User id to get or FALSE for current user
+	 * @return array Groups
+	 */
     public static function get_user_group($user_par = false)
     {
         return get_instance()->aauth->get_user_group($user_par);
     }
 
+	/**
+	 * Is member
+	 * Check if current user is a member of a group
+	 * @return bool
+	 */
     public static function in_group($group_name)
     {
         return get_instance()->aauth->is_member($group_name);
     }
 
+	/**
+	 * Controls if a logged or public user has permission	 *
+	 * @param bool $perm_par If not given just control user logged in or not
+	 */
     public static function control( $perm_par = false )
     {
         return get_instance()->aauth->control($perm_par);
+    }
+
+	/**
+	 * Is user allowed
+	 * Check if user allowed to do specified action, admin always allowed
+	 * first checks user permissions then check group permissions
+	 * @param int $perm_par Permission id or name to check
+	 * @param int|bool $user_id User id to check, or if FALSE checks current user
+	 * @return bool
+	 */
+    public static function is_allowed($perm_par, $user_id=false)
+    {
+        return get_instance()->aauth->is_allowed($perm_par, $user_id);
     }
 
     /**
@@ -62,7 +102,7 @@ class User
             return $picture;
         elseif (file_exists(upload_path().'user_image/'.$user_id.'.jpg'))
             return upload_url().'user_image/'.$user_id.'.jpg';
-        else
+        else 
             $current_user = get_instance()->aauth->get_user($user_id);
             return self::get_gravatar($current_user->email, 90);
     }
@@ -91,7 +131,13 @@ class User
             }
             $url .= ' />';
         }
-        return $url;
+
+		// Open the socket
+		if ( $fp = @fsockopen('www.saintekno.id', 80)) {
+            return $url;
+		}
+
+        return img_url().'user.jpg';
     }
 
     public static function upload_user_image($user_id) 

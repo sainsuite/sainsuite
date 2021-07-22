@@ -55,6 +55,7 @@ class MY_Addon extends CI_Model
                 if (is_file($init_file = $addons[ 'application' ][ 'main' ]) 
                     && $filter === 'unique') 
                 {
+                    MY_Addon::IncFiles( $addons );
                     include_once($init_file);
                     return; // after special init return;
                 }
@@ -73,7 +74,8 @@ class MY_Addon extends CI_Model
                 return;
             }
 
-            if ($filter === 'all') {                    
+            if ($filter === 'all') {           
+                MY_Addon::IncFiles( $addon );         
                 include_once($init_file);
             }
 
@@ -86,10 +88,29 @@ class MY_Addon extends CI_Model
                 if (in_array(strtolower($addon[ 'application' ][ 'namespace' ]), $addons_actives)) 
                 {
                     self::$actives[] = $addon[ 'application' ][ 'namespace' ];
+                    MY_Addon::IncFiles( $addon );  
                     include_once($init_file);
                 }
             }
         }  
+    }
+
+    public static function IncFiles( $addon )
+    {
+        /**
+         * auto include all from inc folder
+         * for an autoloading and a better looking code
+         */
+         if ( ! empty( $addon[ 'application' ][ 'includes' ] ) ) {
+            $autoIncludes = explode( ',', $addon[ 'application' ][ 'includes' ] );
+            foreach( $autoIncludes as $folder ) {
+                $path  = ADDONSPATH . $addon[ 'application' ][ 'namespace' ] . "/$folder/";
+                $files = glob( $path . '*.php');
+                foreach( $files as $filePath) {
+                    include_once( $filePath );
+                }
+            }
+        }
     }
 
 	// --------------------------------------------------------------------
@@ -335,7 +356,7 @@ class MY_Addon extends CI_Model
         global $Options;
 
         $addon = self::get( $addon_namespace );
-        if (! get_instance()->aauth->is_admin() && $addon[ 'application' ][ 'readonly' ]) {
+        if (! User::in_group('master') && $addon[ 'application' ][ 'readonly' ]) {
             return;
         }
         
@@ -363,11 +384,6 @@ class MY_Addon extends CI_Model
             Filer::drop($addon_assets_folder);
         }
 
-        // Drop Assets Folder
-        if (is_dir($addon_themes_folder = FCPATH . 'assets' . '/' . $addon_namespace)) {
-            Filer::drop($addon_themes_folder);
-        }
-
         // Drop Uploads Folder
         if (! $update) :
             if (is_dir($addon_uploads_folder = FCPATH . 'uploads' . '/' . $addon_namespace)) {
@@ -381,7 +397,7 @@ class MY_Addon extends CI_Model
 
     public static function extract($addon_namespace)
     {
-        if (! get_instance()->aauth->is_admin() || ! riake('webdev_mode', options(APPNAME)) ) : return;
+        if (! User::in_group('master') || ! riake('webdev_mode', options(APPNAME)) ) : return;
         endif;
         
         $addon = self::get($addon_namespace);
@@ -424,7 +440,7 @@ class MY_Addon extends CI_Model
                             }
                         }
 
-                        if (strstr($file, $path_id_separator = VIEWPATH . "frontend")) 
+                        if (strstr($file, $path_id_separator = VIEWPATH . "site")) 
                         {
                             // we found a a file
                             $path_splited = explode($path_id_separator, $file);
@@ -435,8 +451,24 @@ class MY_Addon extends CI_Model
                                 mkdir($_temp_folder_themes);
                             }
                             Filer::copy(
-                                VIEWPATH . "frontend" . $path_splited[1],
+                                VIEWPATH . "site" . $path_splited[1],
                                 $_temp_folder_themes . $path_splited[1]
+                            );
+                        }
+
+                        if (strstr($file, $path_id_separator = FCPATH . "assets")) 
+                        {
+                            // we found a a file
+                            $path_splited = explode($path_id_separator, $file);
+                            // var_dump( $path_splited );
+                            // create themes folder
+                            $_temp_folder_themes_assets = $temp_folder . '/' . 'themes/assets';
+                            if (!is_dir($_temp_folder_themes_assets)) {
+                                mkdir($_temp_folder_themes_assets);
+                            }
+                            Filer::copy(
+                                FCPATH . "assets" . $path_splited[1],
+                                $_temp_folder_themes_assets . $path_splited[1]
                             );
                         }
                     }
@@ -454,17 +486,6 @@ class MY_Addon extends CI_Model
                     mkdir($_temp_folder_assets);
                 }
                 Filer::copy($addon_assets_folder, $_temp_folder_assets);
-            }
-
-            // Copy Assets Themes to
-            if (is_dir($addon_themes_folder = FCPATH . 'assets' . '/' . $addon_namespace)) 
-            {
-                // create themes folder
-                $_temp_folder_themes_assets = $temp_folder . '/' . 'assets/themes';
-                if (!is_dir($_temp_folder_themes_assets)) {
-                    mkdir($_temp_folder_themes_assets);
-                }
-                Filer::copy($addon_themes_folder, $_temp_folder_themes_assets);
             }
 
             // Copy Uploads to
@@ -587,7 +608,7 @@ class MY_Addon extends CI_Model
                         }
                         // Delete temp file
                         Filer::drop($extraction_temp_path);
-                        return get_instance()->lang->line('old-version-cannot-be-installed');
+                        return get_instance()->lang->line('old-version');
                     }
 
                     /**
@@ -597,7 +618,7 @@ class MY_Addon extends CI_Model
 
                     // Delete temp file
                     Filer::drop($extraction_temp_path);
-                    if (! get_instance()->aauth->is_admin()) {
+                    if (! User::in_group('master')) {
                         return array(
                             'namespace' => $addon_namespace,
                             'from' => $addon_array[ 'application' ][ 'version' ],
@@ -808,16 +829,41 @@ class MY_Addon extends CI_Model
         {
             // removing raw_name from old manifest to ease copy
             $relative_path_to_file = explode($extraction_data[ 'upload_data' ][ 'raw_name' ] . '/', $_manifest);
-            if ( $relative_path_to_file[1] == 'themes' ) {
+
+            if ( $relative_path_to_file[1] == 'themes' ) 
+            {
                 // relative json manifest
                 $_manifest_themes = self::__parse_path($_manifest);
+
+                // path Themes
+                foreach ($_manifest_themes[0] as $_manifest_theme) 
+                {
+                    $theme_path = explode($extraction_data[ 'upload_data' ][ 'raw_name' ] . '/', $_manifest_theme);
+
+                    if ($theme_path[1] != 'themes/assets') 
+                    {
+                        $theme_path_to = explode('themes/', $theme_path[1]); 
+                        $theme_path_to[1] = VIEWPATH . "site/" . $theme_path_to[1];
+                        Filer::extractor($_manifest_theme, $theme_path_to[1]);
+                        $relative_json_manifest[] = $theme_path_to[1];
+                    }
+                }
+
+                // path Assets
                 foreach ($_manifest_themes[0] as $_manifest_theme) {
-                    $relative_path_to_theme = explode($extraction_data[ 'upload_data' ][ 'raw_name' ] . '/', $_manifest_theme);
-                    $relative_path_to_theme[1] = str_replace("themes", VIEWPATH . "frontend", $relative_path_to_theme[1]);
-                    
-                    Filer::copy($_manifest_theme, $relative_path_to_theme[1]);
-                    
-                    $relative_json_manifest[] = $relative_path_to_theme[1];
+                    $theme_path = explode($extraction_data[ 'upload_data' ][ 'raw_name' ] . '/', $_manifest_theme);
+
+                    if ($theme_path[1] == 'themes/assets') 
+                    {
+                        $_manifest_assets = self::__parse_path($_manifest_theme);
+                        foreach ($_manifest_assets[0] as $_manifest_asset) 
+                        {
+                            $assets_path = explode($extraction_data[ 'upload_data' ][ 'raw_name' ] . '/themes/', $_manifest_asset);   
+                            $assets_path[1] = FCPATH . $assets_path[1];
+                            Filer::extractor($_manifest_asset, $assets_path[1]);
+                            $relative_json_manifest[] = $assets_path[1];
+                        }
+                    }
                 }
             } 
 
@@ -849,6 +895,11 @@ class MY_Addon extends CI_Model
             }
         }
 
+        // Drop themes Folder
+        if (is_dir($addon_themes_folder = ADDONSPATH . $folder_to_lower .'/themes')) {
+            Filer::drop($addon_themes_folder);
+        }
+
         // Creating Manifest
         file_put_contents($addon_dir_path . '/' . self::$manifest_addon, json_encode($relative_json_manifest, JSON_PRETTY_PRINT));
 
@@ -864,14 +915,6 @@ class MY_Addon extends CI_Model
             if (is_dir($addon_assets_folder)) { // checks if addon folder exists on public folder
                 Filer::drop($addon_assets_folder);
             }
-            
-            $themes_assets_folder = FCPATH . 'assets' . '/' . $folder_to_lower;
-            if (is_dir($themes_assets_folder)) { // checks if addon folder exists on public folder
-                Filer::drop($themes_assets_folder);
-            }
-
-            mkdir($themes_assets_folder); // creating addon folder within
-            Filer::extractor($addon_dir_path . '/' . 'assets/themes', $themes_assets_folder);
 
             mkdir($addon_assets_folder); // creating addon folder within
             Filer::extractor($addon_dir_path . '/' . 'assets', $addon_assets_folder);

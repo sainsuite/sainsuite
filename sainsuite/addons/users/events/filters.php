@@ -21,56 +21,46 @@ class Users_Filters extends MY_Addon
         $this->events->add_filter('fill_ref_user_pass', array( $this, 'load_user_pass' ));
 
         $this->events->add_filter('fill_apps_logo', array( $this, 'apps_logo' ), 1, 1);
-        $this->events->add_filter('fill_form_register', array( $this, 'fill_form_register' ), 1, 1);
         $this->events->add_filter('fill_apps_contact', array( $this, 'fill_apps_contact' ), 5, 1);
-        $this->events->add_filter('fill_user_vars', array( $this, 'fields_user_vars' ), 10, 1);
         $this->events->add_filter('fill_user_avatar', function () {
             return User::get_user_image_url(User::id());
         });
-    }
-
-    public function fill_form_register()
-    {
-        return $this->addon_view( 'users', 'auth/register', array(), true );
+        
+        $this->events->add_filter('fill_form_register', array( $this, 'fill_form_register' ), 1, 1);
+        $this->events->add_filter('fill_registration_rules', array( $this, 'fill_registration_rules' ), 1);
     }
     
     public function load_user_profile($config)
     {        
         $filed[] = array(
-            'type'  => 'input-image',
-            'wrapper'  => 'user',
-            'accept' => '.png, .jpg, .jpeg',
-            'label' => __('user_image'),
-            'name'  => 'user_image',
-            'id'  => 'user_image',
-            'description' => 'Allowed file types: png, jpg, jpeg.',
-            'value' => (empty($config['user'])) 
-                ? ''
-                : $config['user']->id
+            'type'        => 'input-image',
+            'wrapper'     => 'user',
+            'accept'      => '.png, .jpg, .jpeg',
+            'label'       => __('User Image'),
+            'name'        => 'user_image',
+            'id'          => 'user_image',
+            'value'       => (isset($config['user'])) ? $config['user']->id : '',
+            'description' => 'Allowed file types: png, jpg, jpeg.'
         );
 
         $filed[] = array(
             [
-                'label'    => __('User Name', 'aauth'),
-                'class' => 'col-12 col-lg-6 col-md-6',
-                'type' => 'text',
-                'required'  => true,
+                'label'    => __('User Name' ),
+                'class'    => 'col-12 col-lg-6 col-md-6',
+                'type'     => 'text',
                 'name'     => 'username',
-                'readonly' => (empty($config['user'])) ? '' : true,
+                'readonly' => (isset($config['user'])) ? true : '',
                 'required' => (empty($config['user'])) ? true : '',
-                'value'    => (empty($config['user'])) 
-                    ? set_value('username')
-                    : set_value('username', $config['user']->username) 
+                'value'    => set_value('username', (isset($config['user']) ? $config['user']->username : ''))
             ],
             [
-                'label'    => __('User Email', 'aauth'),
-                'class' => 'col-12 col-lg-6 col-md-6',
+                'label'    => __('User Email' ),
+                'class'    => 'col-12 col-lg-6 col-md-6',
+                'type'     => 'text',
                 'name'     => 'user_email',
-                'readonly' => (empty($config['user'])) ? '' : true,
+                'readonly' => (isset($config['user'])) ? true : '',
                 'required' => (empty($config['user'])) ? true : '',
-                'value'    => (empty($config['user'])) 
-                    ? set_value('user_email')
-                    : set_value('user_email', $config['user']->email) 
+                'value'    => set_value('user_email', (isset($config['user']) ? $config['user']->email : ''))
             ]
         );
         
@@ -81,30 +71,26 @@ class Users_Filters extends MY_Addon
             }
             $filed[] = array(
                 [
-                    'type' => 'select',
-                    'class' => 'col-12 col-lg-6 col-md-6',
-                    'name'  => 'user_status',
-                    'label' => __('User Status', 'aauth'),
+                    'type'    => 'select',
+                    'class'   => 'col-12 col-lg-6 col-md-6',
+                    'name'    => 'user_status',
+                    'label'   => __('User Status' ),
                     'options' => array(
-                        'default' => __( 'Default', 'aauth'),
-                        '0'       => __( 'Active' , 'aauth'),
-                        '1'       => __( 'Unactive' , 'aauth')
+                        ''  => __( 'Default' ),
+                        '0' => __( 'Active'  ),
+                        '1' => __( 'Unactive'  )
                     ),
-                    'active' => (empty($config['user'])) 
-                        ? ''
-                        : $config['user']->banned 
+                    'active' => (isset($config['user'])) ? $config['user']->banned : ''
                 ],
                 [
-                    'type' => 'select',
-                    'class' => 'col-12 col-lg-6 col-md-6',
-                    'label'   => __('Add to a group', 'aauth'),
-                    'name'    => 'group',
+                    'type'     => 'select',
+                    'class'    => 'col-12 col-lg-6 col-md-6',
+                    'label'    => __('Add to a group' ),
+                    'name'     => 'group',
                     'readonly' => ($groups_array) ? false : true,
-                    'required'  => ($groups_array) ? true : false,
-                    'options' => $groups_array,
-                    'active'  => (empty($config['user_group'])) 
-                        ? null
-                        : $config['user_group']->group_id 
+                    'required' => ($groups_array) ? true : false,
+                    'options'  => $groups_array,
+                    'active'   => (isset($config['user_group'])) ? $config['user_group']->group_id : ''
                 ]
             );
         endif;
@@ -116,9 +102,6 @@ class Users_Filters extends MY_Addon
                 ['page'=> $config['page']]
             )
         ));
-        
-        unset( $filed[ 'page' ] );
-        unset( $filed[ 'user' ] );
 
         return $filed;
     }
@@ -130,7 +113,7 @@ class Users_Filters extends MY_Addon
             $filed[] = array(
                 'type'  => 'password',
                 'class' => 'col-12 col-lg-6 col-md-6',
-                'label' => __('Old Password', 'aauth'),
+                'label' => __('Old Password' ),
                 'name'  => 'old_pass',
             );
         }
@@ -139,25 +122,19 @@ class Users_Filters extends MY_Addon
                 'type'  => 'password',
                 'class' => 'col-12 col-lg-6 col-md-6',
                 'required'  => (empty($config['user'])) ? true : '',
-                'label' => __('New Password', 'aauth'),
+                'label' => __('New Password' ),
                 'name'  => 'password'
             ],
             [
                 'type'  => 'password',
                 'class' => 'col-12 col-lg-6 col-md-6',
                 'required'  => (empty($config['user'])) ? true : '',
-                'label' => __('Confirm New', 'aauth'),
+                'label' => __('Confirm New' ),
                 'name'  => 'confirm'
             ]
         );
 
         return $filed;
-    }
-    
-    public function fields_user_vars($fields)
-    {
-        $fields[ 'theme-skin' ] = ($skin = $this->input->post('theme-skin')) ? $skin : 'skin-'.APPNAME;
-        return $fields;
     }
 
     public function apps_logo($config_logo = null)
@@ -181,7 +158,25 @@ class Users_Filters extends MY_Addon
 
     public function fill_apps_contact()
     {
-        return $this->load->backend_view( 'about/contact', [], true );
+        return $this->load->admin_view( 'about/contact', [], true );
+    }
+
+    /**========================================================================
+     *                           REgister
+     *========================================================================**/
+    public function fill_form_register( $data )
+    {
+        return $this->addon_view( 'users', 'auth/register', $data, true );
+    }
+    
+    public function fill_registration_rules( $rules )
+    {
+        $rules[] = ['field' => 'username', 'label' => __('User Name' ), 'rules' => 'required|min_length[5]|is_unique[aauth_users.username]'];
+        $rules[] = ['field' => 'email', 'label' => __('Email' ), 'rules' => 'valid_email|required|is_unique[aauth_users.email]'];
+        $rules[] = ['field' => 'password', 'label' => __('Password' ), 'rules' => 'required|min_length[6]'];
+        $rules[] = ['field' => 'confirm', 'label' => __('Confirm' ), 'rules' => 'matches[password]'];
+
+        return $rules;
     }
 }
 new Users_Filters;

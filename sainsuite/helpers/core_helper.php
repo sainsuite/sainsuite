@@ -137,8 +137,30 @@ if (!function_exists('notice_info')) {
                 </button>
             </div>
         </div>';
-        ;
     }
+}
+
+
+/**------------------------------------------------------------------------
+ *                           Pagination
+ *------------------------------------------------------------------------**/
+// this function will be called to get configuration of pagination
+function pagination_config($base_url,$total_rows,$per_page){
+    // Pagination Configuration
+    $config['base_url']         = $base_url;
+    $config['use_page_numbers'] = TRUE;
+    $config['total_rows']       = $total_rows;
+    $config['per_page']         = $per_page;
+    $config['full_tag_open']    = '<div class="d-flex flex-wrap py-2 mr-3">';
+    $config['full_tag_close']   = '</div>';
+    $config['first_link']       = '<i class="ki ki-bold-double-arrow-back icon-xs"></i>';
+    $config['prev_link']        = '<i class="ki ki-bold-arrow-back icon-xs"></i>';
+    $config['cur_tag_open']     = '<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1 active">';
+    $config['cur_tag_close']    = '</a>';
+    $config['next_link']        = '<i class="ki ki-bold-arrow-next icon-xs"></i>';
+    $config['last_link']        = '<i class="ki ki-bold-double-arrow-next icon-xs"></i>';
+    $config['attributes']       = array('class' => 'btn btn-icon btn-sm btn-light-primary mr-2 my-1');
+    return $config;
 }
 
 // --------------------------------------------------------------------

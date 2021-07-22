@@ -49,7 +49,7 @@ class Enqueue
     {
 		$root_url = $this->CI->events->apply_filters('fill_root_url', base_url());
         $this->styles[ $this->_namespace ][ basename( $style ) ] = ($path === null)
-            ? $root_url . $this->CI->config->item('asset_path') . $this->CI->config->item('backend_path') . theme_backend() . $this->CI->config->item('css_path') . $style
+            ? $root_url . $this->CI->config->item('asset_path') . $this->CI->config->item('admin_path') . admin_theme() . $this->CI->config->item('css_path') . $style
             : $path . $style;
     }
 
@@ -89,7 +89,7 @@ class Enqueue
     {
 		$root_url = $this->CI->events->apply_filters('fill_root_url', base_url());
         $this->scripts[ $this->_namespace ][ basename( $script ) ] = ($path === null)
-            ? $root_url . $this->CI->config->item('asset_path') . $this->CI->config->item('backend_path') . theme_backend() . $this->CI->config->item('js_path') . $script
+            ? $root_url . $this->CI->config->item('asset_path') . $this->CI->config->item('admin_path') . admin_theme() . $this->CI->config->item('js_path') . $script
             : $path . $script;
     }
 

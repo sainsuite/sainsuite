@@ -42,10 +42,10 @@ if (! function_exists('asset_url')) {
         if ($uri === null) { 
             // if addon namespace is not specified
             //return the full asset path
-            return $root_url . $CI->config->item('asset_path') . $CI->config->item('backend_path') . theme_backend();
+            return $root_url . $CI->config->item('asset_path') . $CI->config->item('admin_path') . admin_theme();
         } 
 
-        return $root_url . $CI->config->item('asset_path') . $CI->config->item('backend_path') . theme_backend() . $uri ;
+        return $root_url . $CI->config->item('asset_path') . $CI->config->item('admin_path') . admin_theme() . $uri ;
     }
 }
 if (! function_exists('fasset_url')) {
@@ -54,10 +54,10 @@ if (! function_exists('fasset_url')) {
         $CI =& get_instance();
         $root_url = $CI->events->apply_filters('fill_root_url', base_url());
         if ($uri === null) { 
-            return $root_url . $CI->config->item('asset_path') . theme_frontend();
+            return $root_url . $CI->config->item('asset_path') . site_theme();
         } 
 
-        return $root_url . $CI->config->item('asset_path') . theme_frontend() . $uri ;
+        return $root_url . $CI->config->item('asset_path') . site_theme() . $uri ;
     }
 }
 
@@ -88,7 +88,7 @@ if (! function_exists('img_url')) {
         $CI =& get_instance();
         $root_url = $CI->events->apply_filters('fill_root_url', base_url());
         if ($addon_namespace === null) {
-            return $root_url . $CI->config->item('asset_path') . $CI->config->item('backend_path') . theme_backend() . $CI->config->item('img_path');
+            return $root_url . $CI->config->item('asset_path') . $CI->config->item('admin_path') . admin_theme() . $CI->config->item('img_path');
         } 
 
         return $root_url . $CI->config->item('asset_path') . $CI->config->item('addon_path') . $addon_namespace . '/' . $CI->config->item('img_path');
@@ -99,7 +99,7 @@ if (! function_exists('fimg_url')) {
     {
         $CI =& get_instance();
         $root_url = $CI->events->apply_filters('fill_root_url', base_url());
-        return $root_url. $CI->config->item('asset_path') . theme_frontend() . $CI->config->item('img_path');
+        return $root_url. $CI->config->item('asset_path') . site_theme() . $CI->config->item('img_path');
     }
 }
 
@@ -154,7 +154,7 @@ if (! function_exists('asset_path')) {
     function asset_path()
     {
         $CI =& get_instance();
-        return FCPATH . $CI->config->item('asset_path') . $CI->config->item('backend_path') . theme_backend();
+        return FCPATH . $CI->config->item('asset_path') . $CI->config->item('admin_path') . admin_theme();
     }
 }
 

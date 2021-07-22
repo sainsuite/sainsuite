@@ -18,8 +18,8 @@ $this->events->add_filter( 'fill_toolbar_nav', function( $final ) {
         'id' => 1,
         'name'   => __('Add A user'),
         'icon'    => 'ki ki-plus',
-        'attr_anchor'  => 'class="btn btn-light-primary btn-sm font-weight-bolder"',
-        'slug'    => [ 'admin', 'users', 'add' ],
+        'attr_anchor'  => 'class="btn btn-primary btn-sm font-weight-bolder ml-2"',
+        'slug'    => site_url([ 'admin', 'users', 'add' ]),
         'permission' => 'create.users'
     );
     return $final;
@@ -35,13 +35,13 @@ $this->events->add_filter('fill_toolbar_filter', function ($filter) { // disabli
     <div class="row">
         <div class="col-12 col-sm-auto mb-1 mb-sm-0">
             <select class="form-control form-control-sm"
-                id="kt_datatable_search_group">
+                id="sit_datatable_search_group">
                 '.$option.'
             </select>
         </div>
         <div class="col-12 col-sm-auto mb-1 mb-sm-0">
             <select class="form-control form-control-sm"
-                id="kt_datatable_search_status">
+                id="sit_datatable_search_status">
                 <option value="">All</option>
                 <option value="0">Active</option>
                 <option value="1">Unactive</option>

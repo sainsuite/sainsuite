@@ -3,12 +3,13 @@
         "name": "Users",
         "namespace": "users",
         "package": "sainsuite",
-        "version": "3.17.4",
+        "type": "addkit",
+        "version": "3.17.5",
         "author": "saintekno",
         "description": "Management Users",
         "main": "main.php",
+        "includes": "events",
         "language": "language",
         "readonly": true
-    },
-    "group": "By Sainsuite"
+    }
 }

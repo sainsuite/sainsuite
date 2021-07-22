@@ -45,7 +45,7 @@ class MY_Loader extends CI_Loader
 	// --------------------------------------------------------------------
 
     /**
-     * Backend View
+     * Admin View
      *
      * @param string path
      * @param array var
@@ -53,10 +53,10 @@ class MY_Loader extends CI_Loader
      * @return string/object
     **/
 
-    public function backend_view( $view, $vars = array(), $return = false)
+    public function admin_view( $view, $vars = array(), $return = false)
     {
         return $this->_ci_load(array( 
-            '_ci_view' => get_instance()->config->item('backend_path') . theme_backend() . $view, 
+            '_ci_view' => get_instance()->config->item('admin_path') . admin_theme() . $view, 
             '_ci_vars' => $this->_ci_prepare_view_vars($vars), 
             '_ci_return' => $return));
     }
@@ -64,7 +64,7 @@ class MY_Loader extends CI_Loader
 	// --------------------------------------------------------------------
 
     /**
-     * Frontend View
+     * Site View
      *
      * @param string path
      * @param array var
@@ -72,10 +72,10 @@ class MY_Loader extends CI_Loader
      * @return string/object
     **/
 
-    public function frontend_view($view, $vars = array(), $return = false)
+    public function site_view($view, $vars = array(), $return = false)
     {
         return $this->_ci_load(array( 
-            '_ci_view' => get_instance()->config->item('frontend_path') . theme_frontend() . $view, 
+            '_ci_view' => get_instance()->config->item('site_path') . site_theme() . $view, 
             '_ci_vars' => $this->_ci_prepare_view_vars($vars), 
             '_ci_return' => $return));
     }

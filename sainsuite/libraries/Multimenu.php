@@ -415,7 +415,7 @@ class Multimenu {
 	  
 	    foreach ($items as $item)
 	    {
-            if( isset($item[ 'permission' ]) && ! User::control( $item[ 'permission' ] ) ) {
+            if( isset($item[ 'permission' ]) && ! User::is_allowed( $item[ 'permission' ] ) ) {
                 continue;
             }
 	        // menu label
@@ -428,19 +428,16 @@ class Multimenu {
 				$label = ($this->item_label != '') ? sprintf($this->item_label, $item[$this->menu_label]) : $item[$this->menu_label];
 
 		        // icon
-		        $icon  = empty($item[$this->menu_icon]) ? '' : $item[$this->menu_icon];
+		        $icon  = empty($item[$this->menu_icon]) ? '' : ($item[$this->menu_icon] == 'text' ? substr($item[$this->menu_label],0,1) : $item[$this->menu_icon]);
 		        if ( isset($this->menu_icons_list[($item[$this->menu_key])]) ) {
 		        	$icon = $this->menu_icons_list[($item[$this->menu_key])];
 		        }		        
 
 		        if ($icon) 
 		        {
-		        	$icon = ($this->item_icon != '') ? sprintf($this->item_icon, $item[$this->menu_icon]) : "<i class='{$icon}'></i>";
+		        	$icon = ($this->item_icon != '') ? sprintf($this->item_icon, $icon) : "<i class='{$icon}'></i>";
 		        	$label = trim( $this->icon_position == 'right' ? ($label . " " . $icon ) : ($icon . " " . $label) );
 		        }
-
-		        // menu slug
-		        $slug  = (isset($item['target']) && $item['target'] == true) ? $item[$this->menu_key] : site_url($item[$this->menu_key]); 
 
 		        if ( $this->divided_items_list_count > 0 
 					&& array_key_exists($item[$this->menu_id], $this->divided_items_list) 
@@ -477,7 +474,7 @@ class Multimenu {
 		        else 
 		        {
 		        	$tag_open    = $this->item_tag_open;
-					$href        = $slug;
+					$href        = $item[$this->menu_key];
 					$item_anchor = $this_item_anchor;
 		        }
 
@@ -485,7 +482,7 @@ class Multimenu {
 					$tag_open = sprintf($tag_open, $item[$this->menu_label]);
 				}
 
-				$html .= $this->set_active($tag_open, $slug);	    	        
+				$html .= $tag_open;	    	        
 
 				if (substr_count($item_anchor, '%s') == 2) {
 					$html .= sprintf($item_anchor, $href, $label);
@@ -542,30 +539,6 @@ class Multimenu {
 		$this->_additional_item[$position] = $item;
 
 		return $this;
-	}
-
-	/**
-	 * Set active item
-	 * 
-	 * @param string $html html tag that would be injected
-	 * @param string $slug html tag that has injected with active class
-	 */
-	private function set_active($html, $slug)
-	{
-		$segment = $this->ci->uri->segment($this->uri_segment);
-
-		if ( ($this->item_active != '' && $slug == $this->item_active && empty($segment)) || $slug == $segment) 
-		{
-			$doc = new DOMDocument();
-			$doc->loadHTML($html);
-			foreach($doc->getElementsByTagName('*') as $tag ){
-				$tag->setAttribute('class', ($tag->hasAttribute('class') ? $tag->getAttribute('class') . ' ' : '') . $this->item_active_class);
-			}
-
-			return preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $doc->saveHTML() );
-		}
-
-		return $html;
 	}
 
 }

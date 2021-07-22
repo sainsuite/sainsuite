@@ -21,6 +21,13 @@ class Install extends MY_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
+
+        $this->events->add_filter('fill_apps_contact', function() {
+            $this->load->admin_view( 'install/wizard' );
+        });
+        $this->events->add_action( 'do_auth_footer', function() {
+            $this->load->admin_view( 'install/script' );
+        });
     }
 
     /**
@@ -36,9 +43,8 @@ class Install extends MY_Controller
         endif;
 
 		Polatan::set_title(sprintf(__('Welcome Page &mdash; %s'), get('app_name')));
-        $data['pages'] = 'install';
-        $data['subpages'] = 'install';
-        $this->load->backend_view('layouts_aside', $data );
+        $data['pages'] = $this->load->admin_view('install/index', [], true);;
+        $this->load->admin_view('layouts_aside', $data );
     }
 
     /**
@@ -59,8 +65,11 @@ class Install extends MY_Controller
         $this->form_validation->set_rules('_db_driv', __('Database Driver'), 'required');
         $this->form_validation->set_rules('_db_pref', __('Database Prefix'), 'required');
 
-        if ($this->form_validation->run()) 
-        {
+        if ($this->form_validation->run() == FALSE) {
+            $success = FALSE;
+            $message = validation_errors('<div class="error">', '</div>');
+        }
+        else{
             $exec = $this->install_model->installation(
                 $this->input->post('_ht_name'),
                 $this->input->post('_uz_name'),
@@ -72,16 +81,18 @@ class Install extends MY_Controller
 
             if ($exec == 'database-installed') 
             {
-                redirect('install/site?notice=' . $exec . (riake('lang', $_GET) ? '&lang=' . $_GET[ 'lang' ] : '') );
+                $success = TRUE;
+                $message = $this->lang->line($exec);
             }
-
-            $this->notice->push_notice_array($exec);
+            else {
+                $success = FALSE;
+                $message = $exec;
+            }
         }
-
-		Polatan::set_title(sprintf(__('Database config &mdash; %s'), get('app_name')));
-        $data['pages'] = 'install';
-        $data['subpages'] = 'database';
-        $this->load->backend_view('layouts_aside', $data );
+        
+        $json_array = array('success' => $success, 'message' => $message);
+        echo json_encode($json_array);
+        exit();
     }
     
     /**
@@ -96,23 +107,29 @@ class Install extends MY_Controller
             redirect('install');
         endif;
 
-        $this->events->do_action('do_settings_setup');
-        $this->form_validation->set_rules('site_name', __('Site Name'), 'required');
-        if ($this->form_validation->run()) 
-        {
+        $rules[] = ['field' => 'site_name', 'label' => __('User Name' ), 'rules' => 'required'];
+        $this->form_validation->set_rules( $this->events->apply_filters('fill_site_setup', $rules) );
+        
+        if ($this->form_validation->run() == FALSE) {
+            $success = FALSE;
+            $message = validation_errors('<div class="error">', '</div>');
+        }
+        else{
             $exec = $this->install_model->final_configuration();
 
             if ($exec == 'system-installed') 
             {                      
-                redirect('login?redirect=admin&notice=' . $exec . ( @$_GET[ 'lang' ] ? '&lang=' . $_GET[ 'lang' ] : '') );
+                $success = TRUE;
+                $message = $this->lang->line($exec);
             }
-
-            $this->notice->push_notice_array($this->aauth->get_errors_array());
+            else {
+                $success = FALSE;
+                $message = $this->aauth->get_errors_array();
+            }
         }
-
-        Polatan::set_title(sprintf(__('Site & Master account &mdash; %s'), get('core_signature')));
-        $data['pages'] = 'install';
-        $data['subpages'] = 'site';
-        $this->load->backend_view('layouts_aside', $data );
+        
+        $json_array = array('success' => $success, 'message' => $message);
+        echo json_encode($json_array);
+        exit();
     }
 }

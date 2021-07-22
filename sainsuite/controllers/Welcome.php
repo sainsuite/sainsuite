@@ -18,8 +18,7 @@ class Welcome extends MY_Controller
 	{
 		parent::__construct();
         
-        global $Options;
-        if (! riake('enable_frontend', $Options)) {
+        if (! riake('enable_site', options(APPNAME))) {
             redirect($this->config->item('login_route') . '?redirect=' . urlencode(current_url()) );
         }
 	}
@@ -27,13 +26,13 @@ class Welcome extends MY_Controller
 	public function index()
 	{
         $data['pages'] = 'home';
-        $this->load->frontend_view( 'layouts', $this->events->apply_filters('fill_website_index', $data) );
+        $this->load->site_view( 'layouts', $this->events->apply_filters('fill_site_index', $data) );
 	}
 
     // not found page
     public function error_404()
     {
         $data['pages'] = '404';
-        $this->load->frontend_view( 'layouts', $this->events->apply_filters('fill_website_index', $data) );
+        $this->load->site_view( 'layouts', $this->events->apply_filters('fill_site_404', $data) );
     }
 }

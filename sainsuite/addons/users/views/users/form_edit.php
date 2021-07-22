@@ -19,7 +19,7 @@ $this->events->add_filter( 'fill_toolbar_nav', function( $final ) {
         'name'   => __('Back to the list'),
         'icon'    => 'ki ki-long-arrow-back',
         'attr_anchor'  => 'class="btn btn-light btn-sm font-weight-bolder"',
-        'slug'    => [ 'admin', 'users' ],
+        'slug'    => site_url([ 'admin', 'users' ]),
         'permission' => 'create.users'
     );
     return $final;
@@ -45,14 +45,12 @@ $this->polatan->add_item(array(
             'description' => 'Update your personal informaiton',
             'show' => true,
             'body' => array(
-                'items' => $this->events->apply_filters_ref_array('fill_ref_user_profile', array( 
-                    array_merge(
-                        ['user'=> $user], 
-                        ['groups'=> $groups], 
-                        ['user_group'=> $user_group], 
-                        ['page'=> 'users']
-                    )
-                 ))
+                'items' => $this->events->apply_filters_ref_array('fill_ref_user_profile', array( [
+                    'user'=> $user, 
+                    'groups'=> $groups,
+                    'user_group'=> $user_group,
+                    'page'=> 'users'
+                ] ))
             )
         ]
     )
@@ -81,11 +79,8 @@ $this->polatan->add_item(array(
             'description' => 'Change your account password',
             'body' => array(
                 'items' => $this->events->apply_filters_ref_array('fill_ref_user_pass', array( 
-                    array_merge(
-                        ['user'=>$user], 
-                        ['page'=> 'users']
-                    )
-                 ))
+                    ['user'=>$user, 'page'=> 'users']
+                ))
             )
         ]
     )

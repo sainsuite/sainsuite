@@ -15,7 +15,7 @@
 // load field for user_profile
 $this->polatan->add_col(array(
     'class' => 'p-10 p-lg-0 flex-row-auto offcanvas-mobile w-200px',
-    'id'=> 'kt_profile_aside',
+    'id'=> 'aside_panel',
 ), 1);
 
 $this->polatan->add_meta(array(
@@ -55,10 +55,7 @@ $user_profile[] = array(
     'description' => 'Update your personal informaiton',
     'body' => array(
         'items' => $this->events->apply_filters_ref_array('fill_ref_user_profile', array( 
-            array_merge(
-                ['user'=> User::get()], 
-                ['page'=> 'profile']
-            )
+            ['user'=> User::get(), 'page'=> 'profile']
         ))
     )
 );
@@ -87,11 +84,8 @@ $user_pass[] = array(
     'description' => 'Change your account password',
     'body' => array(
         'items' => $this->events->apply_filters_ref_array('fill_ref_user_pass', array( 
-            array_merge(
-                ['user'=> User::get()], 
-                ['page'=> 'profile']
-            )
-            ))
+            ['user'=> User::get(), 'page'=> 'profile']
+        ))
     )
 );
 $this->polatan->add_item(array(

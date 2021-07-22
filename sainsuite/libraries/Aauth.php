@@ -198,24 +198,6 @@ class Aauth {
 			}
 		}
 		
- 		// if( $this->config_vars['login_with_name'] == true){
-
-		// 	if( !$identifier OR strlen($pass) < $this->config_vars['min'] OR strlen($pass) > $this->config_vars['max'] )
-		// 	{
-		// 		$this->error($this->CI->lang->line('aauth_error_login_failed_name'));
-		// 		return false;
-		// 	}
-		// 	$db_identifier = 'username';
- 		// }else{
-		// 	$this->CI->load->helper('email');
-		// 	if( !valid_email($identifier) OR strlen($pass) < $this->config_vars['min'] OR strlen($pass) > $this->config_vars['max'] )
-		// 	{
-		// 		$this->error($this->CI->lang->line('aauth_error_login_failed_email'));
-		// 		return false;
-		// 	}
-		// 	$db_identifier = 'email';
- 		// }
-		
 		$valid_email = (bool) filter_var($identifier, FILTER_VALIDATE_EMAIL);
 		if( $valid_email && strlen($pass) > $this->config_vars['min'] && strlen($pass) < $this->config_vars['max'] )
 		{
@@ -330,7 +312,7 @@ class Aauth {
 
 				$this->CI->session->set_userdata($data);
 
-				$this->CI->events->do_action('do_get_users_by', $row);
+				$this->CI->events->do_action('do_login_users', $row);
 
 				if ($remember){
 					$this->CI->load->helper('string');
@@ -438,8 +420,9 @@ class Aauth {
 		if($perm_par == false){
 			if($this->is_loggedin()){
 				return true;
-			}else if(!$this->is_loggedin()){
-				$this->error($this->CI->lang->line('aauth_error_no_access'));
+			}
+			else if(!$this->is_loggedin()){
+				$this->error($this->CI->lang->line('aauth_error_no_access'), true);
 				if($this->config_vars['no_permission'] !== false){
 					redirect($this->config_vars['no_permission']);
 				}
@@ -447,19 +430,16 @@ class Aauth {
 		}
 		else if ( ! $this->is_allowed($perm_id) ){
 			if( $this->config_vars['no_permission'] ) {
-				$this->error($this->CI->lang->line('aauth_error_no_access'));
+				$this->error($this->CI->lang->line('aauth_error_no_access'), true);
 				if($this->config_vars['no_permission'] !== false){
 					redirect($this->config_vars['no_permission']);
 				}
 			}
 			else {
-				return false;
+				echo $this->CI->lang->line('aauth_error_no_access');
+				die();
 			}
 		}
-
-		return (!$this->CI->events->has_filter('fill_ref_control_aauth')) 
-				? true 
-				: $this->CI->events->apply_filters_ref_array('fill_ref_control_aauth', [ $perm_par ] );
 	}
 
 	//tested
@@ -536,14 +516,19 @@ class Aauth {
 
 			$this->CI->load->helper('url');
 
-			// Set .html template
+			// Send Mail
 			$config = array(
-				'email' => $row->email,
+				'template_slug'=>'forgot_password',
+				'to'=> $row->email,
 				'username' => $row->username,
 				'kode' => $ver_code,
-				'url' => site_url() . $this->config_vars['reset_password_link'] . $ver_code
+				'url' => site_url() . $this->config_vars['reset_password_link'] . $ver_code,
+				'verification_text' => $this->CI->lang->line('aauth_email_reset_text'),
+				'subject' => $this->CI->lang->line('aauth_email_reset_subject'),
+				'year' => date('Y'),
+				'company' => riake('site_name', options(APPNAME))
 			);
-			$this->CI->events->do_action('do_email_remind_password', $config);
+			$this->CI->events->do_action('do_sendmail', $config);
 
 			return true;
 		}
@@ -580,13 +565,18 @@ class Aauth {
 			$this->aauth_db->where('id', $row->id);
 			$this->aauth_db->update($this->config_vars['users'] , $data);
 
-			// Set .html template
+			// Send Mail
 			$config = array(
-				'email' => $row->email,
+				'template_slug'=>'reset_password',
+				'to'=> $row->email,
 				'username' => $row->username,
-				'kode' => $pass
+				'kode' => $pass,
+				'verification_text' => $this->CI->lang->line('aauth_email_reset_success_new_password'),
+				'subject' => $this->CI->lang->line('aauth_email_reset_success_subject'),
+				'year' => date('Y'),
+				'company' => riake('site_name', options(APPNAME))
 			);
-			$this->CI->events->do_action('do_email_reset_password', $config);
+			$this->CI->events->do_action('do_sendmail', $config);
 
 			return true;
 		}
@@ -631,6 +621,25 @@ class Aauth {
 		return $this->aauth_db->update($this->config_vars['users'], $data);
 	}
 
+	//tested
+	/**
+	 * Update activity
+	 * Update user's last activity date
+	 * @param int|bool $user_id User id to update or FALSE for current user
+	 * @return bool Update fails/succeeds
+	 */
+	public function update_activity($user_id = false) {
+
+		if ($user_id == false)
+			$user_id = $this->CI->session->userdata('id');
+
+		if($user_id==false){return false;}
+
+		$data['last_activity'] = date("Y-m-d H:i:s");
+
+		$this->aauth_db->where('id',$user_id);
+		return $this->aauth_db->update($this->config_vars['users'], $data);
+	}
 
 	//tested
 	/**
@@ -722,7 +731,7 @@ class Aauth {
 	 * @param string $username User's username
 	 * @return int|bool False if create fails or returns user id if successful
 	 */
-	public function create_user($email, $pass, $username = false) {
+	public function create_user($email, $pass, $username = false, $group_par) {
 
 		$this->config_vars = get_instance()->events->apply_filters('fill_config_aauth', $this->config_vars);
 		
@@ -786,14 +795,16 @@ class Aauth {
 
 		if ( $this->aauth_db->insert($this->config_vars['users'], $data )){
 
+			// add events create users
+			$this->CI->events->do_action('do_create_users', $user_id);
 			// $user_id = $this->aauth_db->insert_id();
 
 			// set default group
-			// $this->add_member($user_id, $this->config_vars['member_group']);
+			$this->add_member($user_id, $group_par);
 
 			// if verification 
 			$Options = options(APPNAME);
-			if($this->config_vars['verification'] && intval(riake('site_registration', $Options)) == true)
+			if($this->config_vars['verification'] && intval(riake('require_validation', $Options)) == true)
 			{
 				$data = null;
 				$data['banned'] = 1;
@@ -813,7 +824,7 @@ class Aauth {
 				$this->aauth_db->update($this->config_vars['users'], $data);
 			}
 
-			return true;
+			return $user_id;
 		} 
 		else {
 			return false;
@@ -887,15 +898,6 @@ class Aauth {
 			$data['username'] = $username;
 		}
 
-        // add custom user fields
-        $fill_user_meta = $this->CI->events->apply_filters('fill_user_meta', []);
-        foreach (force_array($fill_user_meta) as $key => $value) {
-            if ( ! empty($this->CI->input->post($key)) ) {
-				$valid = true;
-                $data[$key] = $this->CI->input->post($key);
-            }
-        }
-
 		if ( !$valid || empty($data)) {
 			return false;
 		}
@@ -913,7 +915,7 @@ class Aauth {
 	 */
 	public function delete_user($user_id) {
 
-		if($this->is_admin($user_id)) : return;
+		if($this->is_member($this->config_vars['master_group'], $user_id)) : return;
 		endif;
 		
         if (file_exists($file = upload_path().'user_image/'.$user_id.'.jpg')) :
@@ -966,34 +968,26 @@ class Aauth {
 		aauth_users.id as user_id, 
 		aauth_groups.name as group";
 
-		$user_group = $this->get_user_group();
-		if ( ! $this->is_admin() && $group_par == false) {
-			$group_par = $user_group->name;
-		}
-
 		// if group_par is given
-		if ($group_par) 
+		if ($group_par != false) 
 		{
-			$group_par = $this->CI->events->apply_filters('fill_list_users', $this->get_group_id($group_par));
-
-			$is_member = $this->is_member();
-			$this->aauth_db->select($select)
-				->from($this->config_vars[ 'users'])
-                ->join($this->config_vars[ 'user_to_group'], $this->config_vars['users'] . ".id = " . $this->config_vars['user_to_group'] . ".user_id")
-                ->join($this->config_vars[ 'groups' ], $this->config_vars[ 'groups' ] . '.id = ' . $this->config_vars['user_to_group']. '.group_id');
-				
-			if ($is_member) {
-				$this->aauth_db->where($this->config_vars['user_to_group'] . ".group_id >", $group_par);
-			} else {
-				$this->aauth_db->where_in($this->config_vars['user_to_group'] . ".group_id", $group_par);
-			}
+			$group_id = $this->get_group_id($group_par);
+            $this->CI->events->apply_filters('fill_where_user', 
+				$this->aauth_db->select($select)
+					->from($this->config_vars[ 'users'])
+					->join($this->config_vars[ 'user_to_group'], $this->config_vars['users'] . ".id = " . $this->config_vars['user_to_group'] . ".user_id")
+					->join($this->config_vars[ 'groups' ], $this->config_vars[ 'groups' ] . '.id = ' . $this->config_vars['user_to_group']. '.group_id')
+					->where($this->config_vars['user_to_group'] . ".group_id", $group_id)
+			);
 		} 
 		else {
 			// if group_par is not given, lists all users
-			$this->aauth_db->select($select)
-				->from($this->config_vars[ 'users'])
-                ->join($this->config_vars[ 'user_to_group'], $this->config_vars['users'] . ".id = " . $this->config_vars['user_to_group'] . ".user_id")
-                ->join($this->config_vars[ 'groups' ], $this->config_vars[ 'groups' ] . '.id = ' . $this->config_vars['user_to_group']. '.group_id');
+            $this->CI->events->apply_filters('fill_where_user', 
+				$this->aauth_db->select($select)
+					->from($this->config_vars[ 'users'])
+					->join($this->config_vars[ 'user_to_group'], $this->config_vars['users'] . ".id = " . $this->config_vars['user_to_group'] . ".user_id")
+					->join($this->config_vars[ 'groups' ], $this->config_vars[ 'groups' ] . '.id = ' . $this->config_vars['user_to_group']. '.group_id')
+			);
 		}
 
 		// Convert array elements into variables
@@ -1015,7 +1009,6 @@ class Aauth {
                 $this->aauth_db->where($key, $val); 
             } 
         } 
-		$this->CI->events->do_action('do_get_users_by');
 		
 		// banneds
 		if ($banneds !== '') {
@@ -1037,16 +1030,8 @@ class Aauth {
 		}
 
 		$query = $this->aauth_db->get();
-		$result = $query->result_array();
 
-		foreach ($result as $row => $value) :
-		$result[$row]['picture'] = User::get_user_image_url($value['id']);
-		endforeach;
-		
-        if (empty($result)) {
-            return false;
-        }
-		return $result; 
+		return $query->result_array();
 	}
 
 	//tested
@@ -1115,22 +1100,27 @@ class Aauth {
 
 			$this->CI->load->helper('string');
 			$ver_code = random_string('alnum', 16);
-
+			
 			$data['verification_code'] = $ver_code;
-
+			
 			$this->aauth_db->where('id', $user_id);
 			$this->aauth_db->update($this->config_vars['users'], $data);
-
+			
 			$this->CI->load->helper('url');
-
-			// Set .html template
+			
+			// Send Mail
 			$config = array(
-				'email' => $row->email,
+				'template_slug'=>'registration',
+				'to' => $row->email,
 				'username' => $row->username,
 				'kode' => $ver_code,
-				'url' => site_url() .$this->config_vars['verification_link'] . $user_id . '/' . $ver_code
+				'url' => site_url() .$this->config_vars['verification_link'] . $user_id . '/' . $ver_code,
+				'verification_text' => $this->CI->lang->line('aauth_email_reset_text'),
+				'subject' => $this->CI->lang->line('aauth_email_reset_subject'),
+				'year' => date('Y'),
+				'company' => riake('site_name', options(APPNAME))
 			);
-			$this->CI->events->do_action('do_email_verification', $config);
+			$this->CI->events->do_action('do_sendmail', $config);
 		}
 	}
 
@@ -1348,26 +1338,6 @@ class Aauth {
 
 	//tested
 	/**
-	 * Update activity
-	 * Update user's last activity date
-	 * @param int|bool $user_id User id to update or FALSE for current user
-	 * @return bool Update fails/succeeds
-	 */
-	public function update_activity($user_id = false) {
-
-		if ($user_id == false)
-			$user_id = $this->CI->session->userdata('id');
-
-		if($user_id==false){return false;}
-
-		$data['last_activity'] = date("Y-m-d H:i:s");
-
-		$this->aauth_db->where('id',$user_id);
-		return $this->aauth_db->update($this->config_vars['users'], $data);
-	}
-
-	//tested
-	/**
 	 * Hash password
 	 * Hash the password for storage in the database
 	 * (thanks to Jacob Tomlinson for contribution)
@@ -1414,46 +1384,25 @@ class Aauth {
 	 */
 	public function create_group($group_name, $definition = '') {
 
-		if(! $this->is_member() && ! $this->is_admin()) :
-		$this->aauth_db->where('id', $group_name);
-		else :
-		$this->aauth_db->where('name', $group_name);
-		endif;
+		$query = $this->aauth_db->from($this->config_vars['groups']);
+		$query = $this->CI->events->apply_filters('fill_where_group', $this->aauth_db->where('name',$group_name) );
+		$query = $this->aauth_db->get();
 
-		$this->CI->events->do_action('do_where_group', '');
-		$query = $this->aauth_db->get($this->config_vars['groups']);
-		if ($query->num_rows() < 1) {
-
+		if ($query->num_rows() < 1) 
+		{
 			$data = array(
 				'name' => $group_name,
 				'definition'=> $definition
 			);
 
-			$this->aauth_db->insert($this->config_vars['groups'], $this->CI->events->apply_filters('fill_data_group', $data) );
+			$this->aauth_db->insert( $this->config_vars['groups'], $data );
 			$group_id = $this->aauth_db->insert_id();
+
+			$this->CI->events->do_action('do_create_group', $group_id);
 			
 			$this->precache_groups();
 			return $group_id;
 		}
-
-
-		if(! $this->is_member() && ! $this->is_admin()) : 
-			$data = array(
-				'name' => $this->get_group($group_name)->name,
-				'definition'=> $this->get_group($group_name)->definition
-			);
-
-			$this->aauth_db->insert($this->config_vars['groups'], $this->CI->events->apply_filters('fill_data_group', $data) );
-			$group_id = $this->aauth_db->insert_id();
-
-			// Add permission
-			foreach ($this->CI->aauth->list_perms($group_name) as $perm) :
-				$this->allow_group($group_id, $perm->perm_id);
-			endforeach;
-
-			$this->CI->events->do_action('do_create_group', $group_id);
-			return true;
-		endif;
 
 		$this->info($this->CI->lang->line('aauth_info_group_exists'));
 		return false;
@@ -1480,7 +1429,7 @@ class Aauth {
 		}
 
 		$this->aauth_db->where('id', $group_id);
-		return $this->aauth_db->update($this->config_vars['groups'], $this->CI->events->apply_filters('fill_data_group', $data) );
+		return $this->aauth_db->update($this->config_vars['groups'], $data );
 	}
 
 	//tested
@@ -1504,22 +1453,20 @@ class Aauth {
 
 		// bug fixed
 		// now users are deleted from user_to_group table
-		if( $this->CI->events->apply_filters('fill_cek_sub_groups', true) ) : 
-			$this->aauth_db->where('group_id', $group_id);
-			$this->aauth_db->delete($this->config_vars['group_to_group']);
-		endif;
-
 		$this->aauth_db->where('group_id', $group_id);
 		$this->aauth_db->delete($this->config_vars['user_to_group']);
 
 		$this->aauth_db->where('group_id', $group_id);
 		$this->aauth_db->delete($this->config_vars['perm_to_group']);
 
-		$this->aauth_db->where('id', $group_id);
-		$this->aauth_db->delete($this->config_vars['groups']);
+		$this->aauth_db->where('group_id', $group_id);
+		$this->aauth_db->delete($this->config_vars['group_to_group']);
 
 		$this->aauth_db->where('subgroup_id', $group_id);
 		$this->aauth_db->delete($this->config_vars['group_to_group']);
+
+		$this->aauth_db->where('id', $group_id);
+		$this->aauth_db->delete($this->config_vars['groups']);
 
 		if ($this->aauth_db->trans_status() === false) {
 			$this->aauth_db->trans_rollback();
@@ -1610,10 +1557,6 @@ class Aauth {
 			$user_id = $this->CI->session->userdata('id');
 		}
 
-		if($group_par == null) {
-			$group_par = $this->config_vars['member_group'];
-		}
-
         if( is_array( $group_par ) ) {
 
             $this->CI->db->select( '*' )
@@ -1655,38 +1598,16 @@ class Aauth {
 
 	//tested
 	/**
-	 * Is admin
-	 * Check if current user is a member of the admin group
-	 * @param int $user_id User id to check, if it is not given checks current user
-	 * @return bool
-	 */
-	public function is_admin( $user_id = false ) {
-
-		return $this->is_member($this->config_vars['admin_group'], $user_id);
-	}
-
-	//tested
-	/**
 	 * List groups
 	 * List all groups
 	 * @return object Array of groups
 	 */
-	public function list_groups($param = null) {
+	public function list_groups( $self = true ) {
 		
-		// die;
-		if ($param != null) {
-			$group_id1 = $this->get_group_id($this->config_vars['user_group']);
-			$this->aauth_db->group_by('name');
-			$this->CI->events->do_action('do_where_group', '');
-			$this->aauth_db->where('id >', $group_id1);
-		}
-		else {
-			$group_id1 = $this->get_group_id($this->get_user_group()->name);
-			$this->aauth_db->group_by('name');
-			$this->CI->events->do_action('do_where_group', '');
-			$this->CI->events->apply_filters('fill_list_groups', $this->aauth_db->where('id >', $group_id1));
-		}
-		$query = $this->aauth_db->get($this->config_vars['groups']);
+		$group_id1 = $this->get_group_id($this->get_user_group()->name);
+		$operat = ($self) ? ">=" : ">";
+		$this->aauth_db->where('id '.$operat, $group_id1);
+		$query = $this->CI->events->apply_filters('fill_list_groups', $this->aauth_db->get($this->config_vars['groups']));
 		return $query->result();
 	}
 
@@ -1778,7 +1699,6 @@ class Aauth {
 
 		$group_id = $this->get_group_id($group_par);
 		$subgroup_id = $this->get_group_id($subgroup_par);
-		$user_id = $this->get_user_id();
 
 		if( ! $group_id ) {
 			$this->error( $this->CI->lang->line('aauth_error_no_group') );
@@ -1808,14 +1728,12 @@ class Aauth {
 
 		$query = $this->aauth_db->where('group_id',$group_id);
 		$query = $this->aauth_db->where('subgroup_id',$subgroup_id);
-		$query = $this->aauth_db->where('user_id',$user_id);
 		$query = $this->aauth_db->get($this->config_vars['group_to_group']);
 
 		if ($query->num_rows() < 1) {
 			$data = array(
 				'group_id' => $group_id,
 				'subgroup_id' => $subgroup_id,
-				'user_id' => $user_id,
 			);
 
 			return $this->aauth_db->insert($this->config_vars['group_to_group'], $data);
@@ -1846,11 +1764,11 @@ class Aauth {
 	 * @param int|string $group_par Group id or name to get
 	 * @return object Array of subgroup_id's
 	 */
-	public function get_subgroups ( ) {
+	public function get_subgroups ( $group_par ) {
 
-		$user_id = $this->get_user_id();
+		$group_id = $this->get_group_id($group_par);
 
-		$query = $this->aauth_db->where('user_id', $user_id);
+		$query = $this->aauth_db->where('group_id', $group_id);
 		$query = $this->aauth_db->select('subgroup_id');
 		$query = $this->aauth_db->get($this->config_vars['group_to_group']);
 
@@ -1978,15 +1896,19 @@ class Aauth {
             $query = $this->aauth_db->get($this->config_vars['perms']);
             return $query->result();
         } else {
-            $query = $this->aauth_db->select(
-                $this->config_vars[ 'perms' ] . '.name as perm_name,' .
-                $this->config_vars[ 'perms' ] . '.definition as perm_desc,'
-            )
-            ->join($this->config_vars[ 'perms' ], $this->config_vars[ 'perm_to_group' ] . '.perm_id = ' . $this->config_vars[ 'perms' ] . '.id')
-            ->join($this->config_vars[ 'groups' ], $this->config_vars[ 'perm_to_group' ] . '.group_id = ' . $this->config_vars[ 'groups'] . '.id')
-            ->where($this->config_vars[ 'groups' ] . '.id', $group_par)
-            ->get($this->config_vars[ 'perm_to_group' ]);
-            return $query->result();
+
+			$group_par = $this->get_group_id($group_par);
+	
+			$query = $this->CI->db->select(
+				$this->config_vars[ 'perms' ] . '.name as perm_name,' .
+				$this->config_vars[ 'perms' ] . '.definition as perm_desc,'
+			)
+			->join($this->config_vars[ 'perms' ], $this->config_vars[ 'perm_to_group' ] . '.perm_id = ' . $this->config_vars[ 'perms' ] . '.id')
+			->join($this->config_vars[ 'groups' ], $this->config_vars[ 'perm_to_group' ] . '.group_id = ' . $this->config_vars[ 'groups'] . '.id')
+			->where($this->config_vars[ 'groups' ] . '.id', $group_par)
+			->get($this->config_vars[ 'perm_to_group' ]);
+			
+			return $query->result();
         }
 	}
 
@@ -2049,9 +1971,10 @@ class Aauth {
 			$user_id = $this->CI->session->userdata('id');
 		}
 
-		if($this->is_admin($user_id))
+		if($this->is_member($this->config_vars['master_group'], $user_id))
 		{
-			return true;
+			return $this->CI->events->apply_filters('fill_control_permission', $perm_par);
+			// return true;
 		}
 
 		if ( ! $perm_id = $this->get_perm_id($perm_par)) {
@@ -2066,9 +1989,11 @@ class Aauth {
 		    return true;
 		} else {
 			$g_allowed=false;
-			$group = $this->get_user_group($user_id);
-			if ( $this->is_group_allowed($perm_id, $group->id) ){
-				$g_allowed=true;
+			foreach( [$this->get_user_group($user_id)] as $group ){
+				if ( $this->is_group_allowed($perm_id, $group->id) ){
+					$g_allowed=true;
+					break;
+				}
 			}
 			return $g_allowed;
 	    }
@@ -2088,25 +2013,25 @@ class Aauth {
 		// if group par is given
 		if($group_par != false){
 
-			// if group is admin group, as admin group has access to all permissions
-			if (strcasecmp($group_par, $this->config_vars['admin_group']) == 0)
+			// if group is master group, as master group has access to all permissions
+			if (strcasecmp($group_par, $this->config_vars['master_group']) == 0)
 			{return true;}
 
-			$g_allowed=false;
-
-			// $subgroup_ids = $this->get_subgroups($group_par);
-			// if(is_array($subgroup_ids)){
-			// 	foreach ($subgroup_ids as $g ){
-			// 		if($this->is_group_allowed($perm_id, $g->subgroup_id)){
-			// 			$g_allowed=true;
-			// 		}
-			// 	}
-			// }
-
+			$subgroup_ids = $this->get_subgroups($group_par);
 			$group_par = $this->get_group_id($group_par);
 			$query = $this->aauth_db->where('perm_id', $perm_id);
 			$query = $this->aauth_db->where('group_id', $group_par);
 			$query = $this->aauth_db->get( $this->config_vars['perm_to_group'] );
+
+			$g_allowed=false;
+			if(is_array($subgroup_ids)){
+				foreach ($subgroup_ids as $g ){
+					if($this->is_group_allowed($perm_id, $g->subgroup_id)){
+						$g_allowed=true;
+					}
+				}
+			}
+
 			if( $query->num_rows() > 0){
 				$g_allowed=true;
 			}
@@ -2117,7 +2042,7 @@ class Aauth {
 		// checks current user's all groups
 		else {
 			// if public is allowed or he is admin
-			if ( $this->is_admin( $this->CI->session->userdata('id')) 
+			if ( $this->is_member($this->config_vars['master_group'], $this->CI->session->userdata('id')) 
 				OR $this->is_group_allowed($perm_id, $this->config_vars['user_group']) )
 			{return true;}
 
@@ -2125,8 +2050,10 @@ class Aauth {
 			if (!$this->is_loggedin()){return false;}
 
 			$group_pars = $this->get_user_group();
-			if($this->is_group_allowed($perm_id, $group_pars->id)){
-				return true;
+			foreach ($group_pars as $g ){
+				if($this->is_group_allowed($perm_id, $g->id)){
+					return true;
+				}
 			}
 			return false;
 		}
@@ -2726,17 +2653,25 @@ class Aauth {
 		// if var already set, overwrite
 		else {
 			if ($key == 'meta') {
-				$values_row = json_decode($values, true);
+				$values_db = json_decode($values, true);
 				$val = json_decode($value, true);
+
 				// Membaca data array menggunakan foreach
-				foreach (force_array($val) as $k => $d) {
-					// Perbarui data kedua
-					if (isset($val[$k])){
-						$values_row[$k] = $val[$k];
+				foreach (force_array($val) as $name => $dom) {
+					if ( is_array($dom) ) {
+						foreach (force_array($dom) as $k => $d) {
+							if (! empty($this->CI->input->post($k))) {
+								$values_db[$name][$k] = $d;
+							}
+						}
+					}
+
+					if( ! empty($this->CI->input->post($name)) ) {
+						$values_db[$name] = $dom;
 					}
 				}
-				$values_row = ($values_row) ? $values_row : array();
-				$data['value'] = json_encode($values_row);
+
+				$data['value'] = json_encode($values_db);
 			}
 			else {
 				$data['value'] = $value;

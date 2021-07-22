@@ -19,7 +19,7 @@ $this->events->add_filter( 'fill_toolbar_nav', function( $final ) {
         'name'   => __('Back to the list'),
         'icon'    => 'ki ki-long-arrow-back',
         'attr_anchor'  => 'class="btn btn-light btn-sm font-weight-bolder"',
-        'slug'    => [ 'admin', 'users' ],
+        'slug'    => site_url([ 'admin', 'users' ]),
         'permission' => 'create.users'
     );
     return $final;
@@ -45,14 +45,12 @@ $item[] = array(
     'show' => true,
     'hide_footer' => true,
     'body' => array(
-        'items' => $this->events->apply_filters_ref_array('fill_ref_user_profile', array( 
-            array_merge(
-                ['user'=> null], 
-                ['groups'=> $groups], 
-                ['user_group'=> null], 
-                ['page'=> 'users']
-            )
-         ))
+        'items' => $this->events->apply_filters_ref_array('fill_ref_user_profile', array( [
+            'user'=> null,
+            'groups'=> $groups,
+            'user_group'=> null,
+            'page'=> 'users'
+        ] ))
     )
 );
 $item[] = array(
@@ -64,11 +62,8 @@ $item[] = array(
     'hide_footer' => true,
     'body' => array(
         'items' => $this->events->apply_filters_ref_array('fill_ref_user_pass', array( 
-            array_merge(
-                ['user'=> null], 
-                ['page'=> 'users']
-            )
-         ))
+            ['user'=> null, 'page'=> 'users']
+        ))
     )
 );
 

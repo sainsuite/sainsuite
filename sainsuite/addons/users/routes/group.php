@@ -45,10 +45,7 @@ class GroupsHomeController extends MY_Addon
      */
     public function index()
     {
-        if ( ! User::control('read.group') ) {
-            $this->session->set_flashdata('error_message', __( 'Access denied. Your are not allowed to see this page.' ));
-            redirect(site_url('admin/page404'));
-		}
+        User::control('read.group');
         
         // Title
 		Polatan::set_title(sprintf(__('Group &mdash; %s', 'group'), get('signature')));
@@ -65,16 +62,12 @@ class GroupsHomeController extends MY_Addon
      */
     public function add()
     {
-        if (! User::control('create.group')) {
-            $this->session->set_flashdata('error_message', __( 'Access denied. Your are not allowed to see this page.' ));
-            redirect(site_url('admin/page404'));
-        }
+        User::control('create.group');
 
         $this->load->library('form_validation');
         $this->form_validation->set_rules('name', 'Group Name', 'required');
-        if( ! $this->events->has_filter('fill_list_users') ):
         $this->form_validation->set_rules('definition', 'Group Definition', 'required');
-        endif;
+
         if ($this->form_validation->run()) 
         { 
             $exec = $this->aauth->create_group(
@@ -109,17 +102,13 @@ class GroupsHomeController extends MY_Addon
      */
     public function edit( $index = "" )
     {
-        if (! User::control('edit.group')) {
-            $this->session->set_flashdata('error_message', __( 'Access denied. Your are not allowed to see this page.' ));
-            redirect(site_url('admin/page404'));
-        }
+        User::control('edit.group');
 
         // Submit
         $this->load->library('form_validation');
         $this->form_validation->set_rules('name', 'Group Name', 'required');
-        if( ! $this->events->has_filter('fill_list_users') ):
         $this->form_validation->set_rules('definition', 'Group Definition', 'required');
-        endif;
+        
         if ($this->form_validation->run()) 
         { 
             $exec = $this->aauth->update_group(
@@ -159,10 +148,7 @@ class GroupsHomeController extends MY_Addon
      */
     public function delete( $index = null )
     {
-        if (! User::control('delete.group')) {
-            $this->session->set_flashdata('error_message', __( 'Access denied. Your are not allowed to see this page.' ));
-            redirect(site_url('admin/page404'));
-        }
+        User::control('delete.group');
 
         // Multi delete
         if ( $index == null ) 

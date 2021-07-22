@@ -25,14 +25,14 @@ class Users_Menu extends MY_Addon
         $menu[] = array(
             'id' => 3,
             'name' => __('Users'),
-            'slug' => [ 'admin', 'users' ],
+            'slug' => site_url([ 'admin', 'users' ]),
             'order' => 3,
             'permission' => 'read.users'
         );
         $menu[] = array(
             'id' => 4,
             'name' => __('Group'),
-            'slug' => [ 'admin', 'group' ],
+            'slug' => site_url([ 'admin', 'group' ]),
             'order' => 4,
             'permission' => 'read.group'
         );
@@ -40,28 +40,6 @@ class Users_Menu extends MY_Addon
         $header_nav = $this->events->apply_filters('fill_header_nav_users', $menu);
         
         return $header_nav;
-	}
-
-	public function _aside_menu($menu) {
-        // $menu[] = array(
-        //     'title' => __('Personal Information'),
-        //     'href' => site_url(),
-        //     'icon' => 'svg/Settings4.svg',
-        // );
-        // $menu[] = array(
-        //     'title' => __('Account Information'),
-        //     'href' => site_url(),
-        //     'icon' => 'svg/Settings4.svg',
-        // );
-        // $menu[] = array(
-        //     'title' => __('Change Password'),
-        //     'href' => site_url(),
-        //     'icon' => 'svg/Settings4.svg',
-        // );
-
-        $aside_menu = $this->events->apply_filters('fill_aside_nav_users', $menu);
-        
-        return $aside_menu;
 	}
 
     /**
@@ -73,21 +51,21 @@ class Users_Menu extends MY_Addon
         $menus[] = array(
             'id' => 4,
             'parent'  => NULL,
-            'name' => __('Users', 'aauth'),
+            'name' => __('Users' ),
             'icon' => 'icon-lg flaticon2-user-1',
-            'slug'  => 'admin/users',
+            'slug'  => site_url('admin/users'),
             'permission' => 'read.users',
             'order' => 4
         );
-        $menus[] = array(
-            'id' => 5,
-            'parent'  => NULL,
-            'name' => __('Inbox', 'aauth'),
-            'icon' => 'icon-lg flaticon2-chat-1',
-            'slug'  => 'admin/chat',
-            'permission' => 'read.users',
-            'order' => 5
-        );
+        // $menus[] = array(
+        //     'id' => 5,
+        //     'parent'  => NULL,
+        //     'name' => __('Inbox' ),
+        //     'icon' => 'icon-lg flaticon2-chat-1',
+        //     'slug'  => site_url('admin/chat'),
+        //     'permission' => 'read.users',
+        //     'order' => 5
+        // );
 
         return $menus;
     }

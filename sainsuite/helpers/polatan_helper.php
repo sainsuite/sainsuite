@@ -15,28 +15,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // --------------------------------------------------------------------
 
-function theme_frontend()
+function site_theme()
 {
-    $theme_frontend = get_instance()->events->apply_filters('fill_theme_frontend', riake( 'theme_frontend', options() ));
-    return $theme_frontend . '/';
+    $site_theme = get_instance()->events->apply_filters('fill_site_theme', riake( 'site_theme', options() ));
+    return $site_theme . '/';
 }
 
 // --------------------------------------------------------------------
 
-function theme_backend()
+function admin_theme()
 {
-    $theme_backend = get_instance()->events->apply_filters('fill_theme_backend', riake( 'theme_backend', options() ));
-    return ($theme_backend) ? $theme_backend . '/' : '';
+    $admin_theme = get_instance()->events->apply_filters('fill_admin_theme', riake( 'admin_theme', options() ));
+    return ($admin_theme) ? $admin_theme . '/' : '';
 }
 
 // --------------------------------------------------------------------
 
 // This function helps us to decode the theme configuration json file and return that array to us
-function theme_config($key = "")
+function config_theme($key = "")
 {
     $themeConfigs = [];
-    if (file_exists(FRONTENDPATH.theme_frontend().'theme.json')) {
-        $themeConfigs = file_get_contents(FRONTENDPATH.theme_frontend().'theme.json');
+    if (file_exists(SITEPATH.site_theme().'theme.json')) {
+        $themeConfigs = file_get_contents(SITEPATH.site_theme().'theme.json');
         $themeConfigs = json_decode($themeConfigs, true);
         if ($key != "") {
             if (array_key_exists($key, $themeConfigs['theme'])) {

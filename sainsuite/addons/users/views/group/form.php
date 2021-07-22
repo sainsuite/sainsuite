@@ -19,7 +19,7 @@ $this->events->add_filter( 'fill_toolbar_nav', function( $final ) {
         'name'        => __('Back to the list'),
         'icon'        => 'ki ki-long-arrow-back',
         'attr_anchor' => 'class="btn btn-light btn-sm font-weight-bolder"',
-        'slug'        => [ 'admin', 'group' ]
+        'slug'        => site_url([ 'admin', 'group' ])
     );
     return $final;
 });
@@ -43,8 +43,6 @@ $this->polatan->add_meta(array(
 /**
  * Item
  */
-if( $this->events->apply_filters('fill_cek_sub_groups', true) ):
-
 $this->polatan->add_item(array(
     [
         'type'  => 'text',
@@ -65,11 +63,5 @@ $this->polatan->add_item(array(
             : set_value('definition'),
     ]
 ), 'group');
-
-else :
-
-$this->events->do_action('do_form_group', '');
-
-endif;
 
 $this->polatan->output();

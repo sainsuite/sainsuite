@@ -16,8 +16,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 global $Routes;
 
 $Routes->group(['prefix' => '/users'], function () use ( $Routes ) {
-    $Routes->match([ 'get', 'post' ], '{page?}', 'usersApiController@index' );
-    $Routes->match([ 'get', 'post' ], 'get/{page?}', 'usersApiController@get_user' );
+    $Routes->match([ 'get', 'post' ], '{group?}', 'usersApiController@index' );
+    $Routes->match([ 'get', 'post' ], 'get/{id?}', 'usersApiController@get_user' );
 });
 
 $Routes->group(['prefix' => '/groups'], function () use ( $Routes ) {

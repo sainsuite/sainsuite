@@ -2,7 +2,7 @@
 var DatatableScript = function() {   
     // Read
     var read = function() {
-        var datatable = $('#kt_datatable').KTDatatable({
+        var datatable = $('#sit_datatable').SITDatatable({
 			data: {
 				type: 'remote',
                 source: '<?php echo site_url(['api', 'groups']);?>',
@@ -23,12 +23,12 @@ var DatatableScript = function() {
                     sortable: false,
                     width: 20,
                     textAlign: 'center',
-                    selector: {class: 'kt-checkbox--solid'},
+                    selector: {class: 'sit-checkbox--solid'},
                 }, {
                     field: 'username',
                     title: 'User',
                     template: function(row) {
-                        var stateNo = KTUtil.getRandomInt(0, 7);
+                        var stateNo = SITUtil.getRandomInt(0, 7);
                         var states = [
                             'success',
                             'primary',
@@ -73,7 +73,7 @@ var DatatableScript = function() {
 					template: function(row) {
                         var edit  = '<button class="btn btn-sm btn-icon btn-light" disabled><i class="fas fa-pen"></i></button>';
                         var hapus = '<button class="btn btn-sm btn-icon btn-light" disabled><i class="fas fa-trash-alt"></i></button>';
-                        <?php if ( User::control('edit.group')) : ?>
+                        <?php if ( User::is_allowed('edit.group')) : ?>
 						edit = '\
                             <a class="btn btn-sm btn-icon btn-light-primary btn-hover-primary "\
                                 href="<?php echo site_url(array( 'admin', 'group', 'edit'));?>/'+ row.id +'">\
@@ -82,7 +82,7 @@ var DatatableScript = function() {
                         ';
                         <?php endif; ?>
 
-                        <?php if ( User::control('delete.group')) : ?>
+                        <?php if ( User::is_allowed('delete.group')) : ?>
                         hapus = '\
                             <button class="btn btn-sm btn-icon btn-light-danger btn-hover-danger "\
                                 data-head="<?php echo _s( 'Would you like to delete this data?' ) ;?>"\
@@ -96,7 +96,7 @@ var DatatableScript = function() {
                         return '<div class="btn-group">'+ edit +' '+ hapus +'</div>';
 					},
 				}
-            ],
+            ]
         });
     };
 

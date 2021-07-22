@@ -1,0 +1,14 @@
+{
+  "theme": {
+    "name": "default",
+    "namespace": "default",
+    "package": "sainsuite",
+    "type": "themekit",
+    "version": "3.0.1",
+    "author": "SainTekno",
+    "author uri": "http://saintekno.id",
+    "email": "sainteknoid@gmail.com",
+    "description": "Layouts default",
+    "readonly": false
+  }
+}

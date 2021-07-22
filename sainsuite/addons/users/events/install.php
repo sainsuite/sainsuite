@@ -23,7 +23,8 @@ class Users_Install extends MY_Addon
         $this->events->add_action('do_settings_tables', array( $this, 'do_settings_tables' ), 1);
         $this->events->add_action('do_settings_final_config', array( $this, 'permissions' ));
         $this->events->add_action('do_settings_final_config', array( $this, 'final_config' ));
-        $this->events->add_action('do_settings_setup', array( new Users_Action, 'do_registration_rules' ));
+        
+        $this->events->add_filter('fill_site_setup', array( new Users_Filters, 'fill_registration_rules' ));
     }
 
     public function enable_addon()
@@ -46,9 +47,8 @@ class Users_Install extends MY_Addon
         // Auth Group to Group
         $this->db->query("CREATE TABLE IF NOT EXISTS `{$database_prefix}aauth_group_to_group` (
             `group_id` int(11) unsigned NOT NULL,
-            `user_id` varchar(100) NOT NULL,
             `subgroup_id` int(11) unsigned NOT NULL,
-            PRIMARY KEY (`group_id`,`user_id`,`subgroup_id`)
+            PRIMARY KEY (`group_id`,`subgroup_id`)
           ) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
         
         // Creating Auth Permission
@@ -94,6 +94,7 @@ class Users_Install extends MY_Addon
             `email` VARCHAR(100) NOT NULL,
             `pass` VARCHAR(64) NOT NULL,
             `username` VARCHAR(100) NULL DEFAULT NULL,
+            `picture` VARCHAR(255) NULL DEFAULT NULL,
             `banned` TINYINT(1) NULL DEFAULT '0',
             `last_login` DATETIME NULL DEFAULT NULL,
             `last_activity` DATETIME NULL DEFAULT NULL,
@@ -116,9 +117,11 @@ class Users_Install extends MY_Addon
         
         // Auth User Variable
         $this->db->query("CREATE TABLE IF NOT EXISTS `{$database_prefix}aauth_user_variables` (
+            `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
             `user_id` VARCHAR(100) NOT NULL,
             `data_key` VARCHAR(100) NOT NULL,
             `value` TEXT NULL,
+            PRIMARY KEY (`id`),
             INDEX `user_id_index` (`user_id`)
           ) COLLATE='utf8_general_ci' ENGINE=InnoDB ;");
         
@@ -140,9 +143,8 @@ class Users_Install extends MY_Addon
     public function permissions()
     {
         // Only create if group does'nt exists (it's optional)
-        // Creating admin Group
+        $this->aauth->create_group('master', 'Master');
         $this->aauth->create_group('admin', 'Administrator');
-        $this->aauth->create_group('member', 'Member');
         $this->aauth->create_group('user', 'User');
 
         /**
@@ -150,42 +152,42 @@ class Users_Install extends MY_Addon
         **/
         $permissions =	[];
         // Core Permission
-        $permissions[ 'manage.core' ] 		=	__( 'Manage Core' );
+        $permissions[ 'manage.core' ] = __( 'Manage Core' );
 
         // Options Permissions
-        $permissions[ 'create.options' ]    =	__( 'Create Options' );
-        $permissions[ 'edit.options' ] 		=	__( 'Edit Options' );
-        $permissions[ 'read.options' ] 		=	__( 'Read Options' );
+        $permissions[ 'create.options' ] = __( 'Create Options' );
+        $permissions[ 'edit.options' ]   = __( 'Edit Options' );
+        $permissions[ 'read.options' ]   = __( 'Read Options' );
 
         // Addons Permissions
-        $permissions[ 'read.addons' ]       =	__( 'Read Addons' );
-        $permissions[ 'install.addons' ]    =	__( 'Install Addons' );
-        $permissions[ 'update.addons' ]     =	__( 'Update Addons' );
-        $permissions[ 'delete.addons' ]     =	__( 'Delete Addons' );
-        $permissions[ 'toggle.addons' ]     =	__( 'Enable/Disable Addons' );
-        $permissions[ 'extract.addons' ]    =	__( 'Extract Addons' );
+        $permissions[ 'read.addons' ]    = __( 'Read Addons' );
+        $permissions[ 'install.addons' ] = __( 'Install Addons' );
+        $permissions[ 'update.addons' ]  = __( 'Update Addons' );
+        $permissions[ 'delete.addons' ]  = __( 'Delete Addons' );
+        $permissions[ 'toggle.addons' ]  = __( 'Enable/Disable Addons' );
+        $permissions[ 'extract.addons' ] = __( 'Extract Addons' );
 
         // Themes Permissions
-        $permissions[ 'read.themes' ]       =	__( 'Read themes' );
-        $permissions[ 'install.themes' ]    =	__( 'Install themes' );
-        $permissions[ 'delete.themes' ]     =	__( 'Delete themes' );
-        $permissions[ 'toggle.themes' ]     =	__( 'Enable/Disable themes' );
-        $permissions[ 'extract.themes' ]    =	__( 'Extract themes' );
+        $permissions[ 'read.themes' ]    = __( 'Read themes' );
+        $permissions[ 'install.themes' ] = __( 'Install themes' );
+        $permissions[ 'delete.themes' ]  = __( 'Delete themes' );
+        $permissions[ 'toggle.themes' ]  = __( 'Enable/Disable themes' );
+        $permissions[ 'extract.themes' ] = __( 'Extract themes' );
 
         // Users Permissions
-        $permissions[ 'read.users' ]        =	__( 'Read Users' );
-        $permissions[ 'create.users' ]      =	__( 'Create Users' );
-        $permissions[ 'edit.users' ]        =	__( 'Edit Users' );
-        $permissions[ 'delete.users' ]      =	__( 'Delete Users' );
+        $permissions[ 'read.users' ]   = __( 'Read Users' );
+        $permissions[ 'create.users' ] = __( 'Create Users' );
+        $permissions[ 'edit.users' ]   = __( 'Edit Users' );
+        $permissions[ 'delete.users' ] = __( 'Delete Users' );
 
         // Group Permissions
-        $permissions[ 'read.group' ]        =	__( 'Read Group' );
-        $permissions[ 'create.group' ]      =	__( 'Create Group' );
-        $permissions[ 'edit.group' ]        =	__( 'Edit Group' );
-        $permissions[ 'delete.group' ]      =	__( 'Delete Group' );
+        $permissions[ 'read.group' ]   = __( 'Read Group' );
+        $permissions[ 'create.group' ] = __( 'Create Group' );
+        $permissions[ 'edit.group' ]   = __( 'Edit Group' );
+        $permissions[ 'delete.group' ] = __( 'Delete Group' );
 
         // Profile Permission
-        $permissions[ 'edit.profile' ]      =	__( 'Edit Profile' );
+        $permissions[ 'edit.profile' ] = __( 'Edit Profile' );
 
         foreach( $permissions as $namespace => $perm ) {
           $this->aauth->create_perm( 
@@ -211,7 +213,7 @@ class Users_Install extends MY_Addon
           {
             $permission = $action . $component;
             if ( in_array( $permission, $permissions_keys ) ) {
-              $this->aauth->allow_group( 'member', $permission );
+              $this->aauth->allow_group( 'admin', $permission );
             }
           }
         }
@@ -232,7 +234,7 @@ class Users_Install extends MY_Addon
     public function final_config()
     {
         // Creating Master & Groups
-        $create_user = $this->user_model->create_admin(
+        $create_user = $this->user_model->create_master(
             $this->input->post('email'),
             $this->input->post('password'),
             $this->input->post('username')

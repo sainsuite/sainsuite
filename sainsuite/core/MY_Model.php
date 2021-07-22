@@ -284,6 +284,9 @@ class MY_Model extends CI_Model
         }
     }
 
+    /**========================================================================
+     *                           Find Data
+     *========================================================================**/
     /**
      * Search for a single row in the database.
      *
@@ -425,6 +428,9 @@ class MY_Model extends CI_Model
         return $return;
     }
 
+    /**========================================================================
+     *                           Insert Data
+     *========================================================================**/
     /**
      * Insert a row of data into the database.
      *
@@ -438,7 +444,7 @@ class MY_Model extends CI_Model
         if ($this->skip_validation === false) {
             $data = $this->validate($data, 'insert');
             if ($data === false) {
-                return false;
+                return validation_errors();
             }
         }
 
@@ -533,6 +539,9 @@ class MY_Model extends CI_Model
         return false;
     }
 
+    /**========================================================================
+     *                           Update Data
+     *========================================================================**/
     /**
      * Update an existing row in the database.
      *
@@ -626,6 +635,9 @@ class MY_Model extends CI_Model
         return true;
     }
 
+    /**========================================================================
+     *                           Delete Data
+     *========================================================================**/
     /**
      * Delete the record with the specified primary key value.
      *
@@ -801,6 +813,23 @@ class MY_Model extends CI_Model
         }
 
         return $options;
+    }
+
+    public function create_slug($id,$title)
+    {
+        $count = 0;
+        $title = url_title($title);
+        $slug_title = $title;
+        while(true) 
+        {
+            $this->db->select('id');
+            $this->db->where('id !=', $id);
+            $this->db->where('slug', $slug_title);
+            $query = $this->db->get($this->table_name);
+            if ($query->num_rows() == 0) break;
+            $slug_title = $title . '-' . (++$count);
+        }
+        return strtolower($slug_title);
     }
 
     //--------------------------------------------------------------------------
@@ -1205,7 +1234,7 @@ class MY_Model extends CI_Model
                 break;
         }
 
-        date_default_timezone_set(get_time_zone());
+        date_default_timezone_set('Asia/Jakarta');
         return (strtolower($this->config->item('time_reference')) == 'gmt' ?
                 gmdate($dateFormat, $curr_date) :
                 date($dateFormat, $curr_date));

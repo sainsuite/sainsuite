@@ -84,20 +84,10 @@ class User_model extends CI_Model
 
     public function create($email, $password, $username, $group_par, $require_validation = 1)
     {
-        $this->aauth->create_user($email, $password, $username);
-
         // bind user to a speciifc group
-        $user_id = $this->aauth->get_user_id($email);
+        $user_id = $this->aauth->create_user($email, $password, $username, $group_par);
 
-        if(! is_numeric($group_par)) {
-            if (! $this->aauth->get_group($group_par)) {
-                $this->aauth->create_group($group_par, ucwords($group_par));
-            }
-        }
-
-        // Adding to a group
-        // refresh group
-        $this->aauth->add_member($user_id, $group_par);
+        $return = 'create-email-send';
 
         // User Status
         if ($require_validation == 0) {
@@ -105,20 +95,17 @@ class User_model extends CI_Model
             if( $user ) {
                 $this->aauth->verify_user($user_id, $user->verification_code);
             }
+            
+            $return = 'created';
         }
 
-        // add events create users
-        $this->events->do_action('do_create_users', $user_id);
-
-        $fill_user_vars = $this->events->apply_filters('fill_user_vars', []);
-        foreach (force_array($fill_user_vars) as $key => $value) {
-            $this->aauth->set_user_var($key, $value, $user_id);
-        }
+        $value_user_vars = $this->events->apply_filters('fill_user_vars', []);
+        $this->aauth->set_user_var('meta', json_encode($value_user_vars), $user_id);
 
         User::upload_user_image($user_id);
 
         if ($user_id) {
-            return 'created';
+            return $return;
         }
     }
 
@@ -160,10 +147,8 @@ class User_model extends CI_Model
             }
         }
 
-        $fill_user_vars = $this->events->apply_filters('fill_user_vars', []);
-        foreach (force_array($fill_user_vars) as $key => $value) {
-            $this->aauth->set_user_var($key, $value, $user_id);
-        }
+        $value_user_vars = $this->events->apply_filters('fill_user_vars', []);
+        $this->aauth->set_user_var('meta', json_encode($value_user_vars), $user_id);
 
         User::upload_user_image($user_id);
 
@@ -203,20 +188,17 @@ class User_model extends CI_Model
      * @return string
     **/
 
-    public function create_admin($email, $password, $username)
+    public function create_master($email, $password, $username)
     {
         // Create user
-        if ($this->aauth->create_user($email, $password, $username)) 
+        if ($this->aauth->create_user($email, $password, $username, 'master')) 
         {
             // Add user to a group
             // We assume 1 is the index of the first user
-            $admin_id = $this->aauth->get_user_id($email);
-
-            // assign user to one of the admin group
-            $this->aauth->add_member($admin_id, 'admin'); 
+            $master_id = $this->aauth->get_user_id($email);
             
             // Send Verification
-            $this->aauth->send_verification($admin_id);
+            $this->aauth->send_verification($master_id);
             
             return 'created';
         }

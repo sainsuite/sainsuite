@@ -18,8 +18,8 @@ $this->events->add_filter( 'fill_toolbar_nav', function( $final ) {
         'id' => 1,
         'name'   => __('Add A group'),
         'icon'    => 'ki ki-plus',
-        'attr_anchor'  => 'class="btn btn-light-primary btn-sm font-weight-bolder"',
-        'slug'    => [ 'admin', 'group', 'add' ],
+        'attr_anchor'  => 'class="btn btn-primary btn-sm font-weight-bolder ml-2"',
+        'slug'    => site_url([ 'admin', 'group', 'add' ]),
         'permission' => 'create.group'
     );
     return $final;

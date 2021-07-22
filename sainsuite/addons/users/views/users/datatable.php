@@ -2,7 +2,7 @@
 var DatatableScript = function() {   
     // Read
     var read = function() {
-        var datatable = $('#kt_datatable').KTDatatable({
+        var datatable = $('#sit_datatable').SITDatatable({
 			data: {
 				type: 'remote',
                 source: '<?php echo site_url(['api', 'users']);?>',
@@ -23,13 +23,13 @@ var DatatableScript = function() {
                     sortable: false,
                     width: 20,
                     textAlign: 'center',
-                    selector: {class: 'kt-checkbox--solid'},
+                    selector: {class: 'sit-checkbox--solid'},
                 }, {
                     field: 'username',
                     title: 'User',
 					overflow: 'visible',
                     template: function(row) {
-                        var stateNo = KTUtil.getRandomInt(0, 7);
+                        var stateNo = SITUtil.getRandomInt(0, 7);
                         var states = [
                             'success',
                             'primary',
@@ -99,14 +99,14 @@ var DatatableScript = function() {
                             </a>';
                         hapus = '';                        
                         } else {
-                            <?php if ( User::control('edit.users')) : ?>
+                            <?php if ( User::is_allowed('edit.users')) : ?>
                             edit = '\<a class="btn btn-sm btn-icon btn-light-primary btn-hover-primary "\
                                     href="<?php echo site_url(array( 'admin', 'users', 'edit'));?>/'+ row.user_id +'">\
                                     <i class="fas fa-pen"></i>\
                                 </a>';
                             <?php endif; ?>
 
-                            <?php if ( User::control('delete.users')) : ?>
+                            <?php if ( User::is_allowed('delete.users')) : ?>
                             hapus = '\<button class="btn btn-sm btn-icon btn-light-danger btn-hover-danger "\
                                     data-head="<?php echo _s( 'Would you like to delete this data?' ) ;?>"\
                                     data-url="<?php echo site_url(array( 'admin', 'users', 'delete'));?>/'+ row.user_id +'"\
@@ -122,11 +122,11 @@ var DatatableScript = function() {
             ],
         });
 
-        $('#kt_datatable_search_group').on('change', function() {
+        $('#sit_datatable_search_group').on('change', function() {
             datatable.search($(this).val().toLowerCase(), 'group');
         });
 
-        $('#kt_datatable_search_status').on('change', function() {
+        $('#sit_datatable_search_status').on('change', function() {
             datatable.search($(this).val().toLowerCase(), 'banned');
         });
     };

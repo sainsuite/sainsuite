@@ -1,13 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [3.19.0] - 2021-07-22
+### Changed
+- normalisasi folder
+
 ## [3.18.0] - 2021-06-04
 ### Changed
 - normalisasi events
 
 ## [3.17.0] - 2021-04-12
 ### Changed
-- normalisasi path frontend
+- normalisasi path site
 
 ### Fixed
 - library Events
@@ -27,30 +31,7 @@ All notable changes to this project will be documented in this file.
 - penambahan captcha
 
 ## [3.14.0] - 2021-03-24
-### Fixed
-- Perbaikan layout
-- Perbaikan datatable
-- Perbaikan data users
-- Perbaiakn addons reset data
-- Perbaikan notice
-
-### Added
-- penambahan event add users
-
 ## [3.13.0] - 2021-03-11
-### Fixed
-- Perbaikan addon users
-- Perbaikan timezone
-- Perbaikan my_controller
-- Perbaikan helper
-
-### Changed
-- hapus library menu
-- peningkatan style dashboard
-
-### Added
-- penambahan menus model
-
 ## [3.12.0] - 2021-02-01
 ## [3.11.0] - 2021-01-18
 ## [3.10.0] - 2020-12-25

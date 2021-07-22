@@ -11,13 +11,14 @@ $route['default_controller']   = 'welcome';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['page404'] = 'welcome/error_404';
+$route['lang/(:any)'] = 'welcome/language/$1';
 
 $route['login' ]    = 'auth';
 $route['logout' ]   = 'auth/logout';
 $route['register' ] = 'auth/register';
 $route['recovery' ] = 'auth/recovery';
 
-// Frontend
+// Site
 $addons_path = APPPATH.'addons/';     
 $addons = scandir($addons_path);
 

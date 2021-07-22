@@ -3,12 +3,13 @@
         "name": "Reset Data",
         "namespace": "reset",
         "package": "sainsuite",
+        "type": "addkit",
         "version": "3.17.4",
         "author": "saintekno",
-        "description": "This Addon will delete all the data. It's action cannot be undone.",
+        "description": "This Addon will delete all the data.",
         "main": "main.php",
+        "includes": "events",
         "language": "language",
         "readonly": true
-    }, 
-    "group": "By Sainsuite"
+    }
 }

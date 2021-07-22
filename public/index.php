@@ -110,8 +110,8 @@ switch (ENVIRONMENT)
  * This variable must contain the name of your "system" directory.
  * Set the path if it is not in the same directory as this file.
  */
-	$path_folder = '..';
-	$system_path = $path_folder.DIRECTORY_SEPARATOR.'system';
+	$folder_path = '..';
+	$system_path = $folder_path.DIRECTORY_SEPARATOR.'system';
 
 /*
  *---------------------------------------------------------------
@@ -128,7 +128,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$application_folder = $path_folder.DIRECTORY_SEPARATOR.'sainsuite';
+	$application_folder = $folder_path.DIRECTORY_SEPARATOR.'sainsuite';
 
 /*
  *---------------------------------------------------------------

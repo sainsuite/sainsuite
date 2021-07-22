@@ -1,0 +1,1231 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-07-22 14:42+0700\n"
+"PO-Revision-Date: 2021-07-22 14:55+0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-KeywordsList: __;_e;_s\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: addons/reset/views/script.php:21
+msgid "Confirm Your Action"
+msgstr "Konfirmasikan Tindakan Anda"
+
+#: addons/reset/views/script.php:23
+msgid "While it's enabled, <br> we to delete all your data."
+msgstr "Saat diaktifkan, <br> kami akan menghapus semua data Anda."
+
+#: addons/reset/views/script.php:38
+msgid "Disable Reset On Active"
+msgstr "Nonaktifkan reset aktif"
+
+#: addons/reset/views/script.php:40
+msgid "You don't wish to reset right now ?"
+msgstr "Anda tidak ingin me-reset sekarang?"
+
+#: addons/users/events/actions.php:50
+msgid "Sign Out"
+msgstr "Keluar"
+
+#: addons/users/events/actions.php:54
+msgid "View Profile"
+msgstr "Lihat Profil"
+
+#: addons/users/events/filters.php:39
+msgid "User Image"
+msgstr "gambar pengguna"
+
+#: addons/users/events/filters.php:48 addons/users/events/filters.php:174
+#: addons/users/routes/users.php:72 addons/users/views/auth/register.php:20
+#: controllers/Install.php:63 controllers/Install.php:110
+#: views/admin/install/content/database.php:67
+#: views/admin/install/content/site.php:41
+msgid "User Name"
+msgstr "Nama pengguna"
+
+#: addons/users/events/filters.php:57 addons/users/routes/profile.php:69
+#: addons/users/routes/users.php:73 addons/users/routes/users.php:168
+#: controllers/Auth.php:133
+msgid "User Email"
+msgstr "Email Pengguna"
+
+#: addons/users/events/filters.php:77
+msgid "User Status"
+msgstr "Status pengguna"
+
+#: addons/users/events/filters.php:79
+msgid "Default"
+msgstr "default"
+
+#: addons/users/events/filters.php:80
+msgid "Active"
+msgstr "Aktif"
+
+#: addons/users/events/filters.php:81
+msgid "Unactive"
+msgstr "Tidak aktif"
+
+#: addons/users/events/filters.php:88
+msgid "Add to a group"
+msgstr "Tambahkan ke grup"
+
+#: addons/users/events/filters.php:116
+msgid "Old Password"
+msgstr "password lama"
+
+#: addons/users/events/filters.php:125
+msgid "New Password"
+msgstr "Password baru"
+
+#: addons/users/events/filters.php:132
+msgid "Confirm New"
+msgstr "Konfirmasi Pasword Baru"
+
+#: addons/users/events/filters.php:175 addons/users/views/auth/register.php:30
+#: views/admin/install/content/site.php:52
+msgid "Email"
+msgstr "Email"
+
+#: addons/users/events/filters.php:176 addons/users/routes/profile.php:45
+#: addons/users/routes/users.php:74 addons/users/routes/users.php:144
+#: addons/users/views/auth/register.php:43 controllers/Auth.php:36
+#: views/admin/auth/login.php:40 views/admin/install/content/site.php:69
+msgid "Password"
+msgstr "Kata sandi"
+
+#: addons/users/events/filters.php:177 addons/users/routes/profile.php:46
+#: addons/users/routes/users.php:75 addons/users/routes/users.php:145
+#: addons/users/views/auth/register.php:61
+msgid "Confirm"
+msgstr "Konfirmasi"
+
+#: addons/users/events/install.php:155
+msgid "Manage Core"
+msgstr "Kelola Core"
+
+#: addons/users/events/install.php:158
+msgid "Create Options"
+msgstr "Buat Options"
+
+#: addons/users/events/install.php:159
+msgid "Edit Options"
+msgstr "Edit Options"
+
+#: addons/users/events/install.php:160
+msgid "Read Options"
+msgstr "Baca Options"
+
+#: addons/users/events/install.php:163
+msgid "Read Addons"
+msgstr "Baca Addons"
+
+#: addons/users/events/install.php:164
+msgid "Install Addons"
+msgstr "Install Addons"
+
+#: addons/users/events/install.php:165
+msgid "Update Addons"
+msgstr "Edit Addons"
+
+#: addons/users/events/install.php:166
+msgid "Delete Addons"
+msgstr "Hapus Addons"
+
+#: addons/users/events/install.php:167
+msgid "Enable/Disable Addons"
+msgstr "Aktifkan/Nonaktifkan Addons"
+
+#: addons/users/events/install.php:168
+msgid "Extract Addons"
+msgstr "Ekstrak Addons"
+
+#: addons/users/events/install.php:171
+msgid "Read themes"
+msgstr "Baca themes"
+
+#: addons/users/events/install.php:172
+msgid "Install themes"
+msgstr "Install themes"
+
+#: addons/users/events/install.php:173
+msgid "Delete themes"
+msgstr "Hapus themes"
+
+#: addons/users/events/install.php:174
+msgid "Enable/Disable themes"
+msgstr "Aktifkan/Nonaktifkan themes"
+
+#: addons/users/events/install.php:175
+msgid "Extract themes"
+msgstr "Extract themes"
+
+#: addons/users/events/install.php:178
+msgid "Read Users"
+msgstr "Baca Pengguna"
+
+#: addons/users/events/install.php:179
+msgid "Create Users"
+msgstr "Buat Pengguna"
+
+#: addons/users/events/install.php:180
+msgid "Edit Users"
+msgstr "Edit Pengguna"
+
+#: addons/users/events/install.php:181
+msgid "Delete Users"
+msgstr "Hapus Pengguna"
+
+#: addons/users/events/install.php:184
+msgid "Read Group"
+msgstr "Baca Grup"
+
+#: addons/users/events/install.php:185
+msgid "Create Group"
+msgstr "Membuat grup"
+
+#: addons/users/events/install.php:186
+msgid "Edit Group"
+msgstr "Edit Grup"
+
+#: addons/users/events/install.php:187
+msgid "Delete Group"
+msgstr "Hapus Grup"
+
+#: addons/users/events/install.php:190
+msgid "Edit Profile"
+msgstr "Edit Profile"
+
+#: addons/users/events/menu.php:27 addons/users/events/menu.php:54
+#: addons/users/routes/users.php:35
+msgid "Users"
+msgstr "Pengguna"
+
+#: addons/users/events/menu.php:34 addons/users/routes/group.php:35
+#: addons/users/routes/users.php:76
+msgid "Group"
+msgstr "Kelompok"
+
+#: addons/users/routes/group.php:30 addons/users/routes/profile.php:27
+#: addons/users/routes/users.php:30
+msgid "Home"
+msgstr "Home"
+
+#: addons/users/routes/group.php:51 addons/users/routes/group.php:86
+#: addons/users/routes/group.php:129
+#, php-format
+msgid "Group &mdash; %s"
+msgstr "Grup &mdash; %s"
+
+#: addons/users/routes/group.php:91 addons/users/routes/users.php:106
+msgid "Add New"
+msgstr "Tambah baru"
+
+#: addons/users/routes/group.php:134 addons/users/routes/users.php:190
+msgid "Edit"
+msgstr "Edit"
+
+#: addons/users/routes/group.php:165 addons/users/routes/users.php:231
+msgid "deleted"
+msgstr "hapus"
+
+#: addons/users/routes/group.php:167 addons/users/routes/users.php:233
+msgid "unexpected-error"
+msgstr "kesalahan tak terduga"
+
+#: addons/users/routes/profile.php:43 addons/users/routes/users.php:142
+msgid "Old Pass"
+msgstr "Password Lama"
+
+#: addons/users/routes/profile.php:57 addons/users/routes/users.php:156
+msgid "password updated"
+msgstr "kata sandi diperbarui"
+
+#: addons/users/routes/profile.php:89
+msgid "My Profile"
+msgstr "Profil saya"
+
+#: addons/users/routes/users.php:53 addons/users/routes/users.php:101
+#: addons/users/routes/users.php:185
+#, php-format
+msgid "Users &mdash; %s"
+msgstr "Pengguna &mdash; %s"
+
+#: addons/users/routes/users.php:132
+msgid "Unknow user. The use you attempted to edit has not been found."
+msgstr ""
+"Pengguna yang tidak diketahui. Penggunaan yang Anda coba edit belum "
+"ditemukan."
+
+#: addons/users/views/auth/register.php:5
+#: addons/users/views/auth/register.php:87
+msgid "Sign Up"
+msgstr "Daftar"
+
+#: addons/users/views/auth/register.php:8
+msgid "I Already Have An Account"
+msgstr "Saya Sudah Punya Akun"
+
+#: addons/users/views/auth/register.php:9 views/admin/auth/login.php:9
+#: views/admin/auth/login.php:74
+msgid "Sign In"
+msgstr "Masuk"
+
+#: addons/users/views/group/datatable.php:88
+#: addons/users/views/users/datatable.php:111
+msgid "Would you like to delete this data?"
+msgstr "Apakah Anda ingin menghapus data ini?"
+
+#: addons/users/views/group/form.php:19 addons/users/views/users/form.php:19
+#: addons/users/views/users/form_edit.php:19
+msgid "Back to the list"
+msgstr "Kembali ke daftar"
+
+#: addons/users/views/group/form.php:50
+msgid "Name"
+msgstr "Nama"
+
+#: addons/users/views/group/form.php:59
+msgid "Definition"
+msgstr "Definisi"
+
+#: addons/users/views/group/read.php:19
+msgid "Add A group"
+msgstr "Tambahkan grup"
+
+#: addons/users/views/profile/read.php:54 addons/users/views/users/form.php:42
+#: addons/users/views/users/form_edit.php:44
+msgid "Personal Information"
+msgstr "Informasi pribadi"
+
+#: addons/users/views/profile/read.php:83 addons/users/views/users/form.php:58
+#: addons/users/views/users/form_edit.php:78
+msgid "Change Password"
+msgstr "Ganti kata sandi"
+
+#: addons/users/views/users/read.php:19
+msgid "Add A user"
+msgstr "Tambahkan pengguna"
+
+#: controllers/Admin.php:99
+#, php-format
+msgid "Dashboard &mdash; %s"
+msgstr "Dashboard &mdash; %s"
+
+#: controllers/Admin.php:121
+#, php-format
+msgid "404 &mdash; %s"
+msgstr "404 &mdash; %s"
+
+#: controllers/Admin.php:270 controllers/Admin.php:412
+#, php-format
+msgid "Addons List &mdash; %s"
+msgstr "Daftar Addons &mdash; %s"
+
+#: controllers/Admin.php:338
+#, php-format
+msgid "Migration &mdash; %s"
+msgstr "Migrasi &mdash; %s"
+
+#: controllers/Admin.php:388 views/admin/addons/migrate_dom.php:44
+msgid "Migration done."
+msgstr "Migrasi selesai."
+
+#: controllers/Admin.php:396
+msgid "File not found or incorrect executable provided."
+msgstr "File tidak ditemukan atau executable yang diberikan salah.\t"
+
+#: controllers/Admin.php:402
+msgid "An error occured"
+msgstr "Kesalahan terjadi"
+
+#: controllers/Admin.php:452 controllers/Admin.php:486
+#, php-format
+msgid "Theme List &mdash; %s"
+msgstr "Daftar Tema &mdash; %s"
+
+#: controllers/Admin.php:508
+#, php-format
+msgid "Preferences &mdash; %s"
+msgstr "Preferensi &mdash; %s"
+
+#: controllers/Admin.php:513
+#, php-format
+msgid "Settings &mdash; %s"
+msgstr "Setelan &mdash; %s"
+
+#: controllers/Admin.php:531
+#, php-format
+msgid "Updating... &mdash; %s"
+msgstr "Memperbarui... &mdash; %s"
+
+#: controllers/Admin.php:555
+#, php-format
+msgid "About &mdash; %s"
+msgstr "Tentang &mdash; %s"
+
+#: controllers/Auth.php:35 views/admin/auth/login.php:29
+msgid "Email or User Name"
+msgstr "Email atau nama pengguna"
+
+#: controllers/Auth.php:64
+#, php-format
+msgid "Sign In &mdash; %s"
+msgstr "Masuk &mdash; %s"
+
+#: controllers/Auth.php:105
+#, php-format
+msgid "Sign Up &mdash; %s"
+msgstr "Daftar &mdash; %s"
+
+#: controllers/Auth.php:149
+#, php-format
+msgid "Recover Password &mdash; %s"
+msgstr "Pulihkan Kata Sandi &mdash; %s"
+
+#: controllers/Install.php:45
+#, php-format
+msgid "Welcome Page &mdash; %s"
+msgstr "Halaman Selamat Datang &mdash; %s"
+
+#: controllers/Install.php:62 views/admin/install/content/database.php:13
+msgid "Host Name"
+msgstr "Nama Host"
+
+#: controllers/Install.php:64 views/admin/install/content/database.php:40
+msgid "Database Name"
+msgstr "Nama Basis Data"
+
+#: controllers/Install.php:65 views/admin/install/content/database.php:23
+msgid "Database Driver"
+msgstr "Driver Basis Data"
+
+#: controllers/Install.php:66 views/admin/install/content/database.php:51
+msgid "Database Prefix"
+msgstr "Awalan Basis Data"
+
+#: core/MY_Addon.php:245
+#, php-format
+msgid ""
+"<strong>%s</strong> has been disabled. This addon require <strong>%s</"
+"strong> to work properly."
+msgstr ""
+"<strong>%s</strong> telah dinonaktifkan. Addon ini memerlukan <strong>%s</"
+"strong> untuk berfungsi dengan baik."
+
+#: core/MY_Lang.php:38 core/MY_Lang.php:50
+msgid "Unable to load the requested lang file"
+msgstr "Tidak dapat memuat file lang yang diminta"
+
+#: language/aauth_lang.php:18
+msgid "Account Verification"
+msgstr "Verifikasi akun"
+
+#: language/aauth_lang.php:19
+msgid "Your verification code is: "
+msgstr "Kode verifikasi Anda adalah:"
+
+#: language/aauth_lang.php:20
+msgid ""
+"Thank you for registering on our site, your account details are as follows:\n"
+"\n"
+msgstr ""
+"Terima kasih telah mendaftar di situs kami, detail akun Anda adalah sebagai "
+"berikut:\n"
+
+#: language/aauth_lang.php:23
+msgid "Reset Password"
+msgstr "Setel Ulang Kata Sandi"
+
+#: language/aauth_lang.php:24
+msgid ""
+"To reset your password click on (or copy and paste in your browser address "
+"bar) the link below:\n"
+"\n"
+msgstr ""
+"Untuk mengatur ulang kata sandi Anda, klik (atau salin dan tempel di bilah "
+"alamat browser Anda) tautan di bawah ini:\n"
+
+#: language/aauth_lang.php:27
+msgid "Successful Pasword Reset"
+msgstr "Reset Kata Sandi Berhasil"
+
+#: language/aauth_lang.php:28
+msgid "Your password has successfully been reset."
+msgstr "Kata sandi Anda telah berhasil disetel ulang."
+
+#: language/aauth_lang.php:29
+msgid "Your password has successfully been reset. Your new password is : "
+msgstr ""
+"Kata sandi Anda telah berhasil disetel ulang. Kata sandi baru Anda adalah:"
+
+#: language/aauth_lang.php:32
+msgid "Email address already exists on the system."
+msgstr "Alamat email sudah ada di sistem."
+
+#: language/aauth_lang.php:33
+msgid ""
+"Account already exists on the system with that username. Please enter a "
+"different username."
+msgstr ""
+"Akun sudah ada di sistem dengan nama pengguna itu. Harap masukkan nama "
+"pengguna yang berbeda."
+
+#: language/aauth_lang.php:34
+msgid "Invalid email address"
+msgstr "alamat email salah"
+
+#: language/aauth_lang.php:35
+msgid "Invalid password"
+msgstr "Kata sandi salah"
+
+#: language/aauth_lang.php:36
+msgid "Invalid Username"
+msgstr "Nama pengguna tidak valid"
+
+#: language/aauth_lang.php:37
+msgid "Username required"
+msgstr "Nama pengguna diperlukan"
+
+#: language/aauth_lang.php:38
+msgid "Authentication Code required"
+msgstr "Kode Otentikasi diperlukan"
+
+#: language/aauth_lang.php:39
+msgid "Invalid Authentication Code"
+msgstr "Kode Otentikasi Tidak Valid"
+
+#: language/aauth_lang.php:42
+msgid ""
+"Email address already exists on the system.  Please enter a different email "
+"address."
+msgstr "Alamat email sudah ada di sistem. Masukkan alamat email yang berbeda."
+
+#: language/aauth_lang.php:43
+msgid ""
+"Username already exists on the system.  Please enter a different username."
+msgstr ""
+"Nama pengguna sudah ada di sistem. Harap masukkan nama pengguna yang berbeda."
+
+#: language/aauth_lang.php:46
+msgid "Sorry, you do not have access to the resource you requested."
+msgstr "Maaf, Anda tidak memiliki akses ke sumber daya yang Anda minta.\t"
+
+#: language/aauth_lang.php:47
+msgid "Email Address and Password do not match."
+msgstr "Alamat Email dan Kata Sandi tidak cocok."
+
+#: language/aauth_lang.php:48
+msgid "Username and Password do not match."
+msgstr "Nama Pengguna dan Kata Sandi tidak cocok."
+
+#: language/aauth_lang.php:49
+msgid "Email, Username or Password do not match."
+msgstr "Email, Nama Pengguna atau Kata Sandi tidak cocok."
+
+#: language/aauth_lang.php:50
+msgid ""
+"You have exceeded your login attempts, your account has now been locked."
+msgstr ""
+"Anda telah melampaui upaya login Anda, akun Anda sekarang telah dikunci."
+
+#: language/aauth_lang.php:51
+msgid "Sorry, the reCAPTCHA text entered was incorrect."
+msgstr "Maaf, teks reCAPTCHA yang dimasukkan salah."
+
+#: language/aauth_lang.php:54
+msgid "User does not exist"
+msgstr "pengguna tidak ada"
+
+#: language/aauth_lang.php:55
+msgid "Invalid Verification Code"
+msgstr "Kode verifikasi tidak benar"
+
+#: language/aauth_lang.php:56
+msgid ""
+"Your account has not been verified. Please check your email and verify your "
+"account."
+msgstr ""
+"Akun Anda belum diverifikasi. Silakan periksa email Anda dan verifikasi akun "
+"Anda."
+
+#: language/aauth_lang.php:57
+msgid "Group does not exist"
+msgstr "Grup tidak ada"
+
+#: language/aauth_lang.php:58
+msgid "Subgroup does not exist"
+msgstr "Subgrup tidak ada"
+
+#: language/aauth_lang.php:59
+msgid "It is not possible to send a Message to yourself."
+msgstr "Tidak mungkin mengirim Pesan ke diri sendiri."
+
+#: language/aauth_lang.php:60
+msgid "Private Message not found"
+msgstr "Pesan Pribadi tidak ditemukan\t"
+
+#: language/aauth_lang.php:63
+msgid "User is already member of group"
+msgstr "Pengguna sudah menjadi anggota grup"
+
+#: language/aauth_lang.php:64
+msgid "Subgroup is already member of group"
+msgstr "Subgrup sudah menjadi anggota grup"
+
+#: language/aauth_lang.php:65
+msgid "Group name already exists"
+msgstr "Nama grup sudah ada"
+
+#: language/aauth_lang.php:66
+msgid "Permission name already exists"
+msgstr "Nama izin sudah ada"
+
+#: language/core_lang.php:19
+#, php-format
+msgid "DB Error: %s"
+msgstr "Kesalahan DB: %s"
+
+#: language/core_lang.php:20
+msgid "No data available."
+msgstr "Tidak ada data yang tersedia."
+
+#: language/core_lang.php:21
+msgid "Invalid ID passed to model."
+msgstr "ID tidak valid diteruskan ke model."
+
+#: language/core_lang.php:22
+msgid "Model has unspecified database table."
+msgstr "Model memiliki tabel database yang tidak ditentukan."
+
+#: language/core_lang.php:23
+msgid "Not enough information to fetch field."
+msgstr "Tidak cukup informasi untuk mengambil bidang."
+
+#: language/core_lang.php:24
+msgid "Not enough information to count results."
+msgstr "Tidak cukup informasi untuk menghitung hasil."
+
+#: language/core_lang.php:25
+msgid "Not enough information to check uniqueness."
+msgstr "Tidak cukup informasi untuk memeriksa keunikan."
+
+#: language/core_lang.php:26
+msgid "Not enough information to find by."
+msgstr "Tidak cukup informasi untuk ditemukan."
+
+#: language/core_lang.php:29
+msgid "Database has been installed"
+msgstr "Basis data telah diinstal"
+
+#: language/core_lang.php:30
+msgid "System has been installed"
+msgstr "Sistem telah diinstal"
+
+#: language/core_lang.php:31
+msgid "SainSuite cannot connect to your database host."
+msgstr "SainSuite tidak dapat terhubung ke host database Anda."
+
+#: language/core_lang.php:32
+msgid "Some problems occured, please try again"
+msgstr "Beberapa masalah terjadi, silakan coba lagi"
+
+#: language/core_lang.php:33
+msgid "An unexpected error occured."
+msgstr "Terjadi kesalahan tak terduga."
+
+#: language/core_lang.php:34
+msgid "File Conflict."
+msgstr "Konflik Berkas."
+
+#: language/core_lang.php:35
+msgid "Option was successfully saved."
+msgstr "Opsi berhasil disimpan."
+
+#: language/core_lang.php:38
+msgid "Sign in to start your account"
+msgstr "Masuk untuk memulai akun Anda"
+
+#: language/core_lang.php:39
+msgid "Please enter your email addresse. A recovery email will be send to you."
+msgstr ""
+"Silakan masukkan alamat email Anda. Email pemulihan akan dikirimkan kepada "
+"Anda."
+
+#: language/core_lang.php:40
+msgid "You logged in successfully."
+msgstr "Anda berhasil login."
+
+#: language/core_lang.php:41
+msgid "Login is required."
+msgstr "Login diperlukan."
+
+#: language/core_lang.php:42
+msgid "Your old password is not correct."
+msgstr "Kata sandi lama Anda tidak benar."
+
+#: language/core_lang.php:43
+msgid "Update password."
+msgstr "Perbarui kata sandi."
+
+#: language/core_lang.php:44
+msgid "Your old password is empty."
+msgstr "Kata sandi lama Anda kosong."
+
+#: language/core_lang.php:47
+msgid "Username is already used by another user."
+msgstr "Nama pengguna sudah digunakan oleh pengguna lain."
+
+#: language/core_lang.php:48
+msgid "This email is already used."
+msgstr "Email ini sudah digunakan."
+
+#: language/core_lang.php:49
+msgid "This email seems to be already taken."
+msgstr "Email ini sepertinya sudah diambil."
+
+#: language/core_lang.php:50
+msgid "This username seems to be already taken."
+msgstr "Nama pengguna ini tampaknya sudah digunakan."
+
+#: language/core_lang.php:51
+msgid "The user has been successfully created."
+msgstr "Pengguna telah berhasil dibuat."
+
+#: language/core_lang.php:52
+msgid "Your Account has been activated."
+msgstr "Akun Anda telah diaktifkan."
+
+#: language/core_lang.php:55
+msgid "Unknow user"
+msgstr "Pengguna tidak diketahui"
+
+#: language/core_lang.php:56
+msgid "Unknow email address"
+msgstr "Alamat email tidak diketahui"
+
+#: language/core_lang.php:57
+msgid ""
+"The recovery email has been send. Please check your email, open the recovery "
+"email and follow the instructions."
+msgstr ""
+"Email pemulihan telah dikirim. Silakan periksa email Anda, buka email "
+"pemulihan dan ikuti petunjuknya.\t"
+
+#: language/core_lang.php:58
+msgid ""
+"The email has been send. Please check your email, open the email and follow "
+"the instructions."
+msgstr ""
+"Email sudah terkirim. Silakan periksa email Anda, buka email dan ikuti "
+"petunjuknya."
+
+#: language/core_lang.php:61
+msgid "You must logout first to access that page."
+msgstr "Anda harus logout terlebih dahulu untuk mengakses halaman tersebut."
+
+#: language/core_lang.php:64
+msgid "The addon has been enabled."
+msgstr "Addon telah diaktifkan."
+
+#: language/core_lang.php:65
+msgid "The addon has been disabled."
+msgstr "Addon telah dinonaktifkan."
+
+#: language/core_lang.php:66
+msgid "The addon has been removed."
+msgstr "Addon telah dihapus."
+
+#: language/core_lang.php:67
+msgid "The addon has been extracted."
+msgstr "Addon telah diekstraksi."
+
+#: language/core_lang.php:68
+msgid "The addon has been updated."
+msgstr "Addon telah diperbarui."
+
+#: language/core_lang.php:69
+msgid "The addon has been installed."
+msgstr "Addonnya sudah terpasang."
+
+#: language/core_lang.php:70
+msgid "The theme has been enabled."
+msgstr "Tema telah diaktifkan."
+
+#: language/core_lang.php:71
+msgid "The theme has been disabled."
+msgstr "Tema telah dinonaktifkan."
+
+#: language/core_lang.php:72
+msgid "The theme has been removed."
+msgstr "Tema telah dihapus."
+
+#: language/core_lang.php:73
+msgid "The theme has been extracted."
+msgstr "Tema telah diekstraksi."
+
+#: language/core_lang.php:74
+msgid "The theme has been updated."
+msgstr "Tema telah diperbarui."
+
+#: language/core_lang.php:75
+msgid "The theme has been installed."
+msgstr "Tema telah diinstal."
+
+#: language/core_lang.php:76
+msgid "The version installed is already up to date."
+msgstr "Versi yang diinstal sudah terbaru."
+
+#: language/core_lang.php:77
+msgid "An error occured during update."
+msgstr "Terjadi kesalahan selama pembaruan."
+
+#: language/core_lang.php:78
+msgid ""
+"config file hasn't been found. This file is not a valid theme. Installation "
+"aborded !!!"
+msgstr ""
+"file konfigurasi belum ditemukan. File ini bukan tema yang valid. Instalasi "
+"dibatalkan !!!"
+
+#: language/core_lang.php:79
+msgid ""
+"manifest file hasn't been found. This file is not a valid addon. "
+"Installation aborded !!!"
+msgstr ""
+"file manifest belum ditemukan. File ini bukan addon yang valid. Instalasi "
+"dibatalkan !!!"
+
+#: language/core_lang.php:80
+msgid ""
+"manifest file incorrect. This file is not a valid addon. Installation "
+"aborded !!!"
+msgstr ""
+"file manifest salah. File ini bukan addon yang valid. Instalasi "
+"dibatalkan !!!"
+
+#: language/core_lang.php:81 language/core_lang.php:88
+msgid "A migration is not required or has already been done."
+msgstr "Migrasi tidak diperlukan atau telah dilakukan."
+
+#: language/core_lang.php:82
+msgid "The Data has been successfully."
+msgstr "Data telah berhasil."
+
+#: language/core_lang.php:83
+msgid "The Data has been updated."
+msgstr "Data telah diperbarui."
+
+#: language/core_lang.php:84
+msgid "The Data has been deleted."
+msgstr "Data telah dihapus."
+
+#: language/core_lang.php:85
+msgid "You cant delete your own  account."
+msgstr "Anda tidak dapat menghapus akun Anda sendiri.\t"
+
+#: models/Menus_model.php:73
+msgid "Appearance"
+msgstr "Penampilan"
+
+#: models/Menus_model.php:80 views/admin/addons/list_dom.php:43
+msgid "Addons"
+msgstr "Addons"
+
+#: models/Menus_model.php:87
+msgid "Setting"
+msgstr "Pengaturan"
+
+#: models/Menus_model.php:94
+msgid "Reset"
+msgstr "Setel ulang"
+
+#: models/Menus_model.php:123
+msgid "API"
+msgstr "API"
+
+#: models/Menus_model.php:128
+msgid "Terms"
+msgstr "Syarat"
+
+#: models/Menus_model.php:133
+msgid "Privacy"
+msgstr "Pribadi"
+
+#: models/Menus_model.php:138
+#, php-format
+msgid "Copyright © %s %s"
+msgstr "Hak Cipta © %s %s."
+
+#: views/admin/about/contact.php:9
+msgid "We Got A<br> Surprise"
+msgstr "Kami Punya<br> Kejutan"
+
+#: views/admin/about/contact.php:12
+msgid "sainsuite"
+msgstr "sainsuite"
+
+#: views/admin/about/contact.php:14
+msgid "To Grow Your Business"
+msgstr "Untuk Menumbuhkan Bisnis Anda"
+
+#: views/admin/about/contact.php:18 views/admin/about/index_dom.php:38
+msgid "If you need help with the SainSuite, please Contact Us "
+msgstr "Jika Anda memerlukan bantuan SainSuite, silakan Hubungi Kami"
+
+#: views/admin/about/index_dom.php:15
+msgid "is up to date"
+msgstr "Versi yang diinstal sudah terbaru."
+
+#: views/admin/about/index_dom.php:16
+#, php-format
+msgid "Version <b>%s</b> (Official build)"
+msgstr "Versi <b>%s</b> (Builan resmi)"
+
+#: views/admin/about/index_dom.php:28
+#, php-format
+msgid "%s : %s is available"
+msgstr "%s : %s tersedia"
+
+#: views/admin/about/index_dom.php:32
+msgid "Click Here to Update"
+msgstr "Klik Di Sini untuk Memperbarui"
+
+#: views/admin/about/index_dom.php:47
+#, php-format
+msgid "Copyright © %s Developed by %s. All rights reserved."
+msgstr "Hak Cipta © %s Dikembangkan oleh %s. Seluruh hak cipta."
+
+#: views/admin/about/update_dom.php:5
+#, php-format
+msgid "Unknow Release : %s"
+msgstr "Rilis Tidak Diketahui : %s"
+
+#: views/admin/about/update_dom.php:6 views/admin/about/update_dom.php:13
+msgid "Update has been aborded...!!!"
+msgstr "Pembaruan telah dibatalkan ...!!!"
+
+#: views/admin/about/update_dom.php:12
+#, php-format
+msgid "Old Release : %s"
+msgstr "Rilisan Lama : %s"
+
+#: views/admin/about/update_dom.php:27
+msgid "Downloading Zip file..."
+msgstr "Mengunduh berkas Zip..."
+
+#: views/admin/about/update_dom.php:37
+msgid "An error occured during download..."
+msgstr "Terjadi kesalahan saat mengunduh..."
+
+#: views/admin/about/update_dom.php:48
+msgid "Extracting the new release..."
+msgstr "Mengekstrak rilis baru..."
+
+#: views/admin/about/update_dom.php:58 views/admin/about/update_dom.php:79
+#: views/admin/about/update_dom.php:98
+msgid "An error occured during extraction..."
+msgstr "Terjadi kesalahan saat ekstraksi..."
+
+#: views/admin/about/update_dom.php:69
+msgid "Installing the new release..."
+msgstr "Menginstal rilis baru..."
+
+#: views/admin/about/update_dom.php:90
+msgid "Release..."
+msgstr "Melepaskan..."
+
+#: views/admin/addons/list.php:35
+msgid "Choose the addons zip file"
+msgstr "Pilih file zip addons"
+
+#: views/admin/addons/list.php:36
+msgid "Add AddOns"
+msgstr "Tambahkan AddOns"
+
+#: views/admin/addons/list_dom.php:59
+msgid "Extract"
+msgstr "Ekstrak"
+
+#: views/admin/addons/list_dom.php:74
+msgid "Migrate"
+msgstr "Migrasi"
+
+#: views/admin/addons/list_dom.php:83
+msgid "Would you like to delete this addon?"
+msgstr "Apakah Anda ingin menghapus addon ini?"
+
+#: views/admin/addons/migrate_dom.php:4
+msgid "Migration has started"
+msgstr "Migrasi telah dimulai"
+
+#: views/admin/addons/migrate_dom.php:13
+msgid "Doing"
+msgstr "Lakukan"
+
+#: views/admin/addons/migrate_dom.php:14
+msgid "An Error Occured"
+msgstr "Kesalahan terjadi"
+
+#: views/admin/addons/migrate_dom.php:23
+msgid "Migrating to"
+msgstr "Migrasi ke"
+
+#: views/admin/addons/migrate_dom.php:28
+msgid "done."
+msgstr "selesai."
+
+#: views/admin/addons/migrate_dom.php:38
+msgid "An error occured :"
+msgstr "Kesalahan terjadi :"
+
+#: views/admin/addons/migrate_dom.php:45
+msgid "Go back to addons"
+msgstr "Kembali ke addon"
+
+#: views/admin/addons/migrate_dom.php:70
+msgid "No migration content available"
+msgstr "Tidak ada konten migrasi yang tersedia"
+
+#: views/admin/addons/migrate_dom.php:79
+msgid "Migrate not available for this addon."
+msgstr "Migrasi tidak tersedia untuk addon ini."
+
+#: views/admin/appearance/list.php:35
+msgid "Choose the themes zip file"
+msgstr "Pilih file zip tema"
+
+#: views/admin/appearance/list.php:36
+msgid "Add themes"
+msgstr "Tambahkan tema"
+
+#: views/admin/appearance/list_dom.php:42
+msgid "themes"
+msgstr "tema"
+
+#: views/admin/appearance/list_dom.php:70
+msgid "Would you like to delete this theme?"
+msgstr "Apakah Anda ingin menghapus tema ini?"
+
+#: views/admin/auth/login.php:14
+msgid "New Here?"
+msgstr "Baru disini?"
+
+#: views/admin/auth/login.php:15
+msgid "Create Account"
+msgstr "Buat Akun"
+
+#: views/admin/auth/login.php:59
+msgid "Remember me"
+msgstr "Ingat sayaIngat saya"
+
+#: views/admin/auth/login.php:65
+msgid "I Lost My Password !"
+msgstr "Saya Kehilangan Kata Sandi Saya!"
+
+#: views/admin/auth/recovery.php:24
+msgid "Submit"
+msgstr "Kirim Tiket"
+
+#: views/admin/elements/accordions.php:24 views/admin/partials/content.php:103
+msgid "Save changes"
+msgstr "Simpan perubahan"
+
+#: views/admin/elements/input-image.php:15
+msgid "Change avatar"
+msgstr "Mengubah avatar"
+
+#: views/admin/elements/input-image.php:21
+msgid "Cancel avatar"
+msgstr "Batalkan avatar"
+
+#: views/admin/elements/input-image.php:25
+msgid "Remove avatar"
+msgstr "Hapus avatar"
+
+#: views/admin/install/content/database.php:24
+msgid "Select database driver"
+msgstr "Pilih driver basis data"
+
+#: views/admin/install/content/database.php:25
+msgid "MySQLi"
+msgstr "MySQLi"
+
+#: views/admin/install/content/database.php:78
+msgid "User Password"
+msgstr "Kata Sandi Pengguna"
+
+#: views/admin/install/content/site.php:13 views/admin/settings/index.php:38
+msgid "Site Name"
+msgstr "Nama situs"
+
+#: views/admin/install/content/site.php:23
+msgid "supported languages"
+msgstr "bahasa yang didukung"
+
+#: views/admin/install/content/site.php:88
+msgid "Password Confirm"
+msgstr "Konfirmasi password"
+
+#: views/admin/install/index.php:8
+msgid "Thank for having chosen SainSuite to host your project."
+msgstr "Terima kasih telah memilih SainSuite untuk menjadi medium proyek Anda."
+
+#: views/admin/install/index.php:18 views/admin/install/wizard.php:27
+msgid "Database."
+msgstr "Basis data."
+
+#: views/admin/install/index.php:21 views/admin/install/index.php:35
+#: views/admin/install/wizard.php:28 views/admin/install/wizard.php:42
+msgid "Configuration."
+msgstr "Konfigurasi."
+
+#: views/admin/install/index.php:32 views/admin/install/wizard.php:41
+msgid "WebSite."
+msgstr "Situs web."
+
+#: views/admin/install/script.php:136 views/admin/install/script.php:192
+msgid "Something Went Wrong!"
+msgstr "Ada yang salah!"
+
+#: views/admin/install/wizard.php:13
+msgid "installation"
+msgstr "instalasi"
+
+#: views/admin/install/wizard.php:14
+msgid "wizard"
+msgstr "wizard"
+
+#: views/admin/layouts_aside.php:43
+#, php-format
+msgid "Copyright © %s %s."
+msgstr "Hak Cipta © %s %s."
+
+#: views/admin/layouts_aside.php:43
+msgid " All rights reserved"
+msgstr " Semua hak dilindungi."
+
+#: views/admin/partials/content.php:103
+msgid "Save New"
+msgstr "Simpan Baru"
+
+#: views/admin/partials/error_404.php:4
+msgid "Oops! Why you’re here?"
+msgstr "Ups! Kenapa kamu di sini?"
+
+#: views/admin/partials/footer.php:10
+#, php-format
+msgid "%s %s"
+msgstr "%s %s"
+
+#: views/admin/partials/footer.php:10
+msgid "Thank you for using"
+msgstr "Terima kasih telah menggunakan"
+
+#: views/admin/partials/home.php:4
+msgid "Hello!"
+msgstr "Halo!"
+
+#: views/admin/partials/home.php:4
+msgid "Let's get started"
+msgstr "Mari kita mulai"
+
+#: views/admin/partials/home.php:6
+msgid "See What We Doing When You Are Enjoying Our Product"
+msgstr "Lihat Apa Yang Kami Lakukan Saat Anda Menikmati Produk Kami"
+
+#: views/admin/partials/home.php:7
+msgid ""
+"Get started building your personal projects, testing out ideas, and more in "
+"your spontaner workspace."
+msgstr ""
+"Mulailah membangun proyek pribadi Anda, menguji ide, dan banyak lagi di "
+"ruang kerja Anda."
+
+#: views/admin/partials/modal.php:48
+msgid "close"
+msgstr "Menutup"
+
+#: views/admin/partials/modal.php:61
+msgid "heads up"
+msgstr "Peringatan "
+
+#: views/admin/partials/modal.php:62
+msgid "are you sure"
+msgstr "apakah anda yakin"
+
+#: views/admin/partials/modal.php:63
+msgid "cancel"
+msgstr "membatalkan"
+
+#: views/admin/partials/modal.php:64
+msgid "continue"
+msgstr "Lanjutkan"
+
+#: views/admin/partials/modal.php:101
+msgid "Upload"
+msgstr "Unggah"
+
+#: views/admin/scripts.js.php:560
+msgid "please fill all the required fields"
+msgstr "silakan isi semua bidang yang diperlukan"
+
+#: views/admin/settings/index.php:47
+msgid "Site Title"
+msgstr "Judul situs"
+
+#: views/admin/settings/index.php:58
+msgid "Site Description"
+msgstr "Deskripsi situs"
+
+#: views/admin/settings/index.php:67
+msgid "Site Keywords"
+msgstr "Kata Kunci Situs"
+
+#: views/admin/settings/index.php:79
+msgid "Timezone"
+msgstr "Zona waktu"
+
+#: views/admin/settings/index.php:87
+msgid "Copyright"
+msgstr "Hak Cipta"
+
+#: views/admin/settings/index.php:103
+msgid "Enable Demo ?"
+msgstr "Aktifkan Demo?"
+
+#: views/admin/settings/index.php:106 views/admin/settings/index.php:118
+msgid "No"
+msgstr "Tidak"
+
+#: views/admin/settings/index.php:107 views/admin/settings/index.php:119
+msgid "Yes"
+msgstr "Iya"
+
+#: views/admin/settings/index.php:115
+msgid "Enable Site ?"
+msgstr "Aktifkan Situs?"
+
+#: views/admin/settings/index.php:131
+msgid "General Settings"
+msgstr "Pengaturan Umum"
+
+#: views/admin/settings/index.php:141
+msgid "Advanced Settings"
+msgstr "Pengaturan lanjutan"
+
+#: views/errors/permission/denied.php:1
+msgid "Access denied. Your are not allowed to see this page."
+msgstr "Akses ditolak. Anda tidak diizinkan untuk melihat halaman ini."
+
+#: views/site/default/pages/home.php:42
+#, php-format
+msgid "Version %s"
+msgstr "Versi %s"

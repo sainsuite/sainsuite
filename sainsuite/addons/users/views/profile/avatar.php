@@ -1,7 +1,7 @@
 <?php global $User_Options;?>
 
 <!--begin::User-->
-<div class="d-flex align-items-center">
+<div class="d-flex">
     <div class="symbol symbol-60 mr-5 align-self-start align-self-xxl-center">
         <div class="symbol-label"
             style="background-image:url('<?php echo User::get_user_image_url(User::get()->id);?>')">
@@ -14,8 +14,9 @@
         <div class="text-muted">
             <?php echo User::get_user_group()->definition;?>
         </div>
-
-        <?php echo $this->events->apply_filters('fill_check_hit', '');?>
+    </div>
+    <div class="d-flex ml-auto d-lg-none" id="aside_close">
+        <i class="la la-arrow-left icon-2x text-dark"></i>
     </div>
 </div>
 <!--end::User-->
@@ -34,10 +35,12 @@
                 <input type="radio" class="radio" name="color-mode" id="skin-light" />
                 <span class="mr-1"></span>
             </label>
-            <label class="radio radio-accent radio-<?=APPNAME;?> mr-0">
-                <input type="radio" class="radio" name="color-mode" id="skin-<?=APPNAME;?>" />
+            <label class="radio radio-accent radio-system mr-0">
+                <input type="radio" class="radio" name="color-mode" id="skin-system" />
                 <span class="mr-1"></span>
             </label>
+
+            <?php echo $this->events->do_action('do_skin_users');?>
         </div>
     </div>
 </div>

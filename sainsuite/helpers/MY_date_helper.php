@@ -70,8 +70,6 @@ if(!function_exists('my_date_now')){
 
 if(!function_exists('get_time_ago')){
     function get_time_ago($time_ago){      
-        $ci = get_instance();
-        
         $dt = new DateTime('now', new DateTimezone(get_time_zone()));
         $date_time = strtotime($dt->format('Y-m-d H:i:s')); 
 
@@ -86,9 +84,6 @@ if(!function_exists('get_time_ago')){
         $months     = round($time_elapsed / 2600640 );
         $years      = round($time_elapsed / 31207680 );
         // Seconds
-
-        //return $seconds;
-
         if($seconds <= 60){
             return "just now";
         }
@@ -141,16 +136,13 @@ if(!function_exists('get_time_ago')){
                 return "$years years ago";
             }
         }
-
-
-        
     }
 }
 
 if(!function_exists('get_time_zone')){
     function get_time_zone(){        
-        $Options = options(APPNAME);
-        return @$Options[ 'site_timezone' ];
+        global $Options;
+        return ($timezone = riake('site_timezone', options(APPNAME))) ? $timezone : $Options['site_timezone'];
     }
 }
 

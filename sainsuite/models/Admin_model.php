@@ -38,10 +38,10 @@ class Admin_Model extends CI_Model
         $this->enqueue->css('plugins.bundle');
         $this->enqueue->css('style.bundle');
         $this->enqueue->css('datatables.bundle');
-        $this->enqueue->css('skin/all');
+        $this->enqueue->css('skin.bundle');
         $this->enqueue->load_css( 'dashboard_header' );
 
-        $this->load->backend_view('settings.js.php');
+        $this->load->admin_view('settings.js.php');
         $this->enqueue->js_namespace( 'dashboard_header' );
         $this->enqueue->js('plugins.bundle');
         $this->enqueue->js('scripts.bundle');
@@ -57,12 +57,12 @@ class Admin_Model extends CI_Model
     public function _dashboard_footer()
     {
         $this->enqueue->js_namespace( 'dashboard_footer' );
-        $this->enqueue->js('angular.min', 'https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/');
-		$this->enqueue->js('underscore-min', 'https://cdn.jsdelivr.net/npm/underscore@1.11.0/');
-		$this->enqueue->js('heartcode-canvasloader-min', 'https://cdn.jsdelivr.net/canvasloader-ui/0.9/');
+        $this->enqueue->js('angular.min');
+		$this->enqueue->js('underscore-min');
+		$this->enqueue->js('canvasloader-min');
         $this->enqueue->js('datatables.bundle');
         $this->enqueue->load_js( 'dashboard_footer' );
-        $this->load->backend_view('scripts.js.php');
+        $this->load->admin_view('scripts.js.php');
     }
 
     /**
@@ -76,8 +76,8 @@ class Admin_Model extends CI_Model
     {
         global $User_Options;
         // skin is defined by default
-        $class = ($db_skin = riake('theme-skin', $User_Options)) ? ((in_array($db_skin, ['skin-light', 'skin-dark'])) ? $db_skin : $class) : $class;
-        return $class;
+        $skin = ($db_skin = riake('theme-skin', $User_Options)) ? $db_skin : $class;
+        return $skin;
     }
 
     /**
