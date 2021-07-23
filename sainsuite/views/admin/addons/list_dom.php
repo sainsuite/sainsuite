@@ -35,7 +35,7 @@ if ($addons) :
                 $last_version = riake('migration_' . $addon_namespace, $Options);
                 $color = ($_group[ 'application' ][ 'package' ] == 'addkit') ? 'bg-light-primary' : 'bg-secondary';
                 ?>
-                <div class="col-6 col-lg-2 col-xxl-2">
+                <div class="col-6 col-lg-3 col-xxl-2">
                     <div class="card card-custom gutter-b card-stretch border border-1 mb-4" data-card="true" data-card-tooltips="false">     
                         <div class="card-header min-h-20px d-flex align-items-center justify-content-between px-2 py-2">
                             <div class="text-dark m-0 text-hover-primary ml-2">

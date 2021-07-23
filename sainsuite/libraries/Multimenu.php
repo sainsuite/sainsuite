@@ -469,7 +469,7 @@ class Multimenu {
 						$item_anchor = $this->parent_anchor;
 		        	}
 
-					$href  = '#';				
+					$href  = $item[$this->menu_key];				
 		        }
 		        else 
 		        {
