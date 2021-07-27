@@ -1,4 +1,6 @@
 <?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
 /**
  * CodeIgniter Markdown.
  *
@@ -14,15 +16,13 @@
  * @copyright   Markdown Copyright (c) 2004-2006 John Gruber
  *              (https://daringfireball.net/projects/markdown/)
  * @license     MIT License (http://opensource.org/licenses/MIT)
- * @author      Jon LaBelle
+ * @author      Jon LaBelle edited by Buddy Winangun
  *
  * @link        https://github.com/jonlabelle/ci-markdown
  *
  * @version     1.5.0
  * @version     PHP Markdown Lib 1.9.0
  */
-defined('BASEPATH') || exit('No direct script access allowed');
-
 class Markdown
 {
     /**

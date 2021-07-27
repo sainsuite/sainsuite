@@ -6,8 +6,8 @@
  * Engine Management System
  *
  * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */
@@ -54,9 +54,12 @@ $user_profile[] = array(
     'heading'=> __('Personal Information'),
     'description' => 'Update your personal informaiton',
     'body' => array(
-        'items' => $this->events->apply_filters_ref_array('fill_ref_user_profile', array( 
-            ['user'=> User::get(), 'page'=> 'profile']
-        ))
+        'items' => $this->events->apply_filters_ref_array('fill_ref_user_profile', array( [
+            'user'=> User::get(),
+            'groups'=> null,
+            'user_group'=> null,
+            'page'=> 'profile'
+        ] ))
     )
 );
 $this->polatan->add_item(array(

@@ -7,6 +7,7 @@
         "version": "3.17.4",
         "author": "saintekno",
         "description": "This Addon will delete all the data.",
+        "require": "3.19.*",
         "main": "main.php",
         "includes": "events",
         "language": "language",

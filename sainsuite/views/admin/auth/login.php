@@ -1,5 +1,18 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
+/**
+ * SainSuite
+ *
+ * Engine Management System
+ *
+ * @package     SainSuite
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
+ * @link        https://github.com/saintekno/sainsuite
+ * @filesource
+ */
+
 $App_Options = options(APPNAME);
 ?>
     
@@ -18,7 +31,7 @@ $App_Options = options(APPNAME);
     </div>
     <!--begin::Title-->
 
-    <form class="form" id="sit_login_singin_form" method="post" autocomplete="off">
+    <form class="form" id="ss_login_singin_form" method="post" autocomplete="off">
         <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 
         <!--begin::Form group-->
@@ -71,7 +84,7 @@ $App_Options = options(APPNAME);
         <!--begin::Action-->
         <div class="pb-lg-0 pb-5">
             <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 btn-block">
-                <span class="position-relative" id="sit_login_singin_form_submit_button"><?php _e('Sign In' ) ?></span>
+                <span class="position-relative" id="ss_login_singin_form_submit_button"><?php _e('Sign In' ) ?></span>
             </button>
             <?php $this->events->do_action( 'do_oauth_button'); ?>
         </div>

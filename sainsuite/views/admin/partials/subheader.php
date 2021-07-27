@@ -1,5 +1,5 @@
 <!--begin::Subheader-->
-<div class="subheader subheader-transparent d-none" id="sit_subheader">
+<div class="subheader subheader-transparent d-none" id="ss_subheader">
     <div class="container">
         <div class="subheader-wrap border-bottom py-2 my-2 d-flex flex-column flex-sm-row justify-content-between flex-wrap flex-sm-nowrap">  
             <!--begin::Info-->

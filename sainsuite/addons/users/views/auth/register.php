@@ -1,5 +1,5 @@
 <div class="login-form">   
-    <form method="post" autocomplete="off" id="sit_signup_form" class="form required-form">
+    <form method="post" autocomplete="off" id="ss_signup_form" class="form required-form">
         <!--begin::Title-->
         <div class="pb-5">
             <h3 class="font-weight-bolder font-size-h2 font-size-h1-lg"><?php echo __('Sign Up');?></h3>
@@ -84,7 +84,7 @@
         <!--begin::Form group-->
         <div class="pb-lg-0 pb-5">
             <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 btn-block">
-                <span class="position-relative" id="sit_singup_form_submit"><?php _e('Sign Up' ) ?></span>
+                <span class="position-relative" id="ss_singup_form_submit"><?php _e('Sign Up' ) ?></span>
             </button>
         </div>
         <!--end::Form group-->

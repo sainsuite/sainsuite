@@ -1,5 +1,5 @@
 <!--begin::Header Mobile-->
-<div id="sit_header_mobile" class="header-mobile header-mobile-fixed ">
+<div id="ss_header_mobile" class="header-mobile header-mobile-fixed ">
 
 	<!--begin::Logo-->
 	<a href="<?php echo site_url('admin'); ?>" class="header-logo d-flex">
@@ -24,8 +24,8 @@
 		</div>
 		<!--end::User-->
 
-		<button class="btn btn-icon btn-clean ml-2" id="sit_aside_mobile_toggle">
-			<i class="icon-lg sit sit-bold-more-ver"></i>
+		<button class="btn btn-icon btn-clean ml-2" id="ss_aside_mobile_toggle">
+			<i class="icon-lg ss ss-bold-more-ver"></i>
 		</button>
 	</div>
 

@@ -6,7 +6,7 @@
         <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
             <div class="wizard-wrapper">
                 <div class="wizard-icon">
-                    <i class="wizard-check sit sit-check"></i>
+                    <i class="wizard-check ss ss-check"></i>
                     <span class="wizard-number">1</span>
                 </div>
                 <div class="wizard-label">
@@ -20,7 +20,7 @@
         <div class="wizard-step" data-wizard-type="step">
             <div class="wizard-wrapper">
                 <div class="wizard-icon">
-                    <i class="wizard-check sit sit-check"></i>
+                    <i class="wizard-check ss ss-check"></i>
                     <span class="wizard-number">2</span>
                 </div>
                 <div class="wizard-label">
@@ -34,7 +34,7 @@
         <div class="wizard-step" data-wizard-type="step">
             <div class="wizard-wrapper">
                 <div class="wizard-icon">
-                    <i class="wizard-check sit sit-check"></i>
+                    <i class="wizard-check ss ss-check"></i>
                     <span class="wizard-number">3</span>
                 </div>
                 <div class="wizard-label">

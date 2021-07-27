@@ -1,16 +1,18 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
 /**
  * SainSuite
  *
  * Engine Management System
  *
  * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
+ * 
+ * Save and enqueue notifications within a big array 
+ * which can be outputed using "parse_notice" method.
  */
 class Notice
 {

@@ -1,5 +1,18 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * SainSuite
+ *
+ * Engine Management System
+ *
+ * @package     SainSuite
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
+ * @link        https://github.com/saintekno/sainsuite
+ * @filesource
+ */
+    
 global $Options;
 $App_Options = options(APPNAME);
 ?>
@@ -24,7 +37,7 @@ $App_Options = options(APPNAME);
     <!--begin::Main-->
     <div class="d-flex flex-column flex-root">
         <!--begin::Login-->
-        <div class="login login-3 wizard d-flex flex-column flex-lg-row flex-column-fluid" id="sit_login">
+        <div class="login login-3 wizard d-flex flex-column flex-lg-row flex-column-fluid" id="ss_login">
             <!--begin::Aside-->
             <div class="login-aside d-flex flex-row-auto p-10 p-lg-10">
                 <!--begin: Aside Container-->
@@ -58,7 +71,7 @@ $App_Options = options(APPNAME);
                 <div class="text-right d-flex justify-content-center">
                     <div class="top-signup text-right d-flex justify-content-end pt-5 pb-lg-0 pb-10">
                         <span class="font-weight-bold text-muted font-size-h4">Having issues?</span>
-                        <a href="javascript:;" class="font-weight-bolder text-primary font-size-h4 ml-2" id="sit_login_signup">Get Help</a>
+                        <a href="javascript:;" class="font-weight-bolder text-primary font-size-h4 ml-2" id="ss_login_signup">Get Help</a>
                     </div>
                 </div>
                 <!--end::Top-->

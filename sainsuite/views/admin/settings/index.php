@@ -7,8 +7,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * Engine Management System
  *
  * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */

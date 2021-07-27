@@ -9,6 +9,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  * This class is heavily based on the WordPress plugin API and most (if not all) of the code comes from there.
  * 
+ * @version 0.1.3
+ * @copyright 2012 - 2014
+ * @author Ohad Raz (email: admin@bainternet.info) edited by Buddy Winangun
+ * @link http://en.bainternet.info
+ * 
  * @license GNU General Public LIcense v3.0 - license.txt
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

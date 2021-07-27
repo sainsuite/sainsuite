@@ -6,8 +6,8 @@
  * Engine Management System
  *
  * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */
@@ -17,7 +17,7 @@ $this->events->add_filter( 'fill_toolbar_nav', function( $final ) {
     $final[] = array(
         'id' => 1,
         'name'   => __('Add A user'),
-        'icon'    => 'sit sit-plus',
+        'icon'    => 'ss ss-plus',
         'attr_anchor'  => 'class="btn btn-primary btn-sm font-weight-bolder ml-2"',
         'slug'    => site_url([ 'admin', 'users', 'add' ]),
         'permission' => 'create.users'
@@ -35,13 +35,13 @@ $this->events->add_filter('fill_toolbar_filter', function ($filter) { // disabli
     <div class="row">
         <div class="col-12 col-sm-auto mb-1 mb-sm-0">
             <select class="form-control form-control-sm"
-                id="sit_datatable_search_group">
+                id="ss_datatable_search_group">
                 '.$option.'
             </select>
         </div>
         <div class="col-12 col-sm-auto mb-1 mb-sm-0">
             <select class="form-control form-control-sm"
-                id="sit_datatable_search_status">
+                id="ss_datatable_search_status">
                 <option value="">All</option>
                 <option value="0">Active</option>
                 <option value="1">Unactive</option>

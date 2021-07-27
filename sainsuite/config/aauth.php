@@ -1,5 +1,30 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
+/**
+ * SainSuite
+ *
+ * Engine Management System
+ * 
+ * Aauth is a User Authorization Library for CodeIgniter 2.x, which aims to make
+ * easy some essential jobs such as login, permissions and access operations.
+ * Despite ease of use, it has also very advanced features like private messages,
+ * groupping, access management, public access etc..
+ *
+ * @author		Emre Akay <emreakayfb@hotmail.com>
+ * @contributor Jacob Tomlinson
+ * @contributor Tim Swagger (Renowne, LLC) <tim@renowne.com>
+ * @contributor Raphael Jackstadt <info@rejack.de>
+ * @edited by Buddy Winangun
+ *
+ * @copyright 2014-2018 Emre Akay
+ * @version 2.5.15
+ * @license MIT License
+ *
+ * The latest version of Aauth can be obtained from:
+ * https://github.com/emreakay/CodeIgniter-Aauth
+ *
+ */
 
 /*
 | -------------------------------------------------------------------

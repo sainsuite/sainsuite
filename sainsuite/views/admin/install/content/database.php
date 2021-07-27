@@ -1,5 +1,5 @@
 <!--begin::Form-->
-<form method="post" action="<?php echo site_url(array( 'install', 'database' ));?>" class="form" autocomplete="off" id="sit_install_db_form" >
+<form method="post" action="<?php echo site_url(array( 'install', 'database' ));?>" class="form" autocomplete="off" id="ss_install_db_form" >
 	<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 
 	<!--begin::Row-->

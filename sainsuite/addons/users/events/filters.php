@@ -7,8 +7,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * Engine Management System
  *
  * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */
@@ -64,7 +64,7 @@ class Users_Filters extends MY_Addon
             ]
         );
         
-        if ($config['page'] != 'profile' && isset($config['groups'])) :
+        if (isset($config['page']) && $config['page'] != 'profile' && isset($config['groups'])) :
             $groups_array = array();
             foreach ( force_array($config['groups']) as $group) {
                 $groups_array[ $group->id ] = $group->definition != null ? $group->definition : $group->name;
@@ -99,7 +99,9 @@ class Users_Filters extends MY_Addon
             array_merge(
                 $filed,
                 ['user'=> $config['user']],
-                ['page'=> $config['page']]
+                ['page'=> $config['page']],
+                ['groups'=> $config['groups']],
+                ['user_group'=> $config['user_group']]
             )
         ));
 

@@ -1,5 +1,5 @@
 <!--begin::Aside-->
-<div class="aside d-flex" id="sit_aside">
+<div class="aside d-flex" id="ss_aside">
 	<!--begin::Primary-->
 	<div class="aside-primary d-flex flex-column align-items-center flex-row-auto">
 		<!--begin::Brand-->
@@ -27,7 +27,7 @@
 
 				<!--begin::Item-->
 				<li class="nav-item mb-2" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="Application">
-					<a href="app" class="nav-link btn btn-icon btn-clean btn-lg d-none mt-4" data-toggle="tab" data-target="#sit_aside_tab_1" role="tab">
+					<a href="app" class="nav-link btn btn-icon btn-clean btn-lg d-none mt-4" data-toggle="tab" data-target="#ss_aside_tab_1" role="tab">
 						<i class="icon-lg flaticon-squares-4"></i>
 					</a>
 				</li>
@@ -71,7 +71,7 @@
 					<img alt="Logo" src="<?php echo $this->events->apply_filters( 'fill_apps_logo', ''); ?>" class="max-h-40px" />
 				</a>
 				<!--end::Logo-->
-				<div class="d-flex d-sm-none" id="sit_aside_close_btn">
+				<div class="d-flex d-sm-none" id="ss_aside_close_btn">
 					<i class="la la-arrow-left icon-2x text-dark"></i>
 				</div>
 			</div>
@@ -83,9 +83,9 @@
 		<div class="aside-workspace scroll scroll-push">
 			<!--begin::Tab Content-->
 			<div class="tab-content">
-				<div class="tab-pane px-3 fade show active" id="sit_aside_tab_1">
+				<div class="tab-pane px-3 fade show active" id="ss_aside_tab_1">
 					<!--begin::Aside Menu-->
-					<div id="sit_aside_menu" class="aside-menu" data-menu-vertical="1" data-menu-scroll="1">
+					<div id="ss_aside_menu" class="aside-menu" data-menu-vertical="1" data-menu-scroll="1">
 						<!--begin::Menu Nav-->
 						<?php echo $this->menus_model->menu_nav(); ?>
 						<!--end::Menu Nav-->

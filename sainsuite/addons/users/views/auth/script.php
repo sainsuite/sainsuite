@@ -2,12 +2,16 @@
     "use strict";
 
 // Class Definition
-var SITRegister = function() {
+var SSRegister = function() {
 	var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
 
+	toastr.options = {
+		"positionClass": "toast-bottom-right"
+	};
+
     var _handleSignUpForm = function(e) {
-        var form = SITUtil.getById('sit_signup_form');
-		var formSubmitButton = SITUtil.getById('sit_singup_form_submit');
+        var form = SSUtil.getById('ss_signup_form');
+		var formSubmitButton = SSUtil.getById('ss_singup_form_submit');
 		
 		if (!form) {
 			return;
@@ -85,14 +89,14 @@ var SITRegister = function() {
 				}).then(function (result) {
 					if (result.value) {
 						// Show loading state on button
-						SITUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+						SSUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
 						// Simulate Ajax request
 						setTimeout(function() {
-							SITUtil.btnRelease(formSubmitButton);
+							SSUtil.btnRelease(formSubmitButton);
 							form.submit(); // Submit form
 						}, 1000);
 					} else if (result.dismiss === 'cancel') {
-						SITUtil.scrollTop();
+						SSUtil.scrollTop();
 					}
 				});
 		    });
@@ -102,13 +106,17 @@ var SITRegister = function() {
     return {
         init: function() {
 			_handleSignUpForm();
+
+			<?php if ( validation_errors() ) : ?>
+			toastr.error(<?php echo json_encode(validation_errors('<p class="mb-0">'));?>);
+			<?php endif; ?>
 			
 			<?php if ($this->notice->output_notice(true)):?>
 			toastr.error("<?php echo $this->notice->output_notice(true);?>");
 			<?php endif;?>
 
 			<?php if (notice_from_url() != ""):?>
-			toastr.success("<?php echo notice_from_url();?>");
+			toastr.info("<?php echo notice_from_url();?>");
 			<?php endif;?>
         }
     };
@@ -116,7 +124,7 @@ var SITRegister = function() {
 
 // Class Initialization
 jQuery(document).ready(function() {
-    SITRegister.init();
+    SSRegister.init();
 });
 
 </script>

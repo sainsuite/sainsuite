@@ -7,8 +7,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Engine Management System
  *
  * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */
@@ -38,7 +38,7 @@ $config[ 'supported_languages' ] = array(
 |--------------------------------------------------------------------------
 */
 $config[ 'app_name' ] = 'sainsuite';
-$config[ 'version' ] = '3.19.2';
+$config[ 'version' ] = '3.19.3';
 $config[ 'signature' ] = $config[ 'app_name' ] . ' v' . $config[ 'version' ];
 
 /*

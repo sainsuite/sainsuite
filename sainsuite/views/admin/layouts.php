@@ -1,5 +1,18 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * SainSuite
+ *
+ * Engine Management System
+ *
+ * @package     SainSuite
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
+ * @link        https://github.com/saintekno/sainsuite
+ * @filesource
+ */
+    
 global $User_Options;
 ?>
 <!doctype html>
@@ -15,7 +28,7 @@ global $User_Options;
 </HEAD>
 <!-- end::Head -->
 <!-- begin::Body -->
-<BODY id="sit_body" 
+<BODY id="ss_body" 
     class="header-mobile-fixed footer-fixed aside-enabled aside-fixed subheader-enabled subheader-transparent 
     <?php echo ($aside = riake('aside', $User_Options)) ? $aside : 'aside-minimize';?>
     <?php echo xss_clean($this->events->apply_filters('fill_skin_class', 'skin-system'));?>" 
@@ -31,12 +44,12 @@ global $User_Options;
             <?php include('partials/aside.php');?>
             <!--end::Aside-->
             <!--begin::Wrapper-->
-            <div class="d-flex flex-column flex-row-fluid min-vh-100 wrapper" id="sit_wrapper">
+            <div class="d-flex flex-column flex-row-fluid min-vh-100 wrapper" id="ss_wrapper">
                 <!--begin::Header-->
                 <?php include('partials/header.php'); ?>
                 <!--end::Header-->
                 <!--begin::Content-->
-                <div class="content d-flex flex-column flex-column-fluid" id="sit_content">
+                <div class="content d-flex flex-column flex-column-fluid" id="ss_content">
                     <!--begin::Subheader-->
                     <?php include('partials/subheader.php'); ?>
                     <!--end::Subheader-->

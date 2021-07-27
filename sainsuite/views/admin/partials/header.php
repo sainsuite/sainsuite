@@ -1,5 +1,5 @@
 <!--begin::Header-->
-<div id="sit_header" class="header header-fixed d-none transition">
+<div id="ss_header" class="header header-fixed d-none transition">
     <div class="container-fluid flex-wrap flex-sm-nowrap">
         <?php echo $this->menus_model->header_nav(); ?>
 

@@ -56,7 +56,7 @@
             </span>Previous</button>
         </div>
         <div>
-            <button class="btn btn-primary font-weight-bolder font-size-h6 pl-5 pr-8 py-4 my-3" data-wizard-type="action-submit" type="submit" id="sit_install_submit_button">Submit
+            <button class="btn btn-primary font-weight-bolder font-size-h6 pl-5 pr-8 py-4 my-3" data-wizard-type="action-submit" type="submit" id="ss_install_submit_button">Submit
             <span class="svg-icon svg-icon-md ml-2">
                 <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Right-2.svg-->
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

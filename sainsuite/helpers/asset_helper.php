@@ -2,26 +2,18 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
+ * SainSuite
+ *
+ * Engine Management System
+ * 
  * Sekati CodeIgniter Asset Helper
  *
  * @package		Sekati
- * @author		Jason M Horwitz
+ * @author		Jason M Horwitz edited by Buddy Winangun
  * @copyright	Copyright (c) 2013, Sekati LLC.
  * @license		http://www.opensource.org/licenses/mit-license.php
  * @link		http://sekati.com
  * @version		v1.2.7
- * @filesource
- */
-
-/**
- * SainSuite
- *
- * Engine Management System
- *
- * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
- * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */
 

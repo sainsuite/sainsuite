@@ -7,15 +7,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Engine Management System
  *
  * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */
     
 ?>
 
-<div class="d-flex flex-column-fluid" id="sit_data">
+<div class="d-flex flex-column-fluid" id="ss_data">
     <div class="container">
         
         <div class="<?php echo $this->events->apply_filters('fill_mobile_toggle_row', 'row');?>">

@@ -7,8 +7,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Engine Management System
  *
  * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */
@@ -67,7 +67,7 @@ if (!function_exists('notice_error')) {
             <div class="alert-text">'.$text.'</div>
             <div class="alert-close">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true"><i class="sit sit-close"></i></span>
+                    <span aria-hidden="true"><i class="ss ss-close"></i></span>
                 </button>
             </div>
         </div>';
@@ -89,7 +89,7 @@ if (!function_exists('notice_success')) {
             <div class="alert-text">'.$text.'</div>
             <div class="alert-close">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true"><i class="sit sit-close"></i></span>
+                    <span aria-hidden="true"><i class="ss ss-close"></i></span>
                 </button>
             </div>
         </div>';
@@ -111,7 +111,7 @@ if (!function_exists('notice_warning')) {
             <div class="alert-text">'.$text.'</div>
             <div class="alert-close">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true"><i class="sit sit-close"></i></span>
+                    <span aria-hidden="true"><i class="ss ss-close"></i></span>
                 </button>
             </div>
         </div>';
@@ -133,7 +133,7 @@ if (!function_exists('notice_info')) {
             <div class="alert-text">'.$text.'</div>
             <div class="alert-close">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true"><i class="sit sit-close"></i></span>
+                    <span aria-hidden="true"><i class="ss ss-close"></i></span>
                 </button>
             </div>
         </div>';
@@ -153,12 +153,12 @@ function pagination_config($base_url,$total_rows,$per_page){
     $config['per_page']         = $per_page;
     $config['full_tag_open']    = '<div class="d-flex flex-wrap py-2 mr-3">';
     $config['full_tag_close']   = '</div>';
-    $config['first_link']       = '<i class="sit sit-bold-double-arrow-back icon-xs"></i>';
-    $config['prev_link']        = '<i class="sit sit-bold-arrow-back icon-xs"></i>';
+    $config['first_link']       = '<i class="ss ss-bold-double-arrow-back icon-xs"></i>';
+    $config['prev_link']        = '<i class="ss ss-bold-arrow-back icon-xs"></i>';
     $config['cur_tag_open']     = '<a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1 active">';
     $config['cur_tag_close']    = '</a>';
-    $config['next_link']        = '<i class="sit sit-bold-arrow-next icon-xs"></i>';
-    $config['last_link']        = '<i class="sit sit-bold-double-arrow-next icon-xs"></i>';
+    $config['next_link']        = '<i class="ss ss-bold-arrow-next icon-xs"></i>';
+    $config['last_link']        = '<i class="ss ss-bold-double-arrow-next icon-xs"></i>';
     $config['attributes']       = array('class' => 'btn btn-icon btn-sm btn-light-primary mr-2 my-1');
     return $config;
 }

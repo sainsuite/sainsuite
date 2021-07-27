@@ -1,28 +1,14 @@
 <script>
 "use strict";
 
-var SITSains = function() {
+var SSuite = function() {
 	// Elements
 	var avatar;
 	var offcanvas;
     var sidePanel;
 
     toastr.options = {
-        "closeButton": false,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": false,
-        "positionClass": "toast-bottom-right",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
+        "positionClass": "toast-bottom-right"
     };
     
     var $body = $('body'),
@@ -32,7 +18,7 @@ var SITSains = function() {
 	// Private functions
 	var _initAside = function () {
 		// Mobile offcanvas for mobile mode
-		offcanvas = new SITOffcanvas('aside_panel', {
+		offcanvas = new SSOffcanvas('aside_panel', {
             overlay: true,
             baseClass: 'offcanvas-mobile',
 			closeBy: 'aside_close',
@@ -40,36 +26,36 @@ var SITSains = function() {
         });
 	}
 	var _initPanel = function () {
-        var _element = SITUtil.getById('action_panel');
-        var header = SITUtil.find(_element, '.offcanvas-header');
-        var content = SITUtil.find(_element, '.offcanvas-content');
+        var _element = SSUtil.getById('action_panel');
+        var header = SSUtil.find(_element, '.offcanvas-header');
+        var content = SSUtil.find(_element, '.offcanvas-content');
 
-		sidePanel = new SITOffcanvas(_element, {
+		sidePanel = new SSOffcanvas(_element, {
             overlay: true,
             baseClass: 'offcanvas',
             placement: 'right'
         });
 
-        SITUtil.scrollInit(content, {
+        SSUtil.scrollInit(content, {
             disableForMobile: true,
             resetHeightOnDestroy: true,
             handleWindowResize: true,
             height: function() {
-                var height = parseInt(SITUtil.getViewPort().height);
+                var height = parseInt(SSUtil.getViewPort().height);
 
                 if (header) {
-                    height = height - parseInt(SITUtil.actualHeight(header));
-                    height = height - parseInt(SITUtil.css(header, 'marginTop'));
-                    height = height - parseInt(SITUtil.css(header, 'marginBottom'));
+                    height = height - parseInt(SSUtil.actualHeight(header));
+                    height = height - parseInt(SSUtil.css(header, 'marginTop'));
+                    height = height - parseInt(SSUtil.css(header, 'marginBottom'));
                 }
 
                 if (content) {
-                    height = height - parseInt(SITUtil.css(content, 'marginTop'));
-                    height = height - parseInt(SITUtil.css(content, 'marginBottom'));
+                    height = height - parseInt(SSUtil.css(content, 'marginTop'));
+                    height = height - parseInt(SSUtil.css(content, 'marginBottom'));
                 }
 
-                height = height - parseInt(SITUtil.css(_element, 'paddingTop'));
-                height = height - parseInt(SITUtil.css(_element, 'paddingBottom'));
+                height = height - parseInt(SSUtil.css(_element, 'paddingTop'));
+                height = height - parseInt(SSUtil.css(_element, 'paddingBottom'));
 
                 height = height - 2;
 
@@ -177,31 +163,31 @@ var SITSains = function() {
 
     var cekClass = function() {
         // cek nav header bottom
-        if ($("#sit_header div > div").length) {
-            $('#sit_body').addClass('header-fixed');
-            $('#sit_header').removeClass('d-none');
+        if ($("#ss_header div > div").length) {
+            $('#ss_body').addClass('header-fixed');
+            $('#ss_header').removeClass('d-none');
         }
         if ($(".navheader-nav").length) {
             $('.quick-search-form').addClass('pl-5 border-left');
         }
 
         // cek nav aside 
-        if ($("#sit_aside_tab_1 .menu-item").length) {
-            $('#sit_aside .aside-primary a[data-toggle="tab"]').removeClass('d-none');
+        if ($("#ss_aside_tab_1 .menu-item").length) {
+            $('#ss_aside .aside-primary a[data-toggle="tab"]').removeClass('d-none');
             $('#aside_toggle').removeClass('d-none');
         }
 
         // cek condition table
-        if ($("#sit_datatable").length && $("#aside_panel").length == 0) {
-            $('#sit_header > div').addClass('container-fluid').removeClass('container');
-            $('#sit_subheader > div').addClass('container-fluid').removeClass('container');
-            $('#sit_data > div').addClass('container-fluid').removeClass('container');
-            $('#sit_footer > div').addClass('container-fluid').removeClass('container');
+        if ($("#ss_datatable").length && $("#aside_panel").length == 0) {
+            $('#ss_header > div').addClass('container-fluid').removeClass('container');
+            $('#ss_subheader > div').addClass('container-fluid').removeClass('container');
+            $('#ss_data > div').addClass('container-fluid').removeClass('container');
+            $('#ss_footer > div').addClass('container-fluid').removeClass('container');
         }
 
         // cek condition home
-        if ($("#sit_home").length == 0) {
-            $('#sit_subheader').removeClass('d-none');
+        if ($("#ss_home").length == 0) {
+            $('#ss_subheader').removeClass('d-none');
         }
     }
     
@@ -220,8 +206,8 @@ var SITSains = function() {
     }
 
     var menuAsidePrimary = function(){
-        var asidePrimary = '#sit_aside .aside-primary a';
-        var sit_aside_toggle = '#aside_toggle';
+        var asidePrimary = '#ss_aside .aside-primary a';
+        var ss_aside_toggle = '#aside_toggle';
 
         $(asidePrimary).on('click', function(e) {
             var linkId = $(this).attr('href');
@@ -257,9 +243,9 @@ var SITSains = function() {
             }
         });
 
-        $(sit_aside_toggle).on('click', function(e) {
+        $(ss_aside_toggle).on('click', function(e) {
             localStorage.setItem("menuAsidePrimary", 'app');
-            $('#sit_aside .aside-primary a[href="app"]').addClass('active');
+            $('#ss_aside .aside-primary a[href="app"]').addClass('active');
             aside_minimize();
         });
 
@@ -275,7 +261,7 @@ var SITSains = function() {
     }
     
     var menuAsideSecondary = function(){
-        var asideSecondary = '#sit_aside_menu .menu-nav li a';
+        var asideSecondary = '#ss_aside_menu .menu-nav li a';
         var _link = '.menu-link',
             _currentURL = window.location.href,
             fileName = _currentURL.substring(0, (_currentURL.indexOf("#") == -1) ? _currentURL.length : _currentURL.indexOf("#")), 
@@ -333,7 +319,7 @@ var SITSains = function() {
     };
     
     var menuMobilePrimary = function(){
-        var mobilePrimary = '#sit_header_mobile a',
+        var mobilePrimary = '#ss_header_mobile a',
             _currentURL = window.location.href;
 
         $(mobilePrimary).on('click', function(e) {
@@ -362,7 +348,7 @@ var SITSains = function() {
     }
 
     var menuHeaderPrimary = function() {
-        var headerPrimary = '#sit_header .navheader-nav a',
+        var headerPrimary = '#ss_header .navheader-nav a',
             _currentURL = window.location.href,
             fileName = _currentURL.substring(0, (_currentURL.indexOf("#") == -1) ? _currentURL.length : _currentURL.indexOf("#")), 
             fileName = fileName.substring(0, (fileName.indexOf("?") == -1) ? fileName.length : fileName.indexOf("?"));
@@ -469,8 +455,8 @@ var SITSains = function() {
         }).attr("readonly", "readonly").css({"cursor":"pointer", "background":"white"});
     }
     var setSelectpicker = function () {
-        if ($(".sit-selectpicker").length) {
-            $('.sit-selectpicker').selectpicker();
+        if ($(".ss-selectpicker").length) {
+            $('.ss-selectpicker').selectpicker();
         }
     }
     var setSelects = function () {
@@ -520,7 +506,7 @@ var SITSains = function() {
             <?php endif;?>
 
             <?php if ( validation_errors() ) : ?>
-            toastr.error("<?php echo validation_errors();?>");
+            toastr.error(<?php echo json_encode(validation_errors('<p class="mb-0">'));?>);
             <?php endif; ?>
 
             <?php if ($this->notice->output_notice(true)):?>
@@ -621,7 +607,7 @@ function deleteConfirmation(el) {
                     type: 'POST',
                     beforeSend: function() {
                         if ( $(el).closest('tr').length === 0 ) {
-                            SITApp.block($(el).closest('div.card'), {
+                            SSApp.block($(el).closest('div.card'), {
                                 overlayColor: '#000000',
                                 state: 'primary',
                                 message: 'Processing...'
@@ -636,7 +622,7 @@ function deleteConfirmation(el) {
                         } 
                         else {
                             $(el).closest('tr').fadeOut(1000,function(){
-                                $('#sit_datatable').SITDatatable('reload');
+                                $('#ss_datatable').SSDatatable('reload');
                             });
                         }
                     }
@@ -659,8 +645,8 @@ function deleteConfirmation(el) {
                         // Remove <tr>
                         $("input[type=checkbox]:checked").each(function(){
                             $(this).closest('tbody tr').fadeOut(1000,function(){
-                                $('#sit_datatable_group_action_form').collapse('hide');
-                                $('#sit_datatable').SITDatatable('reload');
+                                $('#ss_datatable_group_action_form').collapse('hide');
+                                $('#ss_datatable').SSDatatable('reload');
                             });
                         });
                     }
@@ -685,6 +671,6 @@ function printDiv(divName) {
 }
 
 jQuery(document).ready(function () {
-    SITSains.init();
+    SSuite.init();
 });
 </script>

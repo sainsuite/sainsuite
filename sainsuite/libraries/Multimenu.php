@@ -1,25 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 /**
  * Codeigniter Multilevel menu Class
  * Provide easy way to render multi level menu
  * 
  * @package			CodeIgniter
  * @category		Libraries
- * @author			Eding Muhamad Saprudin 
+ * @author			Eding Muhamad Saprudin edited by Buddy Winangun
  */
-/**
- * SainSuite
- *
- * Engine Management System
- *
- * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
- * @link        https://github.com/saintekno/sainsuite
- * @filesource
- */
+
 class Multimenu {
 
 	/**

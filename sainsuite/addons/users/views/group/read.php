@@ -6,8 +6,8 @@
  * Engine Management System
  *
  * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */
@@ -17,7 +17,7 @@ $this->events->add_filter( 'fill_toolbar_nav', function( $final ) {
     $final[] = array(
         'id' => 1,
         'name'   => __('Add A group'),
-        'icon'    => 'sit sit-plus',
+        'icon'    => 'ss ss-plus',
         'attr_anchor'  => 'class="btn btn-primary btn-sm font-weight-bolder ml-2"',
         'slug'    => site_url([ 'admin', 'group', 'add' ]),
         'permission' => 'create.group'

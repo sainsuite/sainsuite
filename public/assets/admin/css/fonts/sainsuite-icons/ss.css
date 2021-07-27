@@ -1,0 +1,102 @@
+/*
+  	Sainsuite Icons Font: Ss
+  	Creation date: 03/08/2020
+ */
+
+@font-face {
+  font-family: "Ss";
+  src: url("./Ss.eot");
+  src: url("./Ss.eot?#iefix") format("embedded-opentype"),
+       url("./Ss.woff") format("woff"),
+       url("./Ss.ttf") format("truetype"),
+       url("./Ss.svg#Ss") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ss {
+    font-size: 1rem;
+}
+
+.ss:before {
+    font-family: "Ss";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-decoration: inherit;
+    text-rendering: optimizeLegibility;
+    text-transform: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.ss-double-arrow-next:before { content: "\f100"; }
+.ss-double-arrow-back:before { content: "\f101"; }
+.ss-double-arrow-down:before { content: "\f102"; }
+.ss-double-arrow-up:before { content: "\f103"; }
+.ss-long-arrow-back:before { content: "\f104"; }
+.ss-arrow-next:before { content: "\f105"; }
+.ss-arrow-back:before { content: "\f106"; }
+.ss-long-arrow-next:before { content: "\f107"; }
+.ss-check:before { content: "\f108"; }
+.ss-arrow-down:before { content: "\f109"; }
+.ss-minus:before { content: "\f10a"; }
+.ss-long-arrow-down:before { content: "\f10b"; }
+.ss-long-arrow-up:before { content: "\f10c"; }
+.ss-plus:before { content: "\f10d"; }
+.ss-arrow-up:before { content: "\f10e"; }
+.ss-round:before { content: "\f10f"; }
+.ss-reload:before { content: "\f110"; }
+.ss-refresh:before { content: "\f111"; }
+.ss-solid-plus:before { content: "\f112"; }
+.ss-bold-close:before { content: "\f113"; }
+.ss-solid-minus:before { content: "\f114"; }
+.ss-hide:before { content: "\f115"; }
+.ss-code:before { content: "\f116"; }
+.ss-copy:before { content: "\f117"; }
+.ss-up-and-down:before { content: "\f118"; }
+.ss-left-and-right:before { content: "\f119"; }
+.ss-bold-triangle-bottom:before { content: "\f11a"; }
+.ss-bold-triangle-right:before { content: "\f11b"; }
+.ss-bold-triangle-top:before { content: "\f11c"; }
+.ss-bold-triangle-left:before { content: "\f11d"; }
+.ss-bold-double-arrow-up:before { content: "\f11e"; }
+.ss-bold-double-arrow-next:before { content: "\f11f"; }
+.ss-bold-double-arrow-back:before { content: "\f120"; }
+.ss-bold-double-arrow-down:before { content: "\f121"; }
+.ss-bold-arrow-down:before { content: "\f122"; }
+.ss-bold-arrow-next:before { content: "\f123"; }
+.ss-bold-arrow-back:before { content: "\f124"; }
+.ss-bold-arrow-up:before { content: "\f125"; }
+.ss-bold-check:before { content: "\f126"; }
+.ss-bold-wide-arrow-down:before { content: "\f127"; }
+.ss-bold-wide-arrow-up:before { content: "\f128"; }
+.ss-bold-wide-arrow-next:before { content: "\f129"; }
+.ss-bold-wide-arrow-back:before { content: "\f12a"; }
+.ss-bold-long-arrow-up:before { content: "\f12b"; }
+.ss-bold-long-arrow-down:before { content: "\f12c"; }
+.ss-bold-long-arrow-back:before { content: "\f12d"; }
+.ss-bold-long-arrow-next:before { content: "\f12e"; }
+.ss-bold-check-1:before { content: "\f12f"; }
+.ss-close:before { content: "\f130"; }
+.ss-more-ver:before { content: "\f131"; }
+.ss-bold-more-ver:before { content: "\f132"; }
+.ss-more-hor:before { content: "\f133"; }
+.ss-bold-more-hor:before { content: "\f134"; }
+.ss-bold-menu:before { content: "\f135"; }
+.ss-drag:before { content: "\f136"; }
+.ss-bold-sort:before { content: "\f137"; }
+.ss-eye:before { content: "\f138"; }
+.ss-outline-info:before { content: "\f139"; }
+.ss-menu:before { content: "\f13a"; }
+.ss-menu-grid:before { content: "\f13b"; }
+.ss-wrench:before { content: "\f13c"; }
+.ss-gear:before { content: "\f13d"; }
+.ss-info:before { content: "\f13e"; }
+.ss-calendar-2:before { content: "\f13f"; }
+.ss-calendar:before { content: "\f140"; }
+.ss-calendar-today:before { content: "\f141"; }
+.ss-clock:before { content: "\f142"; }
+.ss-dots:before { content: "\f143"; }

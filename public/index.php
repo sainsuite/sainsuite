@@ -36,18 +36,6 @@
  * @filesource
  */
 
-/**
- * SainSuite
- *
- * Engine Management System
- *
- * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
- * @link        https://github.com/saintekno/sainsuite
- * @filesource
- */
-
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -321,14 +309,16 @@ switch (ENVIRONMENT)
 
 /*
  *----------------------
- * TIMEZONE
+ * minimum PHP requirements
  *----------------------
  *
- * If timezone has not been set, give it a default
+ * Check that the environment meets minimum PHP requirements.
  *
  */
-if(ini_get('date.timezone') == '' || ini_get('date.timezone') == 'Timezone' ) {
-	date_default_timezone_set('Asia/Jakarta');
+if( version_compare('7.3.0', PHP_VERSION) == 1 ) {
+	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+	echo 'Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.3.0"; you are currently using PHP '.PHP_VERSION;
+	exit(1); // EXIT_ERROR
 }
 
 /*

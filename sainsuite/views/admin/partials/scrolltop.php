@@ -1,6 +1,5 @@
-
 <!--begin::Scrolltop-->
-<div id="sit_scrolltop" class="scrolltop">
+<div id="ss_scrolltop" class="scrolltop">
 	<span class="svg-icon">
 
 		<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Up-2.svg-->

@@ -15,6 +15,11 @@
 
 !**/*/.htaccess
 
+**/addons/*
+!**/addons/reset/
+!**/addons/users/
+!**/addons/index.html
+
 **/third_party/*
 !**/third_party/index.html
 composer.lock

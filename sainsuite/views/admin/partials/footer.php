@@ -1,5 +1,5 @@
 <!--begin::Footer-->
-<div class="footer py-4 d-flex flex-lg-column" id="sit_footer">
+<div class="footer py-4 d-flex flex-lg-column" id="ss_footer">
 
 	<!--begin::Container-->
 	<div class="container d-flex flex-column flex-md-row align-items-center">

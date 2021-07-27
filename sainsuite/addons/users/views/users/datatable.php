@@ -2,7 +2,7 @@
 var DatatableScript = function() {   
     // Read
     var read = function() {
-        var datatable = $('#sit_datatable').SITDatatable({
+        var datatable = $('#ss_datatable').SSDatatable({
 			data: {
 				type: 'remote',
                 source: '<?php echo site_url(['api', 'users']);?>',
@@ -23,13 +23,13 @@ var DatatableScript = function() {
                     sortable: false,
                     width: 20,
                     textAlign: 'center',
-                    selector: {class: 'sit-checkbox--solid'},
+                    selector: {class: 'ss-checkbox--solid'},
                 }, {
                     field: 'username',
                     title: 'User',
 					overflow: 'visible',
                     template: function(row) {
-                        var stateNo = SITUtil.getRandomInt(0, 7);
+                        var stateNo = SSUtil.getRandomInt(0, 7);
                         var states = [
                             'success',
                             'primary',
@@ -122,11 +122,11 @@ var DatatableScript = function() {
             ],
         });
 
-        $('#sit_datatable_search_group').on('change', function() {
+        $('#ss_datatable_search_group').on('change', function() {
             datatable.search($(this).val().toLowerCase(), 'group');
         });
 
-        $('#sit_datatable_search_status').on('change', function() {
+        $('#ss_datatable_search_status').on('change', function() {
             datatable.search($(this).val().toLowerCase(), 'banned');
         });
     };

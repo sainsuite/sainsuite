@@ -7,8 +7,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Engine Management System
  *
  * @package     SainSuite
- * @copyright   Copyright (c) 2019-2020 Buddy Winangun, Eracik.
- * @copyright   Copyright (c) 2020-2021 SainTekno, SainSuite.
+ * @author	    Buddy Winangun
+ * @license	    MIT License. For full terms see the file LICENSE.
  * @link        https://github.com/saintekno/sainsuite
  * @filesource
  */
@@ -67,7 +67,7 @@ class Install extends MY_Controller
 
         if ($this->form_validation->run() == FALSE) {
             $success = FALSE;
-            $message = validation_errors('<div class="error">', '</div>');
+            $message = validation_errors();
         }
         else{
             $exec = $this->install_model->installation(
@@ -112,7 +112,7 @@ class Install extends MY_Controller
         
         if ($this->form_validation->run() == FALSE) {
             $success = FALSE;
-            $message = validation_errors('<div class="error">', '</div>');
+            $message = validation_errors();
         }
         else{
             $exec = $this->install_model->final_configuration();

@@ -2,6 +2,9 @@
     <?php
     $form = (count($_item) <= 3) ? force_array($_item) : array($_item);
     foreach ( $form as $col) : 
+        if ( is_object($col) ) {
+            continue;
+        }
         $col_type = @$col[ 'type' ];
         if( isset($col[ 'permission' ]) && ! User::is_allowed( $col[ 'permission' ] ) ) {
             continue;

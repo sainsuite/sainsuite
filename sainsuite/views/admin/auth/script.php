@@ -1,13 +1,13 @@
 <script>
-    "use strict";
+"use strict";
 
 // Class Definition
-var SITLogin = function() {
+var SSLogin = function() {
 	var _buttonSpinnerClasses = 'spinner spinner-right spinner-white pr-15';
 
 	var _handleFormSignin = function() {
-		var form = SITUtil.getById('sit_login_singin_form');
-		var formSubmitButton = SITUtil.getById('sit_login_singin_form_submit_button');
+		var form = SSUtil.getById('ss_login_singin_form');
+		var formSubmitButton = SSUtil.getById('ss_login_singin_form_submit_button');
 
 		if (!form) {
 			return;
@@ -38,19 +38,19 @@ var SITLogin = function() {
 		    )
 		    .on('core.form.valid', function() {
 				// Show loading state on button
-				SITUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+				SSUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
 
 				// Simulate Ajax request
 				setTimeout(function() {
-					SITUtil.btnRelease(formSubmitButton);
+					SSUtil.btnRelease(formSubmitButton);
 					form.submit(); // Submit form
 				}, 1000);
 		    });
     }
 
 	var _handleFormForgot = function() {
-		var form = SITUtil.getById('sit_login_forgot_form');
-		var formSubmitButton = SITUtil.getById('sit_login_forgot_form_submit_button');
+		var form = SSUtil.getById('ss_login_forgot_form');
+		var formSubmitButton = SSUtil.getById('ss_login_forgot_form_submit_button');
 
 		if (!form) {
 			return;
@@ -81,11 +81,11 @@ var SITLogin = function() {
 		    )
 		    .on('core.form.valid', function() {
 				// Show loading state on button
-				SITUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
+				SSUtil.btnWait(formSubmitButton, _buttonSpinnerClasses, "Please wait");
 
 				// Simulate Ajax request
 				setTimeout(function() {
-					SITUtil.btnRelease(formSubmitButton);
+					SSUtil.btnRelease(formSubmitButton);
 					form.submit(); // Submit form
 				}, 1000);
 		    });
@@ -102,7 +102,7 @@ var SITLogin = function() {
 
 // Class Initialization
 jQuery(document).ready(function() {
-    SITLogin.init();
+    SSLogin.init();
 });
 
 </script>
