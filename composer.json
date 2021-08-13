@@ -1,4 +1,13 @@
 {
+    "name": "saintekno/sainsuite",
+    "description": "SainSuite. Platform To Grow Your Business.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "buddywinangun",
+            "email": "buddywinangun@gmail.com"
+        }
+    ],
     "require": {
         "nesbot/carbon": "^2.39",
         "sepia/po-parser": "4.2.2",

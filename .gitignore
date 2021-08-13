@@ -16,7 +16,6 @@ logs/*
 !*/.htaccess
 
 vendor/*
-!vendor/index.html
 composer.lock
 
 # Upload
