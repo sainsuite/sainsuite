@@ -1,14 +1,10 @@
 {
-    "config": {
-        "process-timeout": 1800,
-        "vendor-dir": "sainsuite/third_party"
-    },
     "require": {
-        "pecee/simple-router": "4.2.0.6",
         "nesbot/carbon": "^2.39",
         "sepia/po-parser": "4.2.2",
         "google/apiclient": "^2.8",
         "phpmailer/phpmailer": "^6.2",
-        "chriskacerguis/codeigniter-restserver": "^3.1"
+        "chriskacerguis/codeigniter-restserver": "^3.1",
+        "pecee/simple-router": "4.3.7.2"
     }
 }

@@ -507,11 +507,10 @@ class MY_Addon extends CI_Model
 
             // read temp folder and download it
             get_instance()->zip->read_dir( $temp_folder . '/', false );
+            get_instance()->zip->download($addon[ 'application' ][ 'name' ] . '_' .  $addon[ 'application' ][ 'version' ] . '_(' . get('version') .')');
             
             // delete temp folder
-            Filer:: drop($temp_folder);
-
-            get_instance()->zip->download($addon[ 'application' ][ 'name' ] . '_' .  $addon[ 'application' ][ 'version' ] . '_(' . get('version') .')');
+            Filer::drop($temp_folder);
         }
     }
 

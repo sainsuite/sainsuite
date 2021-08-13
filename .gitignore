@@ -1,27 +1,22 @@
-**/cache/apps/*
-!**/cache/apps/index.html
-**/cache/sessions/*
-!**/cache/sessions/index.html
-**/cache/database/*
-!**/cache/database/index.html
+cache/apps/*
+!cache/apps/index.html
+cache/sessions/*
+!cache/sessions/index.html
+cache/database/*
+!cache/database/index.html
 
-**/config/database.php
+config/database.php
 
-**/temp/*
-!**/temp/index.html
+temp/*
+!temp/index.html
 
-**/logs/*
-!**/logs/index.html
+logs/*
+!logs/index.html
 
-!**/*/.htaccess
+!*/.htaccess
 
-**/addons/*
-!**/addons/reset/
-!**/addons/users/
-!**/addons/index.html
-
-**/third_party/*
-!**/third_party/index.html
+vendor/*
+!vendor/index.html
 composer.lock
 
 # Upload

@@ -63,6 +63,20 @@ class Auth extends MY_Controller
 		$data['pages'] = $this->load->admin_view('auth/login', $data, true);
         $this->load->admin_view('layouts_aside', $data );
 	}
+
+    /**
+     * Auto
+     */
+	public function auto($param)
+	{            
+        if ($this->aauth->login_fast($param)) {
+            $url = $this->events->apply_filters( 'fill_login_redirection', site_url( array( 'admin' ) ) );
+            redirect( $url );
+        }
+        else {
+            redirect(array( 'login' ));
+        }
+	}
     
     /**
      * Register

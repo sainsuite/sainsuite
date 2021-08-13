@@ -116,7 +116,7 @@ class User_model extends CI_Model
      * @param
     **/
 
-    public function edit($mode = 'edit', $user_id, $email = null, $group_id = null, $user_status = '0')
+    public function edit($mode = 'edit', $user_id = '', $email = null, $group_id = null, $user_status = '0')
     {
         $return = 'updated';
 

@@ -314,7 +314,7 @@ class Aauth {
 
 				$this->CI->session->set_userdata($data);
 
-				$this->CI->events->do_action('do_login_users', $row);
+				$this->CI->events->do_action('do_login_users');
 
 				if ($remember){
 					$this->CI->load->helper('string');
@@ -472,6 +472,8 @@ class Aauth {
 	 */
 	public function login_fast($user_id){
 
+		$user_id = $this->get_user_id($user_id);
+		
 		$query = $this->aauth_db->where('id', $user_id);
 		$query = $this->aauth_db->where('banned', 0);
 		$query = $this->aauth_db->get($this->config_vars['users']);
@@ -733,7 +735,7 @@ class Aauth {
 	 * @param string $username User's username
 	 * @return int|bool False if create fails or returns user id if successful
 	 */
-	public function create_user($email, $pass, $username = false, $group_par) {
+	public function create_user($email, $pass, $username = false, $group_par = '') {
 
 		$this->config_vars = get_instance()->events->apply_filters('fill_config_aauth', $this->config_vars);
 		
@@ -1979,7 +1981,7 @@ class Aauth {
 
 		if($this->is_member($this->config_vars['master_group'], $user_id))
 		{
-			return $this->CI->events->apply_filters('fill_control_permission', $perm_par);
+			return $this->CI->events->apply_filters('fill_control_permission', ($perm_par) ? $perm_par : true);
 			// return true;
 		}
 
@@ -2815,7 +2817,7 @@ class Aauth {
 		return $content;
 	}
 
-	public function update_user_totp_secret($user_id = false, $secret) {
+	public function update_user_totp_secret($user_id = false, $secret = '') {
 
 		if ($user_id == false)
 			$user_id = $this->CI->session->userdata('id');

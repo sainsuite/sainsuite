@@ -38,6 +38,12 @@
                         rows="3"
                         placeholder="<?php echo riake('placeholder', $col);?>" 
                         name="<?php echo riake('name', $col);?>"><?php echo strip_tags( xss_clean( riake('value', $col) ) );?></textarea>
+                
+                <?php elseif ( $col_type == 'file-input') : ?>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="<?php echo riake('name', $col);?>" id="<?php echo riake('id', $col);?>">
+                        <label class="custom-file-label" for="<?php echo riake('id', $col);?>"><?= __('Choose File'); ?></label>
+                    </div>
 
                 <?php else : ?>
                     <?php if (riake('append', $col)) :?>

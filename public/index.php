@@ -116,7 +116,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$application_folder = $folder_path.DIRECTORY_SEPARATOR.'sainsuite';
+	$application_folder = $folder_path.DIRECTORY_SEPARATOR;
 
 /*
  *---------------------------------------------------------------
@@ -326,7 +326,7 @@ if( version_compare('7.3.0', PHP_VERSION) == 1 ) {
 |  Auto-load Packages
 | -------------------------------------------------------------------
 */
-if (! file_exists(APPPATH.'third_party/autoload.php')) {
+if (! file_exists(APPPATH.'vendor/autoload.php')) {
 	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
 	echo 'Auto-load Packages is not install. Run <b>composer install</b> in your root project folder';
 	exit(1); // EXIT_ERROR
